@@ -1,11 +1,19 @@
-const textBtn = document.querySelector("#text");
-const changeBtn = document.querySelector("#change");
+const numberEl = document.querySelector("#number");
+const randomBtn = document.querySelector("#random");
 
-changeBtn.addEventListener("click", () => {
-  textBtn.textContent = "я прокинувся";
+randomBtn.addEventListener("click", () => {
+  const randomValue = Math.floor(Math.random() * 100) + 1;
+  numberEl.textContent = randomValue;
 });
 
-console.log(textBtn);
+// const textBtn = document.querySelector("#text");
+// const changeBtn = document.querySelector("#change");
+
+// changeBtn.addEventListener("click", () => {
+//   textBtn.textContent = "я прокинувся";
+// });
+
+// console.log(textBtn);
 
 // let count = 0;
 // let history = [];
