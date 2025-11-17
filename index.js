@@ -1,15 +1,31 @@
-const toggleBtn = document.querySelector("#toggle");
-const detailsEl = document.querySelector("#details");
+const countEl = document.querySelector("#count");
+const plusBtn = document.querySelector("#plus");
+const resetBtn = document.querySelector("#reset");
 
-toggleBtn.addEventListener("click", () => {
-  if (detailsEl.style.display === "none" || detailsEl.style.display === "") {
-    detailsEl.style.display = "block";
-    toggleBtn.textContent = "Сховати деталі";
-  } else {
-    detailsEl.style.display = "none";
-    toggleBtn.textContent = "Показати деталі";
-  }
+let count = 0;
+
+plusBtn.addEventListener("click", () => {
+  count++;
+  countEl.textContent = count;
 });
+
+resetBtn.addEventListener("click", () => {
+  count = 0;
+  countEl.textContent = count;
+});
+
+// const toggleBtn = document.querySelector("#toggle");
+// const detailsEl = document.querySelector("#details");
+
+// toggleBtn.addEventListener("click", () => {
+//   if (detailsEl.style.display === "none" || detailsEl.style.display === "") {
+//     detailsEl.style.display = "block";
+//     toggleBtn.textContent = "Сховати деталі";
+//   } else {
+//     detailsEl.style.display = "none";
+//     toggleBtn.textContent = "Показати деталі";
+//   }
+// });
 
 // const statusEl = document.querySelector("#status");
 // const toggleBtn = document.querySelector("#toggle");
