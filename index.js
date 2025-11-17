@@ -1,10 +1,35 @@
-const numberEl = document.querySelector("#number");
-const randomBtn = document.querySelector("#random");
+const toggleBtn = document.querySelector("#toggle");
+const detailsEl = document.querySelector("#details");
 
-randomBtn.addEventListener("click", () => {
-  const randomValue = Math.floor(Math.random() * 100) + 1;
-  numberEl.textContent = randomValue;
+toggleBtn.addEventListener("click", () => {
+  if (detailsEl.style.display === "none" || detailsEl.style.display === "") {
+    detailsEl.style.display = "block";
+    toggleBtn.textContent = "Сховати деталі";
+  } else {
+    detailsEl.style.display = "none";
+    toggleBtn.textContent = "Показати деталі";
+  }
 });
+
+// const statusEl = document.querySelector("#status");
+// const toggleBtn = document.querySelector("#toggle");
+
+// toggleBtn.addEventListener("click", () => {
+//   document.body.classList.toggle("dark");
+//   if (document.body.classList.contains("dark")) {
+//     statusEl.textContent = "dark";
+//   } else {
+//     statusEl.textContent = "white";
+//   }
+// });
+
+// const numberEl = document.querySelector("#number");
+// const randomBtn = document.querySelector("#random");
+
+// randomBtn.addEventListener("click", () => {
+//   const randomValue = Math.floor(Math.random() * 100) + 1;
+//   numberEl.textContent = randomValue;
+// });
 
 // const textBtn = document.querySelector("#text");
 // const changeBtn = document.querySelector("#change");

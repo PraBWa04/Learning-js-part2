@@ -3,11 +3,24 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Task 2</title>
+    <title>Завдання 4 — Показати/Сховати блок</title>
+
+    <style>
+      #details {
+        padding: 10px;
+        background: #eee;
+        border-radius: 8px;
+        margin-top: 10px;
+        display: none;
+      }
+    </style>
   </head>
   <body>
-    <h1 id="number">0</h1>
-    <button id="random">random</button>
+    <button id="toggle">Показати деталі</button>
+
+    <div id="details">
+      <p>Ось деталі! Тут якась інформація, яку можна сховати або показати.</p>
+    </div>
 
     <script src="index.js"></script>
   </body>
