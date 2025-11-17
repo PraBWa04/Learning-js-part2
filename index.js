@@ -4,16 +4,35 @@ const taskListEl = document.querySelector("#task-list");
 
 addBtn.addEventListener("click", () => {
   const input = taskInputEl.value;
-  console.log(input);
+
+  if (input.trim() === "") return;
+
   const newLi = document.createElement("li");
-  newLi.textContent = input;
-  taskListEl.appendChild(newLi);
-  taskInputEl.value = "";
-  taskInputEl.focus();
+
+  const checkbox = document.createElement("input");
+  checkbox.type = "checkbox";
+  newLi.appendChild(checkbox);
+
+  const textSpan = document.createElement("span");
+  textSpan.textContent = input;
+  newLi.appendChild(textSpan);
 
   const deleteBtn = document.createElement("button");
   deleteBtn.textContent = "Delete";
   newLi.appendChild(deleteBtn);
+
+  taskListEl.appendChild(newLi);
+
+  taskInputEl.value = "";
+  taskInputEl.focus();
+
+  checkbox.addEventListener("change", () => {
+    if (checkbox.checked) {
+      newLi.classList.add("done");
+    } else {
+      newLi.classList.remove("done");
+    }
+  });
 
   deleteBtn.addEventListener("click", () => {
     newLi.remove();
