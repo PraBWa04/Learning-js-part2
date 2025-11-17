@@ -1,18 +1,40 @@
-const countEl = document.querySelector("#count");
-const plusBtn = document.querySelector("#plus");
-const resetBtn = document.querySelector("#reset");
+const taskInputEl = document.querySelector("#task-input");
+const addBtn = document.querySelector("#add-btn");
+const taskListEl = document.querySelector("#task-list");
 
-let count = 0;
+addBtn.addEventListener("click", () => {
+  const input = taskInputEl.value;
+  console.log(input);
+  const newLi = document.createElement("li");
+  newLi.textContent = input;
+  taskListEl.appendChild(newLi);
+  taskInputEl.value = "";
+  taskInputEl.focus();
 
-plusBtn.addEventListener("click", () => {
-  count++;
-  countEl.textContent = count;
+  const deleteBtn = document.createElement("button");
+  deleteBtn.textContent = "Delete";
+  newLi.appendChild(deleteBtn);
+
+  deleteBtn.addEventListener("click", () => {
+    newLi.remove();
+  });
 });
 
-resetBtn.addEventListener("click", () => {
-  count = 0;
-  countEl.textContent = count;
-});
+// const countEl = document.querySelector("#count");
+// const plusBtn = document.querySelector("#plus");
+// const resetBtn = document.querySelector("#reset");
+
+// let count = 0;
+
+// plusBtn.addEventListener("click", () => {
+//   count++;
+//   countEl.textContent = count;
+// });
+
+// resetBtn.addEventListener("click", () => {
+//   count = 0;
+//   countEl.textContent = count;
+// });
 
 // const toggleBtn = document.querySelector("#toggle");
 // const detailsEl = document.querySelector("#details");
