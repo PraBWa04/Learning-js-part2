@@ -2,41 +2,62 @@ const taskInputEl = document.querySelector("#task-input");
 const addBtn = document.querySelector("#add-btn");
 const taskListEl = document.querySelector("#task-list");
 
+const tasks = [];
+
+// 1. Функція, яка малює список з масиву
+function renderTasks() {
+  taskListEl.innerHTML = "";
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.checked = task.done;
+
+    const textSpan = document.createElement("span");
+    textSpan.textContent = task.text;
+
+    const deleteBtn = document.createElement("button");
+    deleteBtn.textContent = "Delete";
+
+    li.appendChild(checkbox);
+    li.appendChild(textSpan);
+    li.appendChild(deleteBtn);
+
+    if (task.done) {
+      li.classList.add("done");
+    }
+
+    checkbox.addEventListener("change", () => {
+      task.done = checkbox.checked;
+      renderTasks();
+    });
+
+    deleteBtn.addEventListener("click", () => {
+      tasks.splice(index, 1);
+      renderTasks();
+    });
+
+    taskListEl.appendChild(li);
+  });
+}
+
+// 2. Обробник кнопки Add
 addBtn.addEventListener("click", () => {
   const input = taskInputEl.value;
 
   if (input.trim() === "") return;
 
-  const newLi = document.createElement("li");
-
-  const checkbox = document.createElement("input");
-  checkbox.type = "checkbox";
-  newLi.appendChild(checkbox);
-
-  const textSpan = document.createElement("span");
-  textSpan.textContent = input;
-  newLi.appendChild(textSpan);
-
-  const deleteBtn = document.createElement("button");
-  deleteBtn.textContent = "Delete";
-  newLi.appendChild(deleteBtn);
-
-  taskListEl.appendChild(newLi);
+  tasks.push({
+    text: input,
+    done: false,
+  });
 
   taskInputEl.value = "";
   taskInputEl.focus();
 
-  checkbox.addEventListener("change", () => {
-    if (checkbox.checked) {
-      newLi.classList.add("done");
-    } else {
-      newLi.classList.remove("done");
-    }
-  });
-
-  deleteBtn.addEventListener("click", () => {
-    newLi.remove();
-  });
+  renderTasks();
 });
 
 // const countEl = document.querySelector("#count");
