@@ -9,7 +9,7 @@ const user = {
 
 const deep = JSON.parse(JSON.stringify(user));
 
-deep.address.street = "Nowa 10";
+deep.address.street = "Nowa 1";
 console.log(deep);
 
 // const taskInputEl = document.querySelector("#task-input");
