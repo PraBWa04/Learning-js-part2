@@ -1,64 +1,78 @@
-const taskInputEl = document.querySelector("#task-input");
-const addBtn = document.querySelector("#add-btn");
-const taskListEl = document.querySelector("#task-list");
+const user = {
+  name: "Ivan",
+  age: 21,
+  address: {
+    street: "Czajkowskiego",
+    city: "Wroclaw",
+  },
+};
 
-const tasks = [];
+const deep = JSON.parse(JSON.stringify(user));
 
-// 1. Функція, яка малює список з масиву
-function renderTasks() {
-  taskListEl.innerHTML = "";
+deep.address.street = "Nowa 10";
+console.log(deep);
 
-  tasks.forEach((task, index) => {
-    const li = document.createElement("li");
+// const taskInputEl = document.querySelector("#task-input");
+// const addBtn = document.querySelector("#add-btn");
+// const taskListEl = document.querySelector("#task-list");
 
-    const checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.checked = task.done;
+// const tasks = [];
 
-    const textSpan = document.createElement("span");
-    textSpan.textContent = task.text;
+// // 1. Функція, яка малює список з масиву
+// function renderTasks() {
+//   taskListEl.innerHTML = "";
 
-    const deleteBtn = document.createElement("button");
-    deleteBtn.textContent = "Delete";
+//   tasks.forEach((task, index) => {
+//     const li = document.createElement("li");
 
-    li.appendChild(checkbox);
-    li.appendChild(textSpan);
-    li.appendChild(deleteBtn);
+//     const checkbox = document.createElement("input");
+//     checkbox.type = "checkbox";
+//     checkbox.checked = task.done;
 
-    if (task.done) {
-      li.classList.add("done");
-    }
+//     const textSpan = document.createElement("span");
+//     textSpan.textContent = task.text;
 
-    checkbox.addEventListener("change", () => {
-      task.done = checkbox.checked;
-      renderTasks();
-    });
+//     const deleteBtn = document.createElement("button");
+//     deleteBtn.textContent = "Delete";
 
-    deleteBtn.addEventListener("click", () => {
-      tasks.splice(index, 1);
-      renderTasks();
-    });
+//     li.appendChild(checkbox);
+//     li.appendChild(textSpan);
+//     li.appendChild(deleteBtn);
 
-    taskListEl.appendChild(li);
-  });
-}
+//     if (task.done) {
+//       li.classList.add("done");
+//     }
 
-// 2. Обробник кнопки Add
-addBtn.addEventListener("click", () => {
-  const input = taskInputEl.value;
+//     checkbox.addEventListener("change", () => {
+//       task.done = checkbox.checked;
+//       renderTasks();
+//     });
 
-  if (input.trim() === "") return;
+//     deleteBtn.addEventListener("click", () => {
+//       tasks.splice(index, 1);
+//       renderTasks();
+//     });
 
-  tasks.push({
-    text: input,
-    done: false,
-  });
+//     taskListEl.appendChild(li);
+//   });
+// }
 
-  taskInputEl.value = "";
-  taskInputEl.focus();
+// // 2. Обробник кнопки Add
+// addBtn.addEventListener("click", () => {
+//   const input = taskInputEl.value;
 
-  renderTasks();
-});
+//   if (input.trim() === "") return;
+
+//   tasks.push({
+//     text: input,
+//     done: false,
+//   });
+
+//   taskInputEl.value = "";
+//   taskInputEl.focus();
+
+//   renderTasks();
+// });
 
 // const countEl = document.querySelector("#count");
 // const plusBtn = document.querySelector("#plus");
