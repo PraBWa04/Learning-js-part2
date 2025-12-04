@@ -1,17 +1,31 @@
-const user = {
-  name: "Ivan",
-  age: 21,
-  address: {
-    street: "Czajkowskiego",
-    city: "Wroclaw",
-  },
-};
+const tasks = [];
 
-const deep = JSON.parse(JSON.stringify(user));
-deep.address.street = "Nowa 1";
+function render() {
+  console.clear();
+  tasks.forEach((t, i) => {
+    console.log(`${i + 1}. ${t.text} - ${t.done ? "DONE" : "TODO"}`);
+  });
+}
 
-console.log("ORIGINAL:", user);
-console.log("DEEP COPY:", deep);
+function addTask(text) {
+  tasks.push({ text, done: false });
+  render();
+}
+
+function toggleTask(i) {
+  tasks[i].done = !tasks[i].done;
+  render();
+}
+
+function removeTask(i) {
+  tasks.splice(i, 1);
+  render();
+}
+
+addTask("Встати");
+addTask("Піти в зал");
+toggleTask(1);
+removeTask(0);
 
 // const taskInputEl = document.querySelector("#task-input");
 // const addBtn = document.querySelector("#add-btn");
