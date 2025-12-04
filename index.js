@@ -8,9 +8,10 @@ const user = {
 };
 
 const deep = JSON.parse(JSON.stringify(user));
-
 deep.address.street = "Nowa 1";
-console.log(deep);
+
+console.log("ORIGINAL:", user);
+console.log("DEEP COPY:", deep);
 
 // const taskInputEl = document.querySelector("#task-input");
 // const addBtn = document.querySelector("#add-btn");
