@@ -1,31 +1,45 @@
-const tasks = [];
+const state = ["a", "b", "c"];
 
-function render() {
-  console.clear();
-  tasks.forEach((t, i) => {
-    console.log(`${i + 1}. ${t.text} - ${t.done ? "DONE" : "TODO"}`);
-  });
+function saveState() {
+  localStorage.setItem("state", JSON.stringify(state));
 }
 
-function addTask(text) {
-  tasks.push({ text, done: false });
-  render();
+function loadState() {
+  const data = localStorage.getItem("state");
+  return data ? JSON.parse(data) : [];
 }
 
-function toggleTask(i) {
-  tasks[i].done = !tasks[i].done;
-  render();
-}
+saveState();
+console.log("LOADED:", loadState());
 
-function removeTask(i) {
-  tasks.splice(i, 1);
-  render();
-}
+// const tasks = [];
 
-addTask("Встати");
-addTask("Піти в зал");
-toggleTask(1);
-removeTask(0);
+// function render() {
+//   console.clear();
+//   tasks.forEach((t, i) => {
+//     console.log(`${i + 1}. ${t.text} - ${t.done ? "DONE" : "TODO"}`);
+//   });
+// }
+
+// function addTask(text) {
+//   tasks.push({ text, done: false });
+//   render();
+// }
+
+// function toggleTask(i) {
+//   tasks[i].done = !tasks[i].done;
+//   render();
+// }
+
+// function removeTask(i) {
+//   tasks.splice(i, 1);
+//   render();
+// }
+
+// addTask("Встати");
+// addTask("Піти в зал");
+// toggleTask(1);
+// removeTask(0);
 
 // const taskInputEl = document.querySelector("#task-input");
 // const addBtn = document.querySelector("#add-btn");
