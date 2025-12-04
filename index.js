@@ -1,16 +1,57 @@
-const state = ["a", "b", "c"];
+async function getWeather(city) {
+  try {
+    const res = await fetch(
+      `https://api.open-meteo.com/v1/forecast?latitude=51.1&longitude=17.0&current_weather=true`
+    );
 
-function saveState() {
-  localStorage.setItem("state", JSON.stringify(state));
+    const data = await res.json();
+    console.log("CURRENT WEATHER:", data.current_weather);
+  } catch (err) {
+    console.error("ERROR:", err);
+  }
 }
 
-function loadState() {
-  const data = localStorage.getItem("state");
-  return data ? JSON.parse(data) : [];
-}
+getWeather("Wroclaw");
 
-saveState();
-console.log("LOADED:", loadState());
+// let count = 0;
+// let history = [];
+
+// function inc() {
+//   count++;
+//   history.push(`+1 → ${count}`);
+// }
+
+// function dec() {
+//   count--;
+//   history.push(`-1 → ${count}`);
+// }
+
+// function reset() {
+//   count = 0;
+//   history.push(`RESET → ${count}`);
+// }
+
+// inc();
+// inc();
+// dec();
+// reset();
+
+// console.log("COUNT:", count);
+// console.log("HISTORY:", history);
+
+// const state = ["a", "b", "c"];
+
+// function saveState() {
+//   localStorage.setItem("state", JSON.stringify(state));
+// }
+
+// function loadState() {
+//   const data = localStorage.getItem("state");
+//   return data ? JSON.parse(data) : [];
+// }
+
+// saveState();
+// console.log("LOADED:", loadState());
 
 // const tasks = [];
 
