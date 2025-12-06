@@ -1,16 +1,42 @@
-const tasks = ["gym", "study", "clean"];
+let count = 0;
+let history = [];
 
-function saveTasks() {
-  localStorage.setItem("tasks", JSON.stringify(tasks));
+function inc() {
+  count++;
+  history.push(`+1 → ${count}`);
 }
 
-function loadTasks() {
-  const data = localStorage.getItem("tasks");
-  return data ? JSON.parse(data) : [];
+function dec() {
+  count--;
+  history.push(`-1 → ${count}`);
 }
 
-saveTasks();
-console.log("Loaded tasks:", loadTasks());
+function reset() {
+  count = 0;
+  history.push(`RESET → ${count}`);
+}
+
+inc();
+inc();
+dec();
+reset();
+
+console.log("Count:", count);
+console.log("History:", history);
+
+// const tasks = ["gym", "study", "clean"];
+
+// function saveTasks() {
+//   localStorage.setItem("tasks", JSON.stringify(tasks));
+// }
+
+// function loadTasks() {
+//   const data = localStorage.getItem("tasks");
+//   return data ? JSON.parse(data) : [];
+// }
+
+// saveTasks();
+// console.log("Loaded tasks:", loadTasks());
 
 // const user = {
 //   name: "Ivan",
