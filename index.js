@@ -1,17 +1,31 @@
-const user = {
-  name: "Ivan",
-  age: 21,
-  address: {
-    street: "Czajkowskiego",
-    city: "Wroclaw",
-  },
-};
+const tasks = ["gym", "study", "clean"];
 
-const deepCopy = JSON.parse(JSON.stringify(user));
-deepCopy.address.street = "Nowa 1";
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
 
-console.log("Original:", user);
-console.log("Deep copy:", deepCopy);
+function loadTasks() {
+  const data = localStorage.getItem("tasks");
+  return data ? JSON.parse(data) : [];
+}
+
+saveTasks();
+console.log("Loaded tasks:", loadTasks());
+
+// const user = {
+//   name: "Ivan",
+//   age: 21,
+//   address: {
+//     street: "Czajkowskiego",
+//     city: "Wroclaw",
+//   },
+// };
+
+// const deepCopy = JSON.parse(JSON.stringify(user));
+// deepCopy.address.street = "Nowa 1";
+
+// console.log("Original:", user);
+// console.log("Deep copy:", deepCopy);
 
 // async function getWeather(city) {
 //   try {
