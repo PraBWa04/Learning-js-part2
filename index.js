@@ -1,17 +1,32 @@
-async function getWeather(city) {
-  try {
-    const res = await fetch(
-      `https://api.open-meteo.com/v1/forecast?latitude=51.1&longitude=17.0&current_weather=true`
-    );
+const user = {
+  name: "Ivan",
+  age: 21,
+  address: {
+    street: "Czajkowskiego",
+    city: "Wroclaw",
+  },
+};
 
-    const data = await res.json();
-    console.log("CURRENT WEATHER:", data.current_weather);
-  } catch (err) {
-    console.error("ERROR:", err);
-  }
-}
+const deepCopy = JSON.parse(JSON.stringify(user));
+deepCopy.address.street = "Nowa 1";
 
-getWeather("Wroclaw");
+console.log("Original:", user);
+console.log("Deep copy:", deepCopy);
+
+// async function getWeather(city) {
+//   try {
+//     const res = await fetch(
+//       `https://api.open-meteo.com/v1/forecast?latitude=51.1&longitude=17.0&current_weather=true`
+//     );
+
+//     const data = await res.json();
+//     console.log("CURRENT WEATHER:", data.current_weather);
+//   } catch (err) {
+//     console.error("ERROR:", err);
+//   }
+// }
+
+// getWeather("Wroclaw");
 
 // let count = 0;
 // let history = [];
