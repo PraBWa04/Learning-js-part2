@@ -1,17 +1,25 @@
-export function generatePassword(length = 8) {
-  const chars =
-    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
-  let result = "";
+export function countWords(text) {
+  if (!text.trim()) return 0;
 
-  for (let i = 0; i < length; i++) {
-    const random = Math.floor(Math.random() * chars.length);
-    result += chars[random];
-  }
-
-  return result;
+  return text.trim().split(/\s+/).length;
 }
 
-console.log(generatePassword(10));
+console.log(countWords("Hello nice world"));
+
+// export function generatePassword(length = 8) {
+//   const chars =
+//     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+//   let result = "";
+
+//   for (let i = 0; i < length; i++) {
+//     const random = Math.floor(Math.random() * chars.length);
+//     result += chars[random];
+//   }
+
+//   return result;
+// }
+
+// console.log(generatePassword(10));
 
 // const tasks = ["gym", "study", "clean"];
 
