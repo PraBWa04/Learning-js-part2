@@ -1,28 +1,17 @@
-let count = 0;
-let history = [];
+export function generatePassword(length = 8) {
+  const chars =
+    "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
+  let result = "";
 
-function inc() {
-  count++;
-  history.push(`+1 → ${count}`);
+  for (let i = 0; i < length; i++) {
+    const random = Math.floor(Math.random() * chars.length);
+    result += chars[random];
+  }
+
+  return result;
 }
 
-function dec() {
-  count--;
-  history.push(`-1 → ${count}`);
-}
-
-function reset() {
-  count = 0;
-  history.push(`RESET → ${count}`);
-}
-
-inc();
-inc();
-dec();
-reset();
-
-console.log("Count:", count);
-console.log("History:", history);
+console.log(generatePassword(10));
 
 // const tasks = ["gym", "study", "clean"];
 
