@@ -1,12 +1,28 @@
-export function isPalindrome(str) {
-  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
-  const reversed = cleaned.split("").reverse().join("");
+// Generates a random HEX color like #A1F3CC
+export function generateHexColor() {
+  const chars = "0123456789ABCDEF";
+  let color = "#";
 
-  return cleaned === reversed;
+  for (let i = 0; i < 6; i++) {
+    const randomIndex = Math.floor(Math.random() * chars.length);
+    color += chars[randomIndex];
+  }
+
+  return color;
 }
 
-console.log(isPalindrome("Racecar")); // true
-console.log(isPalindrome("Hello")); // false
+// Example usage
+console.log(generateHexColor());
+
+// export function isPalindrome(str) {
+//   const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+//   const reversed = cleaned.split("").reverse().join("");
+
+//   return cleaned === reversed;
+// }
+
+// console.log(isPalindrome("Racecar")); // true
+// console.log(isPalindrome("Hello")); // false
 
 // export function countWords(text) {
 //   if (!text.trim()) return 0;
