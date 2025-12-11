@@ -1,10 +1,20 @@
-export function countWords(text) {
-  if (!text.trim()) return 0;
+export function isPalindrome(str) {
+  const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+  const reversed = cleaned.split("").reverse().join("");
 
-  return text.trim().split(/\s+/).length;
+  return cleaned === reversed;
 }
 
-console.log(countWords("Hello nice world"));
+console.log(isPalindrome("Racecar")); // true
+console.log(isPalindrome("Hello")); // false
+
+// export function countWords(text) {
+//   if (!text.trim()) return 0;
+
+//   return text.trim().split(/\s+/).length;
+// }
+
+// console.log(countWords("Hello nice world"));
 
 // export function generatePassword(length = 8) {
 //   const chars =
