@@ -1,6 +1,10 @@
-function doubleEvens(numbers) {
-  return numbers.filter((n) => n % 2 === 0).map((n) => n * 2);
+function getActiveUsers(users) {
+  return users.filter((user) => user.active === true);
 }
+
+// function doubleEvens(numbers) {
+//   return numbers.filter((n) => n % 2 === 0).map((n) => n * 2);
+// }
 
 // // Generates a random HEX color like #A1F3CC
 // export function generateHexColor() {
