@@ -1,18 +1,22 @@
-// Generates a random HEX color like #A1F3CC
-export function generateHexColor() {
-  const chars = "0123456789ABCDEF";
-  let color = "#";
-
-  for (let i = 0; i < 6; i++) {
-    const randomIndex = Math.floor(Math.random() * chars.length);
-    color += chars[randomIndex];
-  }
-
-  return color;
+function doubleEvens(numbers) {
+  return numbers.filter((n) => n % 2 === 0).map((n) => n * 2);
 }
 
-// Example usage
-console.log(generateHexColor());
+// // Generates a random HEX color like #A1F3CC
+// export function generateHexColor() {
+//   const chars = "0123456789ABCDEF";
+//   let color = "#";
+
+//   for (let i = 0; i < 6; i++) {
+//     const randomIndex = Math.floor(Math.random() * chars.length);
+//     color += chars[randomIndex];
+//   }
+
+//   return color;
+// }
+
+// // Example usage
+// console.log(generateHexColor());
 
 // export function isPalindrome(str) {
 //   const cleaned = str.toLowerCase().replace(/[^a-z0-9]/g, "");
