@@ -1,14 +1,31 @@
-function delay(ms) {
-  return new Promise((resolve) => setTimeout(resolve, ms));
+function saveValue(key, value) {
+  localStorage.setItem(key, JSON.stringify(value));
 }
 
-export async function runDemo() {
-  console.log("Start");
-  await delay(1000);
-  console.log("End");
+function loadValue(key) {
+  const raw = localStorage.getItem(key);
+  return raw === null ? null : JSON.parse(raw);
 }
 
-runDemo();
+function removeValue(key) {
+  localStorage.removeItem(key);
+}
+
+saveValue("user", { name: "Ivan" });
+console.log(loadValue("user"));
+removeValue("user");
+
+// function delay(ms) {
+//   return new Promise((resolve) => setTimeout(resolve, ms));
+// }
+
+// export async function runDemo() {
+//   console.log("Start");
+//   await delay(1000);
+//   console.log("End");
+// }
+
+// runDemo();
 
 // function getActiveUsers(users) {
 //   return users.filter((user) => user.active === true);
