@@ -1,19 +1,26 @@
-function saveValue(key, value) {
-  localStorage.setItem(key, JSON.stringify(value));
+export function isPositive(num) {
+  return num > 0;
 }
 
-function loadValue(key) {
-  const raw = localStorage.getItem(key);
-  return raw === null ? null : JSON.parse(raw);
-}
+console.log(isPositive(5));
+console.log(isPositive(-2));
 
-function removeValue(key) {
-  localStorage.removeItem(key);
-}
+// function saveValue(key, value) {
+//   localStorage.setItem(key, JSON.stringify(value));
+// }
 
-saveValue("user", { name: "Ivan" });
-console.log(loadValue("user"));
-removeValue("user");
+// function loadValue(key) {
+//   const raw = localStorage.getItem(key);
+//   return raw === null ? null : JSON.parse(raw);
+// }
+
+// function removeValue(key) {
+//   localStorage.removeItem(key);
+// }
+
+// saveValue("user", { name: "Ivan" });
+// console.log(loadValue("user"));
+// removeValue("user");
 
 // function delay(ms) {
 //   return new Promise((resolve) => setTimeout(resolve, ms));
