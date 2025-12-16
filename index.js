@@ -1,6 +1,25 @@
-function getActiveUsers(users) {
-  return users.filter((user) => user.active === true);
+function delay(ms) {
+  return new Promise((resolve) => setTimeout(resolve, ms));
 }
+
+export async function runDemo() {
+  console.log("Start");
+  await delay(1000);
+  console.log("End");
+}
+
+runDemo();
+
+// function getActiveUsers(users) {
+//   return users.filter((user) => user.active === true);
+// }
+
+// const users = [
+//   { name: "Ivan", active: true },
+//   { name: "Anna", active: false },
+//   { name: "Oleh", active: true },
+// ];
+// console.log(getActiveUsers(users));
 
 // function doubleEvens(numbers) {
 //   return numbers.filter((n) => n % 2 === 0).map((n) => n * 2);
