@@ -1,9 +1,14 @@
-export function isPositive(num) {
-  return num > 0;
+function sumPositive(numbers) {
+  return numbers.filter((num) => num > 0).reduce((sum, num) => sum + num, 0);
 }
+console.log(sumPositive([-2, 5, 3, -1, 4]));
 
-console.log(isPositive(5));
-console.log(isPositive(-2));
+// function isPositive(num) {
+//   return num > 0;
+// }
+
+// console.log(isPositive(5));
+// console.log(isPositive(-2));
 
 // function saveValue(key, value) {
 //   localStorage.setItem(key, JSON.stringify(value));
