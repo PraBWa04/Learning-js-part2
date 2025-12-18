@@ -1,14 +1,21 @@
-function countCompleted(tasks) {
-  return tasks.filter((task) => task.done).length;
+function toggleFlag(value) {
+  return !value;
 }
 
-const tasks = [
-  { text: "JS", done: true },
-  { text: "Gym", done: false },
-  { text: "React", done: true },
-];
+console.log(toggleFlag(true));
+console.log(toggleFlag(false));
 
-console.log(countCompleted(tasks)); // 2
+// function countCompleted(tasks) {
+//   return tasks.filter((task) => task.done).length;
+// }
+
+// const tasks = [
+//   { text: "JS", done: true },
+//   { text: "Gym", done: false },
+//   { text: "React", done: true },
+// ];
+
+// console.log(countCompleted(tasks)); // 2
 
 // export function getUserNames(users) {
 //   return users.map(({ name }) => name);
