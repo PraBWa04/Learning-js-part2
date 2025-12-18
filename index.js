@@ -1,7 +1,17 @@
-function sumPositive(numbers) {
-  return numbers.filter((num) => num > 0).reduce((sum, num) => sum + num, 0);
+function fakeRequest(success = true) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      success ? resolve("OK") : reject("ERROR");
+    }, 500);
+  });
 }
-console.log(sumPositive([-2, 5, 3, -1, 4]));
+
+fakeRequest().then(console.log).catch(console.error);
+
+// function sumPositive(numbers) {
+//   return numbers.filter((num) => num > 0).reduce((sum, num) => sum + num, 0);
+// }
+// console.log(sumPositive([-2, 5, 3, -1, 4]));
 
 // function isPositive(num) {
 //   return num > 0;
