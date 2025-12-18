@@ -1,9 +1,16 @@
-function toggleFlag(value) {
-  return !value;
+function removeDuplicates(arr) {
+  return [...new Set(arr)];
 }
 
-console.log(toggleFlag(true));
-console.log(toggleFlag(false));
+const numbers = [1, 2, 2, 3, 4, 4, 5];
+console.log(removeDuplicates(numbers));
+
+// function toggleFlag(value) {
+//   return !value;
+// }
+
+// console.log(toggleFlag(true));
+// console.log(toggleFlag(false));
 
 // function countCompleted(tasks) {
 //   return tasks.filter((task) => task.done).length;
