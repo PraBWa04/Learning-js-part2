@@ -1,12 +1,19 @@
-function fakeRequest(success = true) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      success ? resolve("OK") : reject("ERROR");
-    }, 500);
-  });
+export function getUserNames(users) {
+  return users.map(({ name }) => name);
 }
 
-fakeRequest().then(console.log).catch(console.error);
+const users = [{ name: "Ivan" }, { name: "Anna" }, { name: "Oleh" }];
+console.log(getUserNames(users));
+
+// function fakeRequest(success = true) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       success ? resolve("OK") : reject("ERROR");
+//     }, 500);
+//   });
+// }
+
+// fakeRequest().then(console.log).catch(console.error);
 
 // function sumPositive(numbers) {
 //   return numbers.filter((num) => num > 0).reduce((sum, num) => sum + num, 0);
