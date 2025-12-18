@@ -1,9 +1,21 @@
-export function getUserNames(users) {
-  return users.map(({ name }) => name);
+function countCompleted(tasks) {
+  return tasks.filter((task) => task.done).length;
 }
 
-const users = [{ name: "Ivan" }, { name: "Anna" }, { name: "Oleh" }];
-console.log(getUserNames(users));
+const tasks = [
+  { text: "JS", done: true },
+  { text: "Gym", done: false },
+  { text: "React", done: true },
+];
+
+console.log(countCompleted(tasks)); // 2
+
+// export function getUserNames(users) {
+//   return users.map(({ name }) => name);
+// }
+
+// const users = [{ name: "Ivan" }, { name: "Anna" }, { name: "Oleh" }];
+// console.log(getUserNames(users));
 
 // function fakeRequest(success = true) {
 //   return new Promise((resolve, reject) => {
