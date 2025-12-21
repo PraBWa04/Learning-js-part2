@@ -1,7 +1,11 @@
-function capitalize(word) {
-  if (!word) return "";
-  return word[0].toUpperCase() + word.slice(1);
+function isArrayEmpty(arr) {
+  return Array.isArray(arr) && arr.length === 0;
 }
+
+// function capitalize(word) {
+//   if (!word) return "";
+//   return word[0].toUpperCase() + word.slice(1);
+// }
 
 // function removeDuplicates(arr) {
 //   return [...new Set(arr)];
