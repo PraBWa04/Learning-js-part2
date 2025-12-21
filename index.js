@@ -1,6 +1,14 @@
-function findMax(numbers) {
-  return Math.max(...numbers);
+function countWords(text) {
+  return text.trim().split(/\s+/).length;
 }
+
+// function formatPrice(value) {
+//   return `${value.toFixed(2)} $`;
+// }
+
+// function findMax(numbers) {
+//   return Math.max(...numbers);
+// }
 
 // function isArrayEmpty(arr) {
 //   return Array.isArray(arr) && arr.length === 0;
