@@ -1,6 +1,10 @@
-function isArrayEmpty(arr) {
-  return Array.isArray(arr) && arr.length === 0;
+function findMax(numbers) {
+  return Math.max(...numbers);
 }
+
+// function isArrayEmpty(arr) {
+//   return Array.isArray(arr) && arr.length === 0;
+// }
 
 // function capitalize(word) {
 //   if (!word) return "";
