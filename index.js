@@ -1,13 +1,24 @@
-function debounce(fn, delay) {
-  let timeoutId;
+function paginate(items, page, pageSize) {
+  const start = (page - 1) * pageSize;
+  const end = start + pageSize;
 
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      fn.apply(this, args);
-    }, delay);
+  return {
+    data: items.slice(start, end),
+    totalPages: Math.ceil(items.length / pageSize),
+    currentPage: page,
   };
 }
+
+// function debounce(fn, delay) {
+//   let timeoutId;
+
+//   return function (...args) {
+//     clearTimeout(timeoutId);
+//     timeoutId = setTimeout(() => {
+//       fn.apply(this, args);
+//     }, delay);
+//   };
+// }
 
 // function findById(items, id) {
 //   return items.find((item) => item.id === id) || null;
