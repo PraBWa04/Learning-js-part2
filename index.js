@@ -1,6 +1,17 @@
-function findById(items, id) {
-  return items.find((item) => item.id === id) || null;
+function debounce(fn, delay) {
+  let timeoutId;
+
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
 }
+
+// function findById(items, id) {
+//   return items.find((item) => item.id === id) || null;
+// }
 
 // function calculateTotal(items) {
 //   return items.reduce((total, item) => {
