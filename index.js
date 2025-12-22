@@ -1,8 +1,14 @@
-function toggleUserActive(users, index) {
-  return users.map((user, i) =>
-    i === index ? { ...user, active: !user.active } : user
-  );
+function calculateTotal(items) {
+  return items.reduce((total, item) => {
+    return total + item.price * item.quantity;
+  }, 0);
 }
+
+// function toggleUserActive(users, index) {
+//   return users.map((user, i) =>
+//     i === index ? { ...user, active: !user.active } : user
+//   );
+// }
 
 // const tasks = [
 //   { text: "JS", done: false },
