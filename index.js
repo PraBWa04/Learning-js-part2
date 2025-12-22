@@ -1,6 +1,52 @@
-function countWords(text) {
-  return text.trim().split(/\s+/).length;
+const tasks = [
+  { text: "JS", done: false },
+  { text: "Gym", done: true },
+  { text: "React", done: false },
+];
+
+function getDoneTasks(tasks) {
+  return tasks.filter((task) => task.done === true);
 }
+
+function getUndoneTasks(tasks) {
+  return tasks.filter((task) => task.done === false);
+}
+
+function toggleTask(tasks, index) {
+  return tasks.map((task, i) => {
+    if (i !== index) {
+      return task;
+    }
+
+    return {
+      ...task,
+      done: !task.done,
+    };
+  });
+}
+
+const updatedTasks = toggleTask(tasks, 1);
+
+console.log("Done:", getDoneTasks(tasks));
+console.log("Undone:", getUndoneTasks(tasks));
+console.log("Updated:", updatedTasks);
+console.log("Original (unchanged):", tasks);
+
+// const users = [
+//   { name: "Ivan", active: true },
+//   { name: "Anna", active: false },
+//   { name: "Oleh", active: true },
+// ];
+
+// function getActiveUsers(users) {
+//   return users.filter((user) => user.active === true);
+// }
+
+// console.log(getActiveUsers(users));
+
+// function countWords(text) {
+//   return text.trim().split(/\s+/).length;
+// }
 
 // function formatPrice(value) {
 //   return `${value.toFixed(2)} $`;
