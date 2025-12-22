@@ -1,36 +1,42 @@
-const tasks = [
-  { text: "JS", done: false },
-  { text: "Gym", done: true },
-  { text: "React", done: false },
-];
-
-function getDoneTasks(tasks) {
-  return tasks.filter((task) => task.done === true);
+function toggleUserActive(users, index) {
+  return users.map((user, i) =>
+    i === index ? { ...user, active: !user.active } : user
+  );
 }
 
-function getUndoneTasks(tasks) {
-  return tasks.filter((task) => task.done === false);
-}
+// const tasks = [
+//   { text: "JS", done: false },
+//   { text: "Gym", done: true },
+//   { text: "React", done: false },
+// ];
 
-function toggleTask(tasks, index) {
-  return tasks.map((task, i) => {
-    if (i !== index) {
-      return task;
-    }
+// function getDoneTasks(tasks) {
+//   return tasks.filter((task) => task.done === true);
+// }
 
-    return {
-      ...task,
-      done: !task.done,
-    };
-  });
-}
+// function getUndoneTasks(tasks) {
+//   return tasks.filter((task) => task.done === false);
+// }
 
-const updatedTasks = toggleTask(tasks, 1);
+// function toggleTask(tasks, index) {
+//   return tasks.map((task, i) => {
+//     if (i !== index) {
+//       return task;
+//     }
 
-console.log("Done:", getDoneTasks(tasks));
-console.log("Undone:", getUndoneTasks(tasks));
-console.log("Updated:", updatedTasks);
-console.log("Original (unchanged):", tasks);
+//     return {
+//       ...task,
+//       done: !task.done,
+//     };
+//   });
+// }
+
+// const updatedTasks = toggleTask(tasks, 1);
+
+// console.log("Done:", getDoneTasks(tasks));
+// console.log("Undone:", getUndoneTasks(tasks));
+// console.log("Updated:", updatedTasks);
+// console.log("Original (unchanged):", tasks);
 
 // const users = [
 //   { name: "Ivan", active: true },
