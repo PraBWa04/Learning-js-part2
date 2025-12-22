@@ -1,13 +1,42 @@
-function paginate(items, page, pageSize) {
-  const start = (page - 1) * pageSize;
-  const end = start + pageSize;
+function createTaskManager(initialTasks = []) {
+  let tasks = [...initialTasks];
+
+  function getAll() {
+    return [...tasks];
+  }
+
+  function addTask(text) {
+    tasks = [...tasks, { text, done: false }];
+  }
+
+  function toggleTask(index) {
+    tasks = tasks.map((task, i) =>
+      i === index ? { ...task, done: !task.done } : task
+    );
+  }
+
+  function removeTask(index) {
+    tasks = tasks.filter((_, i) => i !== index);
+  }
 
   return {
-    data: items.slice(start, end),
-    totalPages: Math.ceil(items.length / pageSize),
-    currentPage: page,
+    getAll,
+    addTask,
+    toggleTask,
+    removeTask,
   };
 }
+
+// function paginate(items, page, pageSize) {
+//   const start = (page - 1) * pageSize;
+//   const end = start + pageSize;
+
+//   return {
+//     data: items.slice(start, end),
+//     totalPages: Math.ceil(items.length / pageSize),
+//     currentPage: page,
+//   };
+// }
 
 // function debounce(fn, delay) {
 //   let timeoutId;
