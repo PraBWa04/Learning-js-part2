@@ -1,17 +1,27 @@
-function validateForm(fields) {
-  const errors = {};
+function sortByField(items, field, order = "asc") {
+  const sorted = [...items].sort((a, b) => {
+    if (a[field] > b[field]) return 1;
+    if (a[field] < b[field]) return -1;
+    return 0;
+  });
 
-  for (const key in fields) {
-    if (!fields[key]) {
-      errors[key] = "Required";
-    }
-  }
-
-  return {
-    isValid: Object.keys(errors).length === 0,
-    errors,
-  };
+  return order === "desc" ? sorted.reverse() : sorted;
 }
+
+// function validateForm(fields) {
+//   const errors = {};
+
+//   for (const key in fields) {
+//     if (!fields[key]) {
+//       errors[key] = "Required";
+//     }
+//   }
+
+//   return {
+//     isValid: Object.keys(errors).length === 0,
+//     errors,
+//   };
+// }
 
 // function deepClone(value) {
 //   if (value === null || typeof value !== "object") {
