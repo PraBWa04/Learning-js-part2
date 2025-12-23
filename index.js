@@ -1,15 +1,32 @@
-function groupBy(items, key) {
-  return items.reduce((result, item) => {
-    const groupKey = item[key];
+function deepClone(value) {
+  if (value === null || typeof value !== "object") {
+    return value;
+  }
 
-    if (!result[groupKey]) {
-      result[groupKey] = [];
-    }
+  if (Array.isArray(value)) {
+    return value.map(deepClone);
+  }
 
-    result[groupKey].push(item);
-    return result;
-  }, {});
+  const result = {};
+  for (const key in value) {
+    result[key] = deepClone(value[key]);
+  }
+
+  return result;
 }
+
+// function groupBy(items, key) {
+//   return items.reduce((result, item) => {
+//     const groupKey = item[key];
+
+//     if (!result[groupKey]) {
+//       result[groupKey] = [];
+//     }
+
+//     result[groupKey].push(item);
+//     return result;
+//   }, {});
+// }
 
 // function throttle(fn, delay) {
 //   let isThrottled = false;
