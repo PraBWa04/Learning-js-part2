@@ -1,15 +1,27 @@
-const users = [
-  { name: "Ivan", age: 21 },
-  { name: "Oleh", age: 17 },
-  { name: "Anna", age: 25 },
-  { name: "Max", age: 16 },
+const products = [
+  { name: "Phone", price: 1200 },
+  { name: "Laptop", price: 3500 },
+  { name: "Mouse", price: 150 },
 ];
 
-function getAdultUsers(users) {
-  return users.filter((user) => user.age >= 18);
+function getNameAndPrice(products) {
+  return products.map((product) => product.name + " " + product.price + " zŁ");
 }
 
-console.log(getAdultUsers(users));
+console.log(getNameAndPrice(products));
+
+// const users = [
+//   { name: "Ivan", age: 21 },
+//   { name: "Oleh", age: 17 },
+//   { name: "Anna", age: 25 },
+//   { name: "Max", age: 16 },
+// ];
+
+// function getAdultUsers(users) {
+//   return users.filter((user) => user.age >= 18);
+// }
+
+// console.log(getAdultUsers(users));
 
 // function sortByField(items, field, order = "asc") {
 //   const sorted = [...items].sort((a, b) => {
