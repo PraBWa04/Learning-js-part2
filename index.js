@@ -1,17 +1,30 @@
-function throttle(fn, delay) {
-  let isThrottled = false;
+function groupBy(items, key) {
+  return items.reduce((result, item) => {
+    const groupKey = item[key];
 
-  return function (...args) {
-    if (isThrottled) return;
+    if (!result[groupKey]) {
+      result[groupKey] = [];
+    }
 
-    fn.apply(this, args);
-    isThrottled = true;
-
-    setTimeout(() => {
-      isThrottled = false;
-    }, delay);
-  };
+    result[groupKey].push(item);
+    return result;
+  }, {});
 }
+
+// function throttle(fn, delay) {
+//   let isThrottled = false;
+
+//   return function (...args) {
+//     if (isThrottled) return;
+
+//     fn.apply(this, args);
+//     isThrottled = true;
+
+//     setTimeout(() => {
+//       isThrottled = false;
+//     }, delay);
+//   };
+// }
 
 // function createTaskManager(initialTasks = []) {
 //   let tasks = [...initialTasks];
