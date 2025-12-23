@@ -1,19 +1,34 @@
-function deepClone(value) {
-  if (value === null || typeof value !== "object") {
-    return value;
+function validateForm(fields) {
+  const errors = {};
+
+  for (const key in fields) {
+    if (!fields[key]) {
+      errors[key] = "Required";
+    }
   }
 
-  if (Array.isArray(value)) {
-    return value.map(deepClone);
-  }
-
-  const result = {};
-  for (const key in value) {
-    result[key] = deepClone(value[key]);
-  }
-
-  return result;
+  return {
+    isValid: Object.keys(errors).length === 0,
+    errors,
+  };
 }
+
+// function deepClone(value) {
+//   if (value === null || typeof value !== "object") {
+//     return value;
+//   }
+
+//   if (Array.isArray(value)) {
+//     return value.map(deepClone);
+//   }
+
+//   const result = {};
+//   for (const key in value) {
+//     result[key] = deepClone(value[key]);
+//   }
+
+//   return result;
+// }
 
 // function groupBy(items, key) {
 //   return items.reduce((result, item) => {
