@@ -1,12 +1,25 @@
-function sortByField(items, field, order = "asc") {
-  const sorted = [...items].sort((a, b) => {
-    if (a[field] > b[field]) return 1;
-    if (a[field] < b[field]) return -1;
-    return 0;
-  });
+const users = [
+  { name: "Ivan", age: 21 },
+  { name: "Oleh", age: 17 },
+  { name: "Anna", age: 25 },
+  { name: "Max", age: 16 },
+];
 
-  return order === "desc" ? sorted.reverse() : sorted;
+function getAdultUsers(users) {
+  return users.filter((user) => user.age >= 18);
 }
+
+console.log(getAdultUsers(users));
+
+// function sortByField(items, field, order = "asc") {
+//   const sorted = [...items].sort((a, b) => {
+//     if (a[field] > b[field]) return 1;
+//     if (a[field] < b[field]) return -1;
+//     return 0;
+//   });
+
+//   return order === "desc" ? sorted.reverse() : sorted;
+// }
 
 // function validateForm(fields) {
 //   const errors = {};
