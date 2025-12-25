@@ -1,14 +1,26 @@
-const products = [
-  { name: "Phone", price: 1200 },
-  { name: "Laptop", price: 3500 },
-  { name: "Mouse", price: 150 },
+const orders = [
+  { id: 1, total: 250 },
+  { id: 2, total: 900 },
+  { id: 3, total: 120 },
 ];
 
-function getNameAndPrice(products) {
-  return products.map((product) => product.name + " " + product.price + " zŁ");
+function highTotalPrice(orders) {
+  return orders.find((order) => order.total > 500);
 }
 
-console.log(getNameAndPrice(products));
+console.log(highTotalPrice(orders));
+
+// const products = [
+//   { name: "Phone", price: 1200 },
+//   { name: "Laptop", price: 3500 },
+//   { name: "Mouse", price: 150 },
+// ];
+
+// function getNameAndPrice(products) {
+//   return products.map((product) => product.name + " " + product.price + " zŁ");
+// }
+
+// console.log(getNameAndPrice(products));
 
 // const users = [
 //   { name: "Ivan", age: 21 },
