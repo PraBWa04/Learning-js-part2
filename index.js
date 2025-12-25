@@ -1,14 +1,34 @@
-const orders = [
-  { id: 1, total: 250 },
-  { id: 2, total: 900 },
-  { id: 3, total: 120 },
+const tasks = [
+  { text: "JS", done: false },
+  { text: "Gym", done: true },
+  { text: "React", done: false },
 ];
 
-function highTotalPrice(orders) {
-  return orders.find((order) => order.total > 500);
+function toggleTask(tasks, index) {
+  return tasks.map((task, i) => {
+    if (i === index) {
+      return {
+        ...task,
+        done: !task.done,
+      };
+    }
+    return task;
+  });
 }
 
-console.log(highTotalPrice(orders));
+console.log(toggleTask(tasks, 2));
+
+// const orders = [
+//   { id: 1, total: 250 },
+//   { id: 2, total: 900 },
+//   { id: 3, total: 120 },
+// ];
+
+// function highTotalPrice(orders) {
+//   return orders.find((order) => order.total > 500);
+// }
+
+// console.log(highTotalPrice(orders));
 
 // const products = [
 //   { name: "Phone", price: 1200 },
