@@ -1,22 +1,36 @@
-const tasks = [
-  { text: "JS", done: false },
-  { text: "Gym", done: true },
-  { text: "React", done: false },
+const cart = [
+  { name: "Keyboard", price: 300, qty: 1 },
+  { name: "Monitor", price: 2500, qty: 2 },
+  { name: "Cable", price: 50, qty: 3 },
 ];
 
-function toggleTask(tasks, index) {
-  return tasks.map((task, i) => {
-    if (i === index) {
-      return {
-        ...task,
-        done: !task.done,
-      };
-    }
-    return task;
-  });
+function getTotalPrice(cart) {
+  return cart.reduce((total, item) => {
+    return total + item.price * item.qty;
+  }, 0);
 }
 
-console.log(toggleTask(tasks, 2));
+console.log(getTotalPrice(cart));
+
+// const tasks = [
+//   { text: "JS", done: false },
+//   { text: "Gym", done: true },
+//   { text: "React", done: false },
+// ];
+
+// function toggleTask(tasks, index) {
+//   return tasks.map((task, i) => {
+//     if (i === index) {
+//       return {
+//         ...task,
+//         done: !task.done,
+//       };
+//     }
+//     return task;
+//   });
+// }
+
+// console.log(toggleTask(tasks, 2));
 
 // const orders = [
 //   { id: 1, total: 250 },
