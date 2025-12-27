@@ -1,17 +1,27 @@
-const products = [
-  { id: 1, name: "iPhone 13", price: 3500 },
-  { id: 2, name: "Samsung Galaxy S21", price: 3200 },
-  { id: 3, name: "Xiaomi Redmi", price: 1800 },
-  { id: 4, name: "iPhone 11", price: 2500 },
-];
+const buttonEl = document.querySelector("#btn");
+const countEl = document.querySelector("#count");
 
-function searchProducts(products, query) {
-  return products.filter((product) => {
-    return product.name.toLowerCase().includes(query.toLowerCase());
-  });
-}
+let count = 0;
 
-console.log(searchProducts(products, "iphone"));
+buttonEl.addEventListener("click", () => {
+  count++;
+  countEl.textContent = count;
+});
+
+// const products = [
+//   { id: 1, name: "iPhone 13", price: 3500 },
+//   { id: 2, name: "Samsung Galaxy S21", price: 3200 },
+//   { id: 3, name: "Xiaomi Redmi", price: 1800 },
+//   { id: 4, name: "iPhone 11", price: 2500 },
+// ];
+
+// function searchProducts(products, query) {
+//   return products.filter((product) => {
+//     return product.name.toLowerCase().includes(query.toLowerCase());
+//   });
+// }
+
+// console.log(searchProducts(products, "iphone"));
 
 // const cart = [
 //   { name: "Keyboard", price: 300, qty: 1 },
