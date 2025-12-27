@@ -1,12 +1,21 @@
-const buttonEl = document.querySelector("#btn");
-const countEl = document.querySelector("#count");
+const numbers = [1, 2, 2, 3, 4, 4, 5, 1, 6];
 
-let count = 0;
+function getUniqueNumbers(numbers) {
+  return numbers.filter((num, index) => {
+    return numbers.indexOf(num) === index;
+  });
+}
 
-buttonEl.addEventListener("click", () => {
-  count++;
-  countEl.textContent = count;
-});
+console.log(getUniqueNumbers(numbers));
+// const buttonEl = document.querySelector("#btn");
+// const countEl = document.querySelector("#count");
+
+// let count = 0;
+
+// buttonEl.addEventListener("click", () => {
+//   count++;
+//   countEl.textContent = count;
+// });
 
 // const products = [
 //   { id: 1, name: "iPhone 13", price: 3500 },
