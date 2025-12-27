@@ -1,16 +1,31 @@
-const cart = [
-  { name: "Keyboard", price: 300, qty: 1 },
-  { name: "Monitor", price: 2500, qty: 2 },
-  { name: "Cable", price: 50, qty: 3 },
+const products = [
+  { id: 1, name: "iPhone 13", price: 3500 },
+  { id: 2, name: "Samsung Galaxy S21", price: 3200 },
+  { id: 3, name: "Xiaomi Redmi", price: 1800 },
+  { id: 4, name: "iPhone 11", price: 2500 },
 ];
 
-function getTotalPrice(cart) {
-  return cart.reduce((total, item) => {
-    return total + item.price * item.qty;
-  }, 0);
+function searchProducts(products, query) {
+  return products.filter((product) => {
+    return product.name.toLowerCase().includes(query.toLowerCase());
+  });
 }
 
-console.log(getTotalPrice(cart));
+console.log(searchProducts(products, "iphone"));
+
+// const cart = [
+//   { name: "Keyboard", price: 300, qty: 1 },
+//   { name: "Monitor", price: 2500, qty: 2 },
+//   { name: "Cable", price: 50, qty: 3 },
+// ];
+
+// function getTotalPrice(cart) {
+//   return cart.reduce((total, item) => {
+//     return total + item.price * item.qty;
+//   }, 0);
+// }
+
+// console.log(getTotalPrice(cart));
 
 // const tasks = [
 //   { text: "JS", done: false },
