@@ -1,3 +1,14 @@
+const products = [
+  { name: "Phone", price: 1200 },
+  { name: "Laptop", price: 3500 },
+  { name: "Mouse", price: 150 },
+];
+
+const getMostExpensive = (products) =>
+  products.reduce((max, p) => (p.price > max.price ? p : max));
+
+console.log(getMostExpensive(products));
+
 const users = [
   { name: "Ivan", age: 21 },
   { name: "Oleh", age: 17 },
