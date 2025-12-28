@@ -1,3 +1,13 @@
+const users = [
+  { name: "Ivan", age: 21 },
+  { name: "Oleh", age: 17 },
+  { name: "Anna", age: 25 },
+];
+
+const countAdults = (users) => users.filter((u) => u.age >= 18).length;
+
+console.log(countAdults(users));
+
 const numbers = [1, 2, 2, 3, 4, 4, 5, 1, 6];
 
 function getUniqueNumbers(numbers) {
