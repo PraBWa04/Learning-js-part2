@@ -1,33 +1,49 @@
-const products = [
-  { name: "Phone", price: 1200 },
-  { name: "Laptop", price: 3500 },
-  { name: "Mouse", price: 150 },
+const orders = [
+  { id: 1, status: "pending", total: 250 },
+  { id: 2, status: "completed", total: 900 },
+  { id: 3, status: "pending", total: 120 },
+  { id: 4, status: "completed", total: 450 },
 ];
 
-const getMostExpensive = (products) =>
-  products.reduce((max, p) => (p.price > max.price ? p : max));
-
-console.log(getMostExpensive(products));
-
-const users = [
-  { name: "Ivan", age: 21 },
-  { name: "Oleh", age: 17 },
-  { name: "Anna", age: 25 },
-];
-
-const countAdults = (users) => users.filter((u) => u.age >= 18).length;
-
-console.log(countAdults(users));
-
-const numbers = [1, 2, 2, 3, 4, 4, 5, 1, 6];
-
-function getUniqueNumbers(numbers) {
-  return numbers.filter((num, index) => {
-    return numbers.indexOf(num) === index;
-  });
+function competedOrdersTotal(orders) {
+  const completedOrders = orders.filter(
+    (order) => order.status === "completed"
+  );
+  return completedOrders.reduce((sum, order) => sum + order.total, 0);
 }
 
-console.log(getUniqueNumbers(numbers));
+console.log(competedOrdersTotal(orders));
+
+// const products = [
+//   { name: "Phone", price: 1200 },
+//   { name: "Laptop", price: 3500 },
+//   { name: "Mouse", price: 150 },
+// ];
+
+// const getMostExpensive = (products) =>
+//   products.reduce((max, p) => (p.price > max.price ? p : max));
+
+// console.log(getMostExpensive(products));
+
+// const users = [
+//   { name: "Ivan", age: 21 },
+//   { name: "Oleh", age: 17 },
+//   { name: "Anna", age: 25 },
+// ];
+
+// const countAdults = (users) => users.filter((u) => u.age >= 18).length;
+
+// console.log(countAdults(users));
+
+// const numbers = [1, 2, 2, 3, 4, 4, 5, 1, 6];
+
+// function getUniqueNumbers(numbers) {
+//   return numbers.filter((num, index) => {
+//     return numbers.indexOf(num) === index;
+//   });
+// }
+
+// console.log(getUniqueNumbers(numbers));
 // const buttonEl = document.querySelector("#btn");
 // const countEl = document.querySelector("#count");
 
