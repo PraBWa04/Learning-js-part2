@@ -1,11 +1,17 @@
-let isOpen = false;
+const btn = document.querySelector("#btn");
 
-function toggle() {
-  isOpen = !isOpen;
-}
+btn.addEventListener("click", () => {
+  console.log("Clicked");
+});
 
-toggle();
-console.log(isOpen);
+// let isOpen = false;
+
+// function toggle() {
+//   isOpen = !isOpen;
+// }
+
+// toggle();
+// console.log(isOpen);
 
 // const prices = [100, 250, 50];
 
