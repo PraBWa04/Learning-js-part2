@@ -1,22 +1,27 @@
-const orders = [
-  { id: 1, user: "Ivan", total: 250 },
-  { id: 2, user: "Anna", total: 900 },
-  { id: 3, user: "Ivan", total: 120 },
-  { id: 4, user: "Oleh", total: 450 },
-  { id: 5, user: "Anna", total: 100 },
-];
+const prices = [100, 250, 50];
 
-function groupOrdersByUser(orders) {
-  return orders.reduce((acc, order) => {
-    if (!acc[order.user]) {
-      acc[order.user] = 0;
-    }
-    acc[order.user] += order.total;
-    return acc;
-  }, {});
-}
+const total = prices.reduce((sum, price) => sum + price, 0);
+console.log(total);
 
-console.log(groupOrdersByUser(orders));
+// const orders = [
+//   { id: 1, user: "Ivan", total: 250 },
+//   { id: 2, user: "Anna", total: 900 },
+//   { id: 3, user: "Ivan", total: 120 },
+//   { id: 4, user: "Oleh", total: 450 },
+//   { id: 5, user: "Anna", total: 100 },
+// ];
+
+// function groupOrdersByUser(orders) {
+//   return orders.reduce((acc, order) => {
+//     if (!acc[order.user]) {
+//       acc[order.user] = 0;
+//     }
+//     acc[order.user] += order.total;
+//     return acc;
+//   }, {});
+// }
+
+// console.log(groupOrdersByUser(orders));
 
 // const orders = [
 //   { id: 1, status: "pending", total: 250 },
