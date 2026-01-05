@@ -1,7 +1,16 @@
-const prices = [100, 250, 50];
+let isOpen = false;
 
-const total = prices.reduce((sum, price) => sum + price, 0);
-console.log(total);
+function toggle() {
+  isOpen = !isOpen;
+}
+
+toggle();
+console.log(isOpen);
+
+// const prices = [100, 250, 50];
+
+// const total = prices.reduce((sum, price) => sum + price, 0);
+// console.log(total);
 
 // const orders = [
 //   { id: 1, user: "Ivan", total: 250 },
