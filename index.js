@@ -1,22 +1,47 @@
-const orders = [
-  { id: 1, user: "Ivan", total: 250 },
-  { id: 2, user: "Anna", total: 900 },
-  { id: 3, user: "Ivan", total: 120 },
-  { id: 4, user: "Oleh", total: 450 },
-  { id: 5, user: "Anna", total: 100 },
-];
+const minusBtn = document.querySelector("#minus");
+const plusBtn = document.querySelector("#plus");
+const countEl = document.querySelector("#count");
 
-function groupOrdersByUser(orders) {
-  return orders.reduce((acc, order) => {
-    if (!acc[order.user]) {
-      acc[order.user] = 0;
-    }
-    acc[order.user] += order.total;
-    return acc;
-  }, {});
+let count = 0;
+
+function updateUI() {
+  countEl.textContent = count;
+  minusBtn.disabled = count === 0;
 }
 
-console.log(groupOrdersByUser(orders));
+plusBtn.addEventListener("click", () => {
+  count++;
+  updateUI();
+});
+
+minusBtn.addEventListener("click", () => {
+  if (count > 0) {
+    count--;
+    updateUI();
+  }
+});
+
+updateUI();
+
+// const orders = [
+//   { id: 1, user: "Ivan", total: 250 },
+//   { id: 2, user: "Anna", total: 900 },
+//   { id: 3, user: "Ivan", total: 120 },
+//   { id: 4, user: "Oleh", total: 450 },
+//   { id: 5, user: "Anna", total: 100 },
+// ];
+
+// function groupOrdersByUser(orders) {
+//   return orders.reduce((acc, order) => {
+//     if (!acc[order.user]) {
+//       acc[order.user] = 0;
+//     }
+//     acc[order.user] += order.total;
+//     return acc;
+//   }, {});
+// }
+
+// console.log(groupOrdersByUser(orders));
 
 // const btn = document.querySelector("#btn");
 
