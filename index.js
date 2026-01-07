@@ -1,18 +1,50 @@
-const users = [
-  { name: "Ivan", role: "admin" },
-  { name: "Anna", role: "user" },
-  { name: "Oleh", role: "admin" },
-  { name: "Max", role: "user" },
+const items = [
+  { name: "Apple", price: 5 },
+  { name: "Banana", price: 3 },
+  { name: "Orange", price: 4 },
 ];
 
-const groupUsersByRole = (users) =>
-  users.reduce((acc, user) => {
-    acc[user.role] ??= [];
-    acc[user.role].push(user.name);
-    return acc;
-  }, {});
+const listEl = document.querySelector("#list");
+const totalEl = document.querySelector("#total");
 
-console.log(groupUsersByRole(users));
+let cart = [];
+
+function render() {
+  listEl.innerHTML = "";
+
+  items.forEach((item) => {
+    const btn = document.createElement("button");
+    btn.textContent = `Add ${item.name}`;
+    btn.onclick = () => {
+      cart.push(item);
+      updateTotal();
+    };
+    listEl.appendChild(btn);
+  });
+}
+
+function updateTotal() {
+  const total = cart.reduce((sum, item) => sum + item.price, 0);
+  totalEl.textContent = total;
+}
+
+render();
+
+// const users = [
+//   { name: "Ivan", role: "admin" },
+//   { name: "Anna", role: "user" },
+//   { name: "Oleh", role: "admin" },
+//   { name: "Max", role: "user" },
+// ];
+
+// const groupUsersByRole = (users) =>
+//   users.reduce((acc, user) => {
+//     acc[user.role] ??= [];
+//     acc[user.role].push(user.name);
+//     return acc;
+//   }, {});
+
+// console.log(groupUsersByRole(users));
 
 // const orders = [
 //   { id: 1, status: "completed", total: 250 },
