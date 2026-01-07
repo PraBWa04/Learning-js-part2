@@ -1,27 +1,44 @@
-const minusBtn = document.querySelector("#minus");
-const plusBtn = document.querySelector("#plus");
-const countEl = document.querySelector("#count");
+const orders = [
+  { id: 1, status: "completed", total: 250 },
+  { id: 2, status: "pending", total: 900 },
+  { id: 3, status: "completed", total: 120 },
+  { id: 4, status: "completed", total: 450 },
+];
 
-let count = 0;
+const getCompletedAverage = (orders) => {
+  const completed = orders.filter((o) => o.status === "completed");
 
-function updateUI() {
-  countEl.textContent = count;
-  minusBtn.disabled = count === 0;
-}
+  const sum = completed.reduce((acc, o) => acc + o.total, 0);
 
-plusBtn.addEventListener("click", () => {
-  count++;
-  updateUI();
-});
+  return completed.length ? sum / completed.length : 0;
+};
 
-minusBtn.addEventListener("click", () => {
-  if (count > 0) {
-    count--;
-    updateUI();
-  }
-});
+console.log(getCompletedAverage(orders));
 
-updateUI();
+// const minusBtn = document.querySelector("#minus");
+// const plusBtn = document.querySelector("#plus");
+// const countEl = document.querySelector("#count");
+
+// let count = 0;
+
+// function updateUI() {
+//   countEl.textContent = count;
+//   minusBtn.disabled = count === 0;
+// }
+
+// plusBtn.addEventListener("click", () => {
+//   count++;
+//   updateUI();
+// });
+
+// minusBtn.addEventListener("click", () => {
+//   if (count > 0) {
+//     count--;
+//     updateUI();
+//   }
+// });
+
+// updateUI();
 
 // const orders = [
 //   { id: 1, user: "Ivan", total: 250 },
