@@ -1,19 +1,35 @@
-const orders = [
-  { id: 1, status: "completed", total: 250 },
-  { id: 2, status: "pending", total: 900 },
-  { id: 3, status: "completed", total: 120 },
-  { id: 4, status: "completed", total: 450 },
+const users = [
+  { name: "Ivan", role: "admin" },
+  { name: "Anna", role: "user" },
+  { name: "Oleh", role: "admin" },
+  { name: "Max", role: "user" },
 ];
 
-const getCompletedAverage = (orders) => {
-  const completed = orders.filter((o) => o.status === "completed");
+const groupUsersByRole = (users) =>
+  users.reduce((acc, user) => {
+    acc[user.role] ??= [];
+    acc[user.role].push(user.name);
+    return acc;
+  }, {});
 
-  const sum = completed.reduce((acc, o) => acc + o.total, 0);
+console.log(groupUsersByRole(users));
 
-  return completed.length ? sum / completed.length : 0;
-};
+// const orders = [
+//   { id: 1, status: "completed", total: 250 },
+//   { id: 2, status: "pending", total: 900 },
+//   { id: 3, status: "completed", total: 120 },
+//   { id: 4, status: "completed", total: 450 },
+// ];
 
-console.log(getCompletedAverage(orders));
+// const getCompletedAverage = (orders) => {
+//   const completed = orders.filter((o) => o.status === "completed");
+
+//   const sum = completed.reduce((acc, o) => acc + o.total, 0);
+
+//   return completed.length ? sum / completed.length : 0;
+// };
+
+// console.log(getCompletedAverage(orders));
 
 // const minusBtn = document.querySelector("#minus");
 // const plusBtn = document.querySelector("#plus");
