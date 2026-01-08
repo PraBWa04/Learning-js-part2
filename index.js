@@ -1,15 +1,29 @@
-const scores = [10, 20, 15, 30, 25];
+function normalizeUsers(users) {
+  return users.map((user) => {
+    const name =
+      user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase();
 
-function getScoreStats(scores) {
-  const total = scores.reduce((acc, score) => acc + score, 0);
-  const average = total / scores.length;
-  return {
-    total: total,
-    average: average,
-  };
+    return {
+      ...user,
+      name: name,
+    };
+  });
 }
 
-console.log(getScoreStats(scores));
+console.log(normalizeUsers(users));
+
+// const scores = [10, 20, 15, 30, 25];
+
+// function getScoreStats(scores) {
+//   const total = scores.reduce((acc, score) => acc + score, 0);
+//   const average = total / scores.length;
+//   return {
+//     total: total,
+//     average: average,
+//   };
+// }
+
+// console.log(getScoreStats(scores));
 // const users = [
 //   { name: "Ivan", active: true },
 //   { name: "Anna", active: false },
