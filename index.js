@@ -1,34 +1,52 @@
-const items = [
-  { name: "Apple", price: 5 },
-  { name: "Banana", price: 3 },
-  { name: "Orange", price: 4 },
+const users = [
+  { name: "Ivan", active: true },
+  { name: "Anna", active: false },
+  { name: "Oleh", active: true },
+  { name: "Max", active: false },
 ];
 
-const listEl = document.querySelector("#list");
-const totalEl = document.querySelector("#total");
+function getActiveUsers(users) {
+  const activeUsers = users.filter((user) => user.active);
 
-let cart = [];
-
-function render() {
-  listEl.innerHTML = "";
-
-  items.forEach((item) => {
-    const btn = document.createElement("button");
-    btn.textContent = `Add ${item.name}`;
-    btn.onclick = () => {
-      cart.push(item);
-      updateTotal();
-    };
-    listEl.appendChild(btn);
-  });
+  return {
+    users: activeUsers,
+    count: activeUsers.length,
+  };
 }
 
-function updateTotal() {
-  const total = cart.reduce((sum, item) => sum + item.price, 0);
-  totalEl.textContent = total;
-}
+console.log(getActiveUsers(users));
 
-render();
+// const items = [
+//   { name: "Apple", price: 5 },
+//   { name: "Banana", price: 3 },
+//   { name: "Orange", price: 4 },
+// ];
+
+// const listEl = document.querySelector("#list");
+// const totalEl = document.querySelector("#total");
+
+// let cart = [];
+
+// function render() {
+//   listEl.innerHTML = "";
+
+//   items.forEach((item) => {
+//     const btn = document.createElement("button");
+//     btn.textContent = `Add ${item.name}`;
+//     btn.onclick = () => {
+//       cart.push(item);
+//       updateTotal();
+//     };
+//     listEl.appendChild(btn);
+//   });
+// }
+
+// function updateTotal() {
+//   const total = cart.reduce((sum, item) => sum + item.price, 0);
+//   totalEl.textContent = total;
+// }
+
+// render();
 
 // const users = [
 //   { name: "Ivan", role: "admin" },
