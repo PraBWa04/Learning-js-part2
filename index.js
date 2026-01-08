@@ -1,20 +1,32 @@
-const users = [
-  { name: "Ivan", active: true },
-  { name: "Anna", active: false },
-  { name: "Oleh", active: true },
-  { name: "Max", active: false },
-];
+const scores = [10, 20, 15, 30, 25];
 
-function getActiveUsers(users) {
-  const activeUsers = users.filter((user) => user.active);
-
+function getScoreStats(scores) {
+  const total = scores.reduce((acc, score) => acc + score, 0);
+  const average = total / scores.length;
   return {
-    users: activeUsers,
-    count: activeUsers.length,
+    total: total,
+    average: average,
   };
 }
 
-console.log(getActiveUsers(users));
+console.log(getScoreStats(scores));
+// const users = [
+//   { name: "Ivan", active: true },
+//   { name: "Anna", active: false },
+//   { name: "Oleh", active: true },
+//   { name: "Max", active: false },
+// ];
+
+// function getActiveUsers(users) {
+//   const activeUsers = users.filter((user) => user.active);
+
+//   return {
+//     users: activeUsers,
+//     count: activeUsers.length,
+//   };
+// }
+
+// console.log(getActiveUsers(users));
 
 // const items = [
 //   { name: "Apple", price: 5 },
