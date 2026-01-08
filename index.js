@@ -1,23 +1,44 @@
-const orders = [
-  { id: 1, status: "completed", total: 250 },
-  { id: 2, status: "pending", total: 400 },
-  { id: 3, status: "completed", total: 120 },
-  { id: 4, status: "cancelled", total: 300 },
-  { id: 5, status: "completed", total: 80 },
+const products = [
+  { name: "Phone", category: "electronics", price: 1200 },
+  { name: "Laptop", category: "electronics", price: 3500 },
+  { name: "Apple", category: "food", price: 5 },
+  { name: "Bread", category: "food", price: 3 },
+  { name: "T-shirt", category: "clothes", price: 25 },
 ];
 
-function getCompleteStats(orders) {
-  const count = orders.filter((order) => order.status === "completed");
-  const total = count.reduce((acc, count) => acc + count.total, 0);
-  const average = total / count.length;
-  return {
-    count: count.length,
-    total: total,
-    average: average,
-  };
+function getTotalByCategory(products) {
+  return products.reduce((acc, product) => {
+    if (!acc[product.category]) {
+      acc[product.category] = 0;
+    }
+
+    acc[product.category] += product.price;
+    return acc;
+  }, {});
 }
 
-console.log(getCompleteStats(orders));
+console.log(getTotalByCategory(products));
+
+// const orders = [
+//   { id: 1, status: "completed", total: 250 },
+//   { id: 2, status: "pending", total: 400 },
+//   { id: 3, status: "completed", total: 120 },
+//   { id: 4, status: "cancelled", total: 300 },
+//   { id: 5, status: "completed", total: 80 },
+// ];
+
+// function getCompleteStats(orders) {
+//   const count = orders.filter((order) => order.status === "completed");
+//   const total = count.reduce((acc, count) => acc + count.total, 0);
+//   const average = total / count.length;
+//   return {
+//     count: count.length,
+//     total: total,
+//     average: average,
+//   };
+// }
+
+// console.log(getCompleteStats(orders));
 
 // function normalizeUsers(users) {
 //   return users.map((user) => {
