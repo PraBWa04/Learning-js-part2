@@ -1,23 +1,33 @@
-const users = [
-  { name: "ivan", score: 50 },
-  { name: "ANNA", score: 80 },
-  { name: "oLeh", score: 65 },
-  { name: "max", score: 40 },
-];
+const btn = document.querySelector("#btn");
+const countEl = document.querySelector("#count");
 
-function prepareLeaderboard(users) {
-  return users
-    .map((user) => {
-      return {
-        ...user,
-        name:
-          user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase(),
-      };
-    })
-    .sort((a, b) => b.score - a.score);
-}
+let count = 0;
 
-console.log(prepareLeaderboard(users));
+btn.addEventListener("click", () => {
+  count++;
+  countEl.textContent = count;
+});
+
+// const users = [
+//   { name: "ivan", score: 50 },
+//   { name: "ANNA", score: 80 },
+//   { name: "oLeh", score: 65 },
+//   { name: "max", score: 40 },
+// ];
+
+// function prepareLeaderboard(users) {
+//   return users
+//     .map((user) => {
+//       return {
+//         ...user,
+//         name:
+//           user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase(),
+//       };
+//     })
+//     .sort((a, b) => b.score - a.score);
+// }
+
+// console.log(prepareLeaderboard(users));
 
 // const products = [
 //   { name: "Phone", category: "electronics", price: 1200 },
