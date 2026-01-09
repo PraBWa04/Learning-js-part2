@@ -1,23 +1,45 @@
-const products = [
-  { name: "Phone", category: "electronics", price: 1200 },
-  { name: "Laptop", category: "electronics", price: 3500 },
-  { name: "Apple", category: "food", price: 5 },
-  { name: "Bread", category: "food", price: 3 },
-  { name: "T-shirt", category: "clothes", price: 25 },
+const users = [
+  { name: "ivan", score: 50 },
+  { name: "ANNA", score: 80 },
+  { name: "oLeh", score: 65 },
+  { name: "max", score: 40 },
 ];
 
-function getTotalByCategory(products) {
-  return products.reduce((acc, product) => {
-    if (!acc[product.category]) {
-      acc[product.category] = 0;
-    }
-
-    acc[product.category] += product.price;
-    return acc;
-  }, {});
+function prepareLeaderboard(users) {
+  return users
+    .map((user) => {
+      return {
+        ...user,
+        name:
+          user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase(),
+      };
+    })
+    .sort((a, b) => b.score - a.score);
 }
 
-console.log(getTotalByCategory(products));
+console.log(prepareLeaderboard(users));
+
+// const products = [
+//   { name: "Phone", category: "electronics", price: 1200 },
+//   { name: "Laptop", category: "electronics", price: 3500 },
+//   { name: "Apple", category: "food", price: 5 },
+//   { name: "Bread", category: "food", price: 3 },
+//   { name: "T-shirt", category: "clothes", price: 25 },
+// ];
+
+// function getTotalByCategory(products) {
+//   return products.reduce((acc, product) => {
+//     if (!acc[product.category]) {
+//       acc[product.category] = 0;
+//     }
+
+//     acc[product.category] += product.price;
+//     return acc;
+//   }, {});
+
+// }
+
+// console.log(getTotalByCategory(products));
 
 // const orders = [
 //   { id: 1, status: "completed", total: 250 },
