@@ -1,23 +1,39 @@
-const listEl = document.querySelector("#list");
-const addBtn = document.querySelector("#addBtn");
+const toggleClassBtn = document.querySelector("#toggleClassBtn");
+const boxEl = document.querySelector("#box");
 
-let items = [];
+let isActive = false;
 
 function render() {
-  listEl.innerHTML = "";
-  items.forEach((item) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    listEl.appendChild(li);
-  });
+  boxEl.classList.toggle("active", isActive);
 }
 
-addBtn.addEventListener("click", () => {
-  items.push(`Item ${items.length + 1}`);
+toggleClassBtn.addEventListener("click", () => {
+  isActive = !isActive;
   render();
 });
 
 render();
+
+// const listEl = document.querySelector("#list");
+// const addBtn = document.querySelector("#addBtn");
+
+// let items = [];
+
+// function render() {
+//   listEl.innerHTML = "";
+//   items.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   items.push(`Item ${items.length + 1}`);
+//   render();
+// });
+
+// render();
 
 // const plusBtn = document.querySelector("#plusBtn");
 // const valueEl = document.querySelector("#value");
