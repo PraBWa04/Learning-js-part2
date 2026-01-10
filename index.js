@@ -1,18 +1,46 @@
-const toggleClassBtn = document.querySelector("#toggleClassBtn");
-const boxEl = document.querySelector("#box");
+const tasksEl = document.querySelector("#tasks");
+const addTaskBtn = document.querySelector("#addTaskBtn");
 
-let isActive = false;
+let tasks = [];
 
 function render() {
-  boxEl.classList.toggle("active", isActive);
+  tasksEl.innerHTML = "";
+
+  tasks.forEach((task, index) => {
+    const li = document.createElement("li");
+    li.textContent = task;
+
+    li.addEventListener("click", () => {
+      tasks.splice(index, 1);
+      render();
+    });
+
+    tasksEl.appendChild(li);
+  });
 }
 
-toggleClassBtn.addEventListener("click", () => {
-  isActive = !isActive;
+addTaskBtn.addEventListener("click", () => {
+  tasks.push(`Task ${tasks.length + 1}`);
   render();
 });
 
 render();
+
+// const toggleClassBtn = document.querySelector("#toggleClassBtn");
+// const boxEl = document.querySelector("#box");
+
+// let isActive = false;
+
+// function render() {
+//   boxEl.classList.toggle("active", isActive);
+// }
+
+// toggleClassBtn.addEventListener("click", () => {
+//   isActive = !isActive;
+//   render();
+// });
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const addBtn = document.querySelector("#addBtn");
