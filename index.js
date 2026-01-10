@@ -1,18 +1,36 @@
-const toggleBtn = document.querySelector("#toggleBtn");
-const statusEl = document.querySelector("#status");
+const plusBtn = document.querySelector("#plusBtn");
+const valueEl = document.querySelector("#value");
 
-let isOn = false;
+let value = 0;
+const MAX = 5;
 
 function render() {
-  statusEl.textContent = isOn ? "ON" : "OFF";
+  valueEl.textContent = value;
+  plusBtn.disabled = value >= MAX;
 }
 
-toggleBtn.addEventListener("click", () => {
-  isOn = !isOn;
+plusBtn.addEventListener("click", () => {
+  value++;
   render();
 });
 
 render();
+
+// const toggleBtn = document.querySelector("#toggleBtn");
+// const statusEl = document.querySelector("#status");
+
+// let isOn = false;
+
+// function render() {
+//   statusEl.textContent = isOn ? "ON" : "OFF";
+// }
+
+// toggleBtn.addEventListener("click", () => {
+//   isOn = !isOn;
+//   render();
+// });
+
+// render();
 
 // const btn = document.querySelector("#btn");
 // const countEl = document.querySelector("#count");
