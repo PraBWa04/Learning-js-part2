@@ -1,20 +1,41 @@
-const plusBtn = document.querySelector("#plusBtn");
-const valueEl = document.querySelector("#value");
+const listEl = document.querySelector("#list");
+const addBtn = document.querySelector("#addBtn");
 
-let value = 0;
-const MAX = 5;
+let items = [];
 
 function render() {
-  valueEl.textContent = value;
-  plusBtn.disabled = value >= MAX;
+  listEl.innerHTML = "";
+  items.forEach((item) => {
+    const li = document.createElement("li");
+    li.textContent = item;
+    listEl.appendChild(li);
+  });
 }
 
-plusBtn.addEventListener("click", () => {
-  value++;
+addBtn.addEventListener("click", () => {
+  items.push(`Item ${items.length + 1}`);
   render();
 });
 
 render();
+
+// const plusBtn = document.querySelector("#plusBtn");
+// const valueEl = document.querySelector("#value");
+
+// let value = 0;
+// const MAX = 5;
+
+// function render() {
+//   valueEl.textContent = value;
+//   plusBtn.disabled = value >= MAX;
+// }
+
+// plusBtn.addEventListener("click", () => {
+//   value++;
+//   render();
+// });
+
+// render();
 
 // const toggleBtn = document.querySelector("#toggleBtn");
 // const statusEl = document.querySelector("#status");
