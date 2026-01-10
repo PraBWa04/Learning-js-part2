@@ -1,12 +1,28 @@
-const btn = document.querySelector("#btn");
-const countEl = document.querySelector("#count");
+const toggleBtn = document.querySelector("#toggleBtn");
+const statusEl = document.querySelector("#status");
 
-let count = 0;
+let isOn = false;
 
-btn.addEventListener("click", () => {
-  count++;
-  countEl.textContent = count;
+function render() {
+  statusEl.textContent = isOn ? "ON" : "OFF";
+}
+
+toggleBtn.addEventListener("click", () => {
+  isOn = !isOn;
+  render();
 });
+
+render();
+
+// const btn = document.querySelector("#btn");
+// const countEl = document.querySelector("#count");
+
+// let count = 0;
+
+// btn.addEventListener("click", () => {
+//   count++;
+//   countEl.textContent = count;
+// });
 
 // const users = [
 //   { name: "ivan", score: 50 },
