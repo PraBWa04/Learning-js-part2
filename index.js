@@ -1,16 +1,38 @@
-const fruits = ["Apple", "Banana", "Orange"];
-
 const listEl = document.querySelector("#list");
+const addBtn = document.querySelector("#addBtn");
+
+let items = ["Apple", "Banana"];
 
 function render() {
-  fruits.forEach((fruit) => {
+  listEl.textContent = "";
+
+  items.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = fruit;
+    li.textContent = item;
     listEl.appendChild(li);
   });
 }
 
+addBtn.addEventListener("click", () => {
+  items.push(`Item ${items.length + 1}`);
+  render();
+});
+
 render();
+
+// const fruits = ["Apple", "Banana", "Orange"];
+
+// const listEl = document.querySelector("#list");
+
+// function render() {
+//   fruits.forEach((fruit) => {
+//     const li = document.createElement("li");
+//     li.textContent = fruit;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// render();
 
 // const btn = document.querySelector("#btn");
 // const textEl = document.querySelector("#text");
