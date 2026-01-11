@@ -1,18 +1,32 @@
-const btn = document.querySelector("#btn");
-const textEl = document.querySelector("#text");
+const fruits = ["Apple", "Banana", "Orange"];
 
-let isHello = true;
+const listEl = document.querySelector("#list");
 
 function render() {
-  textEl.textContent = isHello ? "Hello" : "World";
+  fruits.forEach((fruit) => {
+    const li = document.createElement("li");
+    li.textContent = fruit;
+    listEl.appendChild(li);
+  });
 }
 
-btn.addEventListener("click", () => {
-  isHello = !isHello;
-  render();
-});
-
 render();
+
+// const btn = document.querySelector("#btn");
+// const textEl = document.querySelector("#text");
+
+// let isHello = true;
+
+// function render() {
+//   textEl.textContent = isHello ? "Hello" : "World";
+// }
+
+// btn.addEventListener("click", () => {
+//   isHello = !isHello;
+//   render();
+// });
+
+// render();
 
 // const tasksEl = document.querySelector("#tasks");
 // const addTaskBtn = document.querySelector("#addTaskBtn");
