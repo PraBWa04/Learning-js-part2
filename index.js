@@ -1,24 +1,54 @@
-const listEl = document.querySelector("#list");
-const addBtn = document.querySelector("#addBtn");
+const users = [
+  { name: "Ivan", active: true },
+  { name: "Anna", active: false },
+  { name: "Oleh", active: true },
+];
 
-let items = ["Apple", "Banana"];
+const listEl = document.querySelector("#list");
+const toggleBtn = document.querySelector("#toggle");
+
+let showOnlyActive = false;
 
 function render() {
   listEl.textContent = "";
 
-  items.forEach((item) => {
+  const filtered = showOnlyActive ? users.filter((u) => u.active) : users;
+
+  filtered.forEach((user) => {
     const li = document.createElement("li");
-    li.textContent = item;
+    li.textContent = user.name;
     listEl.appendChild(li);
   });
 }
 
-addBtn.addEventListener("click", () => {
-  items.push(`Item ${items.length + 1}`);
+toggleBtn.addEventListener("click", () => {
+  showOnlyActive = !showOnlyActive;
   render();
 });
 
 render();
+
+// const listEl = document.querySelector("#list");
+// const addBtn = document.querySelector("#addBtn");
+
+// let items = ["Apple", "Banana"];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   items.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   items.push(`Item ${items.length + 1}`);
+//   render();
+// });
+
+// render();
 
 // const fruits = ["Apple", "Banana", "Orange"];
 
