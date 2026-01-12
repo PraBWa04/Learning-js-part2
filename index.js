@@ -1,27 +1,50 @@
-const products = ["Apple", "Banana", "Orange", "Avocado"];
-const input = document.querySelector("#search");
-const listEl = document.querySelector("#list");
+const tasks = [
+  { text: "JS", done: true },
+  { text: "Gym", done: false },
+  { text: "Study", done: true },
+];
 
-let query = "";
+const statsEl = document.querySelector("#stats");
 
-function render() {
-  listEl.textContent = "";
+function renderStats() {
+  const stats = tasks.reduce(
+    (acc, task) => {
+      acc.total++;
+      task.done ? acc.done++ : acc.active++;
+      return acc;
+    },
+    { total: 0, done: 0, active: 0 }
+  );
 
-  products
-    .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
-    .forEach((item) => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      listEl.appendChild(li);
-    });
+  statsEl.textContent = `Total: ${stats.total}, Done: ${stats.done}, Active: ${stats.active}`;
 }
 
-input.addEventListener("input", (e) => {
-  query = e.target.value;
-  render();
-});
+renderStats();
 
-render();
+// const products = ["Apple", "Banana", "Orange", "Avocado"];
+// const input = document.querySelector("#search");
+// const listEl = document.querySelector("#list");
+
+// let query = "";
+
+// function render() {
+//   listEl.textContent = "";
+
+//   products
+//     .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+//     .forEach((item) => {
+//       const li = document.createElement("li");
+//       li.textContent = item;
+//       listEl.appendChild(li);
+//     });
+// }
+
+// input.addEventListener("input", (e) => {
+//   query = e.target.value;
+//   render();
+// });
+
+// render();
 
 // const btn = document.querySelector("#btn");
 // const valueEl = document.querySelector("#value");
