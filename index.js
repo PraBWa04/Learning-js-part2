@@ -1,32 +1,50 @@
-const users = [
-  { name: "Ivan", active: true },
-  { name: "Anna", active: false },
-  { name: "Oleh", active: true },
-];
+const btn = document.querySelector("#btn");
+const valueEl = document.querySelector("#value");
 
-const listEl = document.querySelector("#list");
-const toggleBtn = document.querySelector("#toggle");
-
-let showOnlyActive = false;
+let count = 0;
+const MAX = 10;
 
 function render() {
-  listEl.textContent = "";
-
-  const filtered = showOnlyActive ? users.filter((u) => u.active) : users;
-
-  filtered.forEach((user) => {
-    const li = document.createElement("li");
-    li.textContent = user.name;
-    listEl.appendChild(li);
-  });
+  valueEl.textContent = count;
+  btn.disabled = count >= MAX;
 }
 
-toggleBtn.addEventListener("click", () => {
-  showOnlyActive = !showOnlyActive;
+btn.addEventListener("click", () => {
+  count++;
   render();
 });
 
 render();
+
+// const users = [
+//   { name: "Ivan", active: true },
+//   { name: "Anna", active: false },
+//   { name: "Oleh", active: true },
+// ];
+
+// const listEl = document.querySelector("#list");
+// const toggleBtn = document.querySelector("#toggle");
+
+// let showOnlyActive = false;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   const filtered = showOnlyActive ? users.filter((u) => u.active) : users;
+
+//   filtered.forEach((user) => {
+//     const li = document.createElement("li");
+//     li.textContent = user.name;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// toggleBtn.addEventListener("click", () => {
+//   showOnlyActive = !showOnlyActive;
+//   render();
+// });
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const addBtn = document.querySelector("#addBtn");
