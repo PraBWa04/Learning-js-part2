@@ -1,20 +1,45 @@
-const btn = document.querySelector("#btn");
-const valueEl = document.querySelector("#value");
+const products = ["Apple", "Banana", "Orange", "Avocado"];
+const input = document.querySelector("#search");
+const listEl = document.querySelector("#list");
 
-let count = 0;
-const MAX = 10;
+let query = "";
 
 function render() {
-  valueEl.textContent = count;
-  btn.disabled = count >= MAX;
+  listEl.textContent = "";
+
+  products
+    .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+    .forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      listEl.appendChild(li);
+    });
 }
 
-btn.addEventListener("click", () => {
-  count++;
+input.addEventListener("input", (e) => {
+  query = e.target.value;
   render();
 });
 
 render();
+
+// const btn = document.querySelector("#btn");
+// const valueEl = document.querySelector("#value");
+
+// let count = 0;
+// const MAX = 10;
+
+// function render() {
+//   valueEl.textContent = count;
+//   btn.disabled = count >= MAX;
+// }
+
+// btn.addEventListener("click", () => {
+//   count++;
+//   render();
+// });
+
+// render();
 
 // const users = [
 //   { name: "Ivan", active: true },
