@@ -1,25 +1,57 @@
-const tasks = [
-  { text: "JS", done: true },
-  { text: "Gym", done: false },
-  { text: "Study", done: true },
+const products = [
+  { name: "Phone", price: 1200 },
+  { name: "Mouse", price: 50 },
+  { name: "Laptop", price: 3500 },
 ];
 
-const statsEl = document.querySelector("#stats");
+const listEl = document.querySelector("#list");
+const sortBtn = document.querySelector("#sort");
 
-function renderStats() {
-  const stats = tasks.reduce(
-    (acc, task) => {
-      acc.total++;
-      task.done ? acc.done++ : acc.active++;
-      return acc;
-    },
-    { total: 0, done: 0, active: 0 }
+let asc = true;
+
+function render() {
+  listEl.textContent = "";
+
+  const sorted = [...products].sort((a, b) =>
+    asc ? a.price - b.price : b.price - a.price
   );
 
-  statsEl.textContent = `Total: ${stats.total}, Done: ${stats.done}, Active: ${stats.active}`;
+  sorted.forEach((p) => {
+    const li = document.createElement("li");
+    li.textContent = `${p.name} — ${p.price}`;
+    listEl.appendChild(li);
+  });
 }
 
-renderStats();
+sortBtn.addEventListener("click", () => {
+  asc = !asc;
+  render();
+});
+
+render();
+
+// const tasks = [
+//   { text: "JS", done: true },
+//   { text: "Gym", done: false },
+//   { text: "Study", done: true },
+// ];
+
+// const statsEl = document.querySelector("#stats");
+
+// function renderStats() {
+//   const stats = tasks.reduce(
+//     (acc, task) => {
+//       acc.total++;
+//       task.done ? acc.done++ : acc.active++;
+//       return acc;
+//     },
+//     { total: 0, done: 0, active: 0 }
+//   );
+
+//   statsEl.textContent = `Total: ${stats.total}, Done: ${stats.done}, Active: ${stats.active}`;
+// }
+
+// renderStats();
 
 // const products = ["Apple", "Banana", "Orange", "Avocado"];
 // const input = document.querySelector("#search");
