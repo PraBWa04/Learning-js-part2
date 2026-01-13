@@ -1,18 +1,21 @@
-const input = document.querySelector("#taskInput");
-const addBtn = document.querySelector("#addTask");
-const listEl = document.querySelector("#tasks");
+const listEl = document.querySelector("#list");
 
-let tasks = [];
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function save() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
 
 function render() {
   listEl.textContent = "";
 
-  tasks.forEach((task, index) => {
+  notes.forEach((note, index) => {
     const li = document.createElement("li");
-    li.textContent = task;
+    li.textContent = note;
 
     li.addEventListener("click", () => {
-      tasks.splice(index, 1);
+      notes.splice(index, 1);
+      save();
       render();
     });
 
@@ -20,14 +23,38 @@ function render() {
   });
 }
 
-addBtn.addEventListener("click", () => {
-  const value = input.value.trim();
-  if (!value) return;
+render();
 
-  tasks.push(value);
-  input.value = "";
-  render();
-});
+// const input = document.querySelector("#taskInput");
+// const addBtn = document.querySelector("#addTask");
+// const listEl = document.querySelector("#tasks");
+
+// let tasks = [];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   tasks.forEach((task, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = task;
+
+//     li.addEventListener("click", () => {
+//       tasks.splice(index, 1);
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   const value = input.value.trim();
+//   if (!value) return;
+
+//   tasks.push(value);
+//   input.value = "";
+//   render();
+// });
 
 // const input = document.querySelector("#taskInput");
 // const addBtn = document.querySelector("#addTask");
