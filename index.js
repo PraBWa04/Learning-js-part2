@@ -6,6 +6,13 @@ let items = ["Apple", "Banana"];
 function render() {
   listEl.textContent = "";
 
+  if (items.length === 0) {
+    const p = document.createElement("p");
+    p.textContent = "List is empty";
+    listEl.appendChild(p);
+    return;
+  }
+
   items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
@@ -16,14 +23,6 @@ function render() {
 addBtn.addEventListener("click", () => {
   items.push(`Item ${items.length + 1}`);
   render();
-
-  if (items.length === 0) {
-    const p = document.createElement("p");
-    p.textContent = "List is empty";
-    listEl.appendChild(p);
-    return;
-  }
-  return;
 });
 
 render();
