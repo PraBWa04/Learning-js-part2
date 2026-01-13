@@ -1,34 +1,96 @@
-const products = [
-  { name: "Phone", price: 1200 },
-  { name: "Mouse", price: 50 },
-  { name: "Laptop", price: 3500 },
-];
+const input = document.querySelector("#taskInput");
+const addBtn = document.querySelector("#addTask");
+const listEl = document.querySelector("#tasks");
 
-const listEl = document.querySelector("#list");
-const sortBtn = document.querySelector("#sort");
-
-let asc = true;
+let tasks = [];
 
 function render() {
   listEl.textContent = "";
 
-  const sorted = [...products].sort((a, b) =>
-    asc ? a.price - b.price : b.price - a.price
-  );
-
-  sorted.forEach((p) => {
+  tasks.forEach((task, index) => {
     const li = document.createElement("li");
-    li.textContent = `${p.name} — ${p.price}`;
+    li.textContent = task;
+
+    li.addEventListener("click", () => {
+      tasks.splice(index, 1);
+      render();
+    });
+
     listEl.appendChild(li);
   });
 }
 
-sortBtn.addEventListener("click", () => {
-  asc = !asc;
+addBtn.addEventListener("click", () => {
+  const value = input.value.trim();
+  if (!value) return;
+
+  tasks.push(value);
+  input.value = "";
   render();
 });
 
-render();
+// const input = document.querySelector("#taskInput");
+// const addBtn = document.querySelector("#addTask");
+// const listEl = document.querySelector("#tasks");
+
+// let tasks = [];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   tasks.forEach((task, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = task;
+
+//     li.addEventListener("click", () => {
+//       tasks.splice(index, 1);
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   const value = input.value.trim();
+//   if (!value) return;
+
+//   tasks.push(value);
+//   input.value = "";
+//   render();
+// });
+
+// const products = [
+//   { name: "Phone", price: 1200 },
+//   { name: "Mouse", price: 50 },
+//   { name: "Laptop", price: 3500 },
+// ];
+
+// const listEl = document.querySelector("#list");
+// const sortBtn = document.querySelector("#sort");
+
+// let asc = true;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   const sorted = [...products].sort((a, b) =>
+//     asc ? a.price - b.price : b.price - a.price
+//   );
+
+//   sorted.forEach((p) => {
+//     const li = document.createElement("li");
+//     li.textContent = `${p.name} — ${p.price}`;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// sortBtn.addEventListener("click", () => {
+//   asc = !asc;
+//   render();
+// });
+
+// render();
 
 // const tasks = [
 //   { text: "JS", done: true },
