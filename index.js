@@ -1,28 +1,51 @@
-const input = document.querySelector("#search");
-const listEl = document.querySelector("#list");
+const orders = [
+  { status: "completed", total: 250 },
+  { status: "pending", total: 100 },
+  { status: "completed", total: 400 },
+];
 
-const data = ["Apple", "Avocado", "Banana", "Orange", "Mango"];
+const statsEl = document.querySelector("#stats");
 
-let query = "";
+function renderStats() {
+  const stats = orders.reduce(
+    (acc, order) => {
+      acc.count++;
+      acc.total += order.total;
+      return acc;
+    },
+    { count: 0, total: 0 }
+  );
 
-function render() {
-  listEl.textContent = "";
-
-  data
-    .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
-    .forEach((item) => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      listEl.appendChild(li);
-    });
+  statsEl.textContent = `Orders: ${stats.count}, Total: ${stats.total}`;
 }
 
-input.addEventListener("input", (e) => {
-  query = e.target.value;
-  render();
-});
+renderStats();
 
-render();
+// const input = document.querySelector("#search");
+// const listEl = document.querySelector("#list");
+
+// const data = ["Apple", "Avocado", "Banana", "Orange", "Mango"];
+
+// let query = "";
+
+// function render() {
+//   listEl.textContent = "";
+
+//   data
+//     .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+//     .forEach((item) => {
+//       const li = document.createElement("li");
+//       li.textContent = item;
+//       listEl.appendChild(li);
+//     });
+// }
+
+// input.addEventListener("input", (e) => {
+//   query = e.target.value;
+//   render();
+// });
+
+// render();
 
 // const listEl = document.querySelector("#list");
 
