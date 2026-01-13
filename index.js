@@ -1,29 +1,55 @@
+const input = document.querySelector("#search");
 const listEl = document.querySelector("#list");
 
-let notes = JSON.parse(localStorage.getItem("notes")) || [];
+const data = ["Apple", "Avocado", "Banana", "Orange", "Mango"];
 
-function save() {
-  localStorage.setItem("notes", JSON.stringify(notes));
-}
+let query = "";
 
 function render() {
   listEl.textContent = "";
 
-  notes.forEach((note, index) => {
-    const li = document.createElement("li");
-    li.textContent = note;
-
-    li.addEventListener("click", () => {
-      notes.splice(index, 1);
-      save();
-      render();
+  data
+    .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+    .forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      listEl.appendChild(li);
     });
-
-    listEl.appendChild(li);
-  });
 }
 
+input.addEventListener("input", (e) => {
+  query = e.target.value;
+  render();
+});
+
 render();
+
+// const listEl = document.querySelector("#list");
+
+// let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+// function save() {
+//   localStorage.setItem("notes", JSON.stringify(notes));
+// }
+
+// function render() {
+//   listEl.textContent = "";
+
+//   notes.forEach((note, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = note;
+
+//     li.addEventListener("click", () => {
+//       notes.splice(index, 1);
+//       save();
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// render();
 
 // const input = document.querySelector("#taskInput");
 // const addBtn = document.querySelector("#addTask");
