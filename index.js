@@ -1,31 +1,56 @@
 const listEl = document.querySelector("#list");
-const addBtn = document.querySelector("#addBtn");
+const countEl = document.querySelector("#count");
 
 let items = ["Apple", "Banana"];
 
 function render() {
   listEl.textContent = "";
 
-  if (items.length === 0) {
-    const p = document.createElement("p");
-    p.textContent = "List is empty";
-    listEl.appendChild(p);
-    return;
-  }
-
   items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     listEl.appendChild(li);
   });
+
+  countEl.textContent = `Items count: ${items.length}`;
 }
 
-addBtn.addEventListener("click", () => {
-  items.push(`Item ${items.length + 1}`);
-  render();
-});
-
 render();
+
+// const listEl = document.querySelector("#list");
+// const addBtn = document.querySelector("#addBtn");
+
+// let items = ["Apple", "Banana"];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   if (items.length === 0) {
+//     const p = document.createElement("p");
+//     p.textContent = "List is empty";
+//     listEl.appendChild(p);
+//     return;
+//   }
+
+//   items.forEach((item, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+
+//     li.addEventListener("click", () => {
+//       items.splice(index, 1);
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   items.push(`Item ${items.length + 1}`);
+//   render();
+// });
+
+// render();
 
 // const orders = [
 //   { status: "completed", total: 250 },
