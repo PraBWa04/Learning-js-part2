@@ -1,21 +1,44 @@
 const listEl = document.querySelector("#list");
-const countEl = document.querySelector("#count");
+const toggleBtn = document.querySelector("#toggle");
 
-let items = ["Apple", "Banana"];
+let items = ["Apple", "Banana", "Orange"];
+let showUppercase = false;
 
 function render() {
   listEl.textContent = "";
 
   items.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = item;
+    li.textContent = showUppercase ? item.toUpperCase() : item;
     listEl.appendChild(li);
   });
-
-  countEl.textContent = `Items count: ${items.length}`;
 }
 
+toggleBtn.addEventListener("click", () => {
+  showUppercase = !showUppercase;
+  render();
+});
+
 render();
+
+// const listEl = document.querySelector("#list");
+// const countEl = document.querySelector("#count");
+
+// let items = ["Apple", "Banana"];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   items.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+//     listEl.appendChild(li);
+//   });
+
+//   countEl.textContent = `Items count: ${items.length}`;
+// }
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const addBtn = document.querySelector("#addBtn");
