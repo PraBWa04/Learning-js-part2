@@ -1,25 +1,52 @@
 const listEl = document.querySelector("#list");
-const toggleBtn = document.querySelector("#toggle");
+const filterBtn = document.querySelector("#filter");
 
-let items = ["Apple", "Banana", "Orange"];
-let showUppercase = false;
+let items = ["Apple", "Banana", "Orange", "Kiwi"];
+let showShortOnly = false;
 
 function render() {
   listEl.textContent = "";
 
-  items.forEach((item) => {
+  const visibleItems = showShortOnly
+    ? items.filter((item) => item.length < 6)
+    : items;
+
+  visibleItems.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = showUppercase ? item.toUpperCase() : item;
+    li.textContent = item;
     listEl.appendChild(li);
   });
 }
 
-toggleBtn.addEventListener("click", () => {
-  showUppercase = !showUppercase;
+filterBtn.addEventListener("click", () => {
+  showShortOnly = !showShortOnly;
   render();
 });
 
 render();
+
+// const listEl = document.querySelector("#list");
+// const toggleBtn = document.querySelector("#toggle");
+
+// let items = ["Apple", "Banana", "Orange"];
+// let showUppercase = false;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   items.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.textContent = showUppercase ? item.toUpperCase() : item;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// toggleBtn.addEventListener("click", () => {
+//   showUppercase = !showUppercase;
+//   render();
+// });
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const countEl = document.querySelector("#count");
