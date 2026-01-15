@@ -1,29 +1,58 @@
 const listEl = document.querySelector("#list");
-const filterBtn = document.querySelector("#filter");
+const resetBtn = document.querySelector("#reset");
 
-let items = ["Apple", "Banana", "Orange", "Kiwi"];
-let showShortOnly = false;
+let items = ["Apple", "Banana", "Orange"];
 
 function render() {
   listEl.textContent = "";
 
-  const visibleItems = showShortOnly
-    ? items.filter((item) => item.length < 6)
-    : items;
+  if (items.length === 0) {
+    const p = document.createElement("p");
+    p.textContent = "List is empty";
+    listEl.appendChild(p);
+    return;
+  }
 
-  visibleItems.forEach((item) => {
+  items.forEach((item) => {
     const li = document.createElement("li");
     li.textContent = item;
     listEl.appendChild(li);
   });
 }
 
-filterBtn.addEventListener("click", () => {
-  showShortOnly = !showShortOnly;
+resetBtn.addEventListener("click", () => {
+  items = [];
   render();
 });
 
 render();
+
+// const listEl = document.querySelector("#list");
+// const filterBtn = document.querySelector("#filter");
+
+// let items = ["Apple", "Banana", "Orange", "Kiwi"];
+// let showShortOnly = false;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   const visibleItems = showShortOnly
+//     ? items.filter((item) => item.length < 6)
+//     : items;
+
+//   visibleItems.forEach((item) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// filterBtn.addEventListener("click", () => {
+//   showShortOnly = !showShortOnly;
+//   render();
+// });
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const toggleBtn = document.querySelector("#toggle");
