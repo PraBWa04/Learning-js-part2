@@ -1,29 +1,52 @@
-const listEl = document.querySelector("#list");
+const statsEl = document.querySelector("#stats");
 
-let notes = JSON.parse(localStorage.getItem("notes")) || [];
+const orders = [
+  { total: 200, completed: true },
+  { total: 150, completed: false },
+  { total: 400, completed: true },
+];
 
-function save() {
-  localStorage.setItem("notes", JSON.stringify(notes));
+function renderStats() {
+  const stats = orders.reduce(
+    (acc, o) => {
+      acc.count++;
+      if (o.completed) acc.total += o.total;
+      return acc;
+    },
+    { count: 0, total: 0 }
+  );
+
+  statsEl.textContent = `Orders: ${stats.count}, Revenue: ${stats.total}`;
 }
 
-function render() {
-  listEl.textContent = "";
+renderStats();
 
-  notes.forEach((note, index) => {
-    const li = document.createElement("li");
-    li.textContent = note;
+// const listEl = document.querySelector("#list");
 
-    li.addEventListener("click", () => {
-      notes.splice(index, 1);
-      save();
-      render();
-    });
+// let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-    listEl.appendChild(li);
-  });
-}
+// function save() {
+//   localStorage.setItem("notes", JSON.stringify(notes));
+// }
 
-render();
+// function render() {
+//   listEl.textContent = "";
+
+//   notes.forEach((note, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = note;
+
+//     li.addEventListener("click", () => {
+//       notes.splice(index, 1);
+//       save();
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// render();
 
 // const input = document.querySelector("#input");
 // const addBtn = document.querySelector("#add");
