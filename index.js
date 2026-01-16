@@ -1,27 +1,54 @@
-const input = document.querySelector("#input");
-const addBtn = document.querySelector("#add");
 const listEl = document.querySelector("#list");
 
-let tasks = [];
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
+
+function save() {
+  localStorage.setItem("notes", JSON.stringify(notes));
+}
 
 function render() {
   listEl.textContent = "";
 
-  tasks.forEach((task) => {
+  notes.forEach((note, index) => {
     const li = document.createElement("li");
-    li.textContent = task;
+    li.textContent = note;
+
+    li.addEventListener("click", () => {
+      notes.splice(index, 1);
+      save();
+      render();
+    });
+
     listEl.appendChild(li);
   });
 }
 
-addBtn.addEventListener("click", () => {
-  const value = input.value.trim();
-  if (!value) return;
+render();
 
-  tasks.push(value);
-  input.value = "";
-  render();
-});
+// const input = document.querySelector("#input");
+// const addBtn = document.querySelector("#add");
+// const listEl = document.querySelector("#list");
+
+// let tasks = [];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   tasks.forEach((task) => {
+//     const li = document.createElement("li");
+//     li.textContent = task;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   const value = input.value.trim();
+//   if (!value) return;
+
+//   tasks.push(value);
+//   input.value = "";
+//   render();
+// });
 
 // const listEl = document.querySelector("#list");
 
