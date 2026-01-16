@@ -1,28 +1,53 @@
+const input = document.querySelector("#input");
+const addBtn = document.querySelector("#add");
 const listEl = document.querySelector("#list");
 
-let items = [
-  { text: "JS", done: false },
-  { text: "Gym", done: true },
-];
+let tasks = [];
 
 function render() {
   listEl.textContent = "";
 
-  items.forEach((item, index) => {
+  tasks.forEach((task) => {
     const li = document.createElement("li");
-    li.textContent = item.text;
-    li.style.textDecoration = item.done ? "line-through" : "none";
-
-    li.addEventListener("click", () => {
-      items[index].done = !items[index].done;
-      render();
-    });
-
+    li.textContent = task;
     listEl.appendChild(li);
   });
 }
 
-render();
+addBtn.addEventListener("click", () => {
+  const value = input.value.trim();
+  if (!value) return;
+
+  tasks.push(value);
+  input.value = "";
+  render();
+});
+
+// const listEl = document.querySelector("#list");
+
+// let items = [
+//   { text: "JS", done: false },
+//   { text: "Gym", done: true },
+// ];
+
+// function render() {
+//   listEl.textContent = "";
+
+//   items.forEach((item, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = item.text;
+//     li.style.textDecoration = item.done ? "line-through" : "none";
+
+//     li.addEventListener("click", () => {
+//       items[index].done = !items[index].done;
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const resetBtn = document.querySelector("#reset");
