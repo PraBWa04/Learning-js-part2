@@ -1,25 +1,54 @@
-const statsEl = document.querySelector("#stats");
+const input = document.querySelector("#search");
+const listEl = document.querySelector("#list");
 
-const orders = [
-  { total: 200, completed: true },
-  { total: 150, completed: false },
-  { total: 400, completed: true },
-];
+const data = ["Apple", "Avocado", "Banana", "Orange", "Mango"];
+let timer = null;
+let query = "";
 
-function renderStats() {
-  const stats = orders.reduce(
-    (acc, o) => {
-      acc.count++;
-      if (o.completed) acc.total += o.total;
-      return acc;
-    },
-    { count: 0, total: 0 }
-  );
+function render() {
+  listEl.textContent = "";
 
-  statsEl.textContent = `Orders: ${stats.count}, Revenue: ${stats.total}`;
+  data
+    .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+    .forEach((item) => {
+      const li = document.createElement("li");
+      li.textContent = item;
+      listEl.appendChild(li);
+    });
 }
 
-renderStats();
+input.addEventListener("input", (e) => {
+  clearTimeout(timer);
+  timer = setTimeout(() => {
+    query = e.target.value;
+    render();
+  }, 300);
+});
+
+render();
+
+// const statsEl = document.querySelector("#stats");
+
+// const orders = [
+//   { total: 200, completed: true },
+//   { total: 150, completed: false },
+//   { total: 400, completed: true },
+// ];
+
+// function renderStats() {
+//   const stats = orders.reduce(
+//     (acc, o) => {
+//       acc.count++;
+//       if (o.completed) acc.total += o.total;
+//       return acc;
+//     },
+//     { count: 0, total: 0 }
+//   );
+
+//   statsEl.textContent = `Orders: ${stats.count}, Revenue: ${stats.total}`;
+// }
+
+// renderStats();
 
 // const listEl = document.querySelector("#list");
 
