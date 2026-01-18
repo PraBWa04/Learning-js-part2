@@ -1,31 +1,60 @@
-const input = document.querySelector("#search");
 const listEl = document.querySelector("#list");
+const toggleBtn = document.querySelector("#toggle");
 
-const data = ["Apple", "Avocado", "Banana", "Orange", "Mango"];
-let timer = null;
-let query = "";
+let tasks = [
+  { text: "JS", done: true },
+  { text: "Gym", done: false },
+];
+
+let showCompletedOnly = false;
 
 function render() {
   listEl.textContent = "";
 
-  data
-    .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
-    .forEach((item) => {
-      const li = document.createElement("li");
-      li.textContent = item;
-      listEl.appendChild(li);
-    });
+  const visible = showCompletedOnly ? tasks.filter((t) => t.done) : tasks;
+
+  visible.forEach((task) => {
+    const li = document.createElement("li");
+    li.textContent = task.text;
+    listEl.appendChild(li);
+  });
 }
 
-input.addEventListener("input", (e) => {
-  clearTimeout(timer);
-  timer = setTimeout(() => {
-    query = e.target.value;
-    render();
-  }, 300);
+toggleBtn.addEventListener("click", () => {
+  showCompletedOnly = !showCompletedOnly;
+  render();
 });
 
 render();
+
+// const input = document.querySelector("#search");
+// const listEl = document.querySelector("#list");
+
+// const data = ["Apple", "Avocado", "Banana", "Orange", "Mango"];
+// let timer = null;
+// let query = "";
+
+// function render() {
+//   listEl.textContent = "";
+
+//   data
+//     .filter((item) => item.toLowerCase().includes(query.toLowerCase()))
+//     .forEach((item) => {
+//       const li = document.createElement("li");
+//       li.textContent = item;
+//       listEl.appendChild(li);
+//     });
+// }
+
+// input.addEventListener("input", (e) => {
+//   clearTimeout(timer);
+//   timer = setTimeout(() => {
+//     query = e.target.value;
+//     render();
+//   }, 300);
+// });
+
+// render();
 
 // const statsEl = document.querySelector("#stats");
 
