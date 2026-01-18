@@ -1,26 +1,26 @@
-const input = document.querySelector("#input");
-const addBtn = document.querySelector("#add");
 const listEl = document.querySelector("#list");
 
-let items = [];
+let items = ["Apple", "Banana", "Orange"];
+let activeIndex = null;
 
 function render() {
   listEl.textContent = "";
-  items.forEach((item) => {
+
+  items.forEach((item, index) => {
     const li = document.createElement("li");
     li.textContent = item;
+    li.style.fontWeight = index === activeIndex ? "bold" : "normal";
+
+    li.addEventListener("click", () => {
+      activeIndex = index;
+      render();
+    });
+
     listEl.appendChild(li);
   });
 }
 
-addBtn.addEventListener("click", () => {
-  const value = input.value.trim();
-  if (!value || items.includes(value)) return;
-
-  items.push(value);
-  input.value = "";
-  render();
-});
+render();
 
 // const listEl = document.querySelector("#list");
 // const toggleBtn = document.querySelector("#toggle");
