@@ -1,15 +1,46 @@
-const statsEl = document.querySelector("#stats");
+const listEl = document.querySelector("#list");
+const undoBtn = document.querySelector("#undo");
 
-const tasks = [{ done: true }, { done: false }, { done: true }];
+let items = ["A", "B", "C"];
+let lastRemoved = null;
 
-function renderStats() {
-  const doneCount = tasks.filter((t) => t.done).length;
-  const percent = Math.round((doneCount / tasks.length) * 100);
+function render() {
+  listEl.textContent = "";
+  items.forEach((item, index) => {
+    const li = document.createElement("li");
+    li.textContent = item;
 
-  statsEl.textContent = `Completed: ${percent}%`;
+    li.addEventListener("click", () => {
+      lastRemoved = { item, index };
+      items.splice(index, 1);
+      render();
+    });
+
+    listEl.appendChild(li);
+  });
 }
 
-renderStats();
+undoBtn.addEventListener("click", () => {
+  if (!lastRemoved) return;
+  items.splice(lastRemoved.index, 0, lastRemoved.item);
+  lastRemoved = null;
+  render();
+});
+
+render();
+
+// const statsEl = document.querySelector("#stats");
+
+// const tasks = [{ done: true }, { done: false }, { done: true }];
+
+// function renderStats() {
+//   const doneCount = tasks.filter((t) => t.done).length;
+//   const percent = Math.round((doneCount / tasks.length) * 100);
+
+//   statsEl.textContent = `Completed: ${percent}%`;
+// }
+
+// renderStats();
 
 // const listEl = document.querySelector("#list");
 
