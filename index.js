@@ -1,31 +1,55 @@
+const input = document.querySelector("#input");
+const addBtn = document.querySelector("#add");
 const listEl = document.querySelector("#list");
-const toggleBtn = document.querySelector("#toggle");
 
-let tasks = [
-  { text: "JS", done: true },
-  { text: "Gym", done: false },
-];
-
-let showCompletedOnly = false;
+let items = [];
 
 function render() {
   listEl.textContent = "";
-
-  const visible = showCompletedOnly ? tasks.filter((t) => t.done) : tasks;
-
-  visible.forEach((task) => {
+  items.forEach((item) => {
     const li = document.createElement("li");
-    li.textContent = task.text;
+    li.textContent = item;
     listEl.appendChild(li);
   });
 }
 
-toggleBtn.addEventListener("click", () => {
-  showCompletedOnly = !showCompletedOnly;
+addBtn.addEventListener("click", () => {
+  const value = input.value.trim();
+  if (!value || items.includes(value)) return;
+
+  items.push(value);
+  input.value = "";
   render();
 });
 
-render();
+// const listEl = document.querySelector("#list");
+// const toggleBtn = document.querySelector("#toggle");
+
+// let tasks = [
+//   { text: "JS", done: true },
+//   { text: "Gym", done: false },
+// ];
+
+// let showCompletedOnly = false;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   const visible = showCompletedOnly ? tasks.filter((t) => t.done) : tasks;
+
+//   visible.forEach((task) => {
+//     const li = document.createElement("li");
+//     li.textContent = task.text;
+//     listEl.appendChild(li);
+//   });
+// }
+
+// toggleBtn.addEventListener("click", () => {
+//   showCompletedOnly = !showCompletedOnly;
+//   render();
+// });
+
+// render();
 
 // const input = document.querySelector("#search");
 // const listEl = document.querySelector("#list");
