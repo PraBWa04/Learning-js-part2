@@ -1,18 +1,23 @@
 const listEl = document.querySelector("#list");
-const undoBtn = document.querySelector("#undo");
 
-let items = ["A", "B", "C"];
-let lastRemoved = null;
+let items = [
+  { text: "JS", active: true },
+  { text: "Gym", active: false },
+];
+
+let showActive = true;
 
 function render() {
   listEl.textContent = "";
-  items.forEach((item, index) => {
+
+  const visible = items.filter((i) => i.active === showActive);
+
+  visible.forEach((item, index) => {
     const li = document.createElement("li");
-    li.textContent = item;
+    li.textContent = item.text;
 
     li.addEventListener("click", () => {
-      lastRemoved = { item, index };
-      items.splice(index, 1);
+      items[index].active = !items[index].active;
       render();
     });
 
@@ -20,14 +25,38 @@ function render() {
   });
 }
 
-undoBtn.addEventListener("click", () => {
-  if (!lastRemoved) return;
-  items.splice(lastRemoved.index, 0, lastRemoved.item);
-  lastRemoved = null;
-  render();
-});
-
 render();
+
+// const listEl = document.querySelector("#list");
+// const undoBtn = document.querySelector("#undo");
+
+// let items = ["A", "B", "C"];
+// let lastRemoved = null;
+
+// function render() {
+//   listEl.textContent = "";
+//   items.forEach((item, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+
+//     li.addEventListener("click", () => {
+//       lastRemoved = { item, index };
+//       items.splice(index, 1);
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// undoBtn.addEventListener("click", () => {
+//   if (!lastRemoved) return;
+//   items.splice(lastRemoved.index, 0, lastRemoved.item);
+//   lastRemoved = null;
+//   render();
+// });
+
+// render();
 
 // const statsEl = document.querySelector("#stats");
 
