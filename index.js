@@ -1,26 +1,39 @@
-const listEl = document.querySelector("#list");
+const statsEl = document.querySelector("#stats");
 
-let items = ["Apple", "Banana", "Orange"];
-let activeIndex = null;
+const tasks = [{ done: true }, { done: false }, { done: true }];
 
-function render() {
-  listEl.textContent = "";
+function renderStats() {
+  const doneCount = tasks.filter((t) => t.done).length;
+  const percent = Math.round((doneCount / tasks.length) * 100);
 
-  items.forEach((item, index) => {
-    const li = document.createElement("li");
-    li.textContent = item;
-    li.style.fontWeight = index === activeIndex ? "bold" : "normal";
-
-    li.addEventListener("click", () => {
-      activeIndex = index;
-      render();
-    });
-
-    listEl.appendChild(li);
-  });
+  statsEl.textContent = `Completed: ${percent}%`;
 }
 
-render();
+renderStats();
+
+// const listEl = document.querySelector("#list");
+
+// let items = ["Apple", "Banana", "Orange"];
+// let activeIndex = null;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   items.forEach((item, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = item;
+//     li.style.fontWeight = index === activeIndex ? "bold" : "normal";
+
+//     li.addEventListener("click", () => {
+//       activeIndex = index;
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const toggleBtn = document.querySelector("#toggle");
