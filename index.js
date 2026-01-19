@@ -1,36 +1,77 @@
-const orders = [
-  { id: 1, user: "Ivan", total: 200, status: "completed" },
-  { id: 2, user: "Anna", total: 150, status: "pending" },
-  { id: 3, user: "Ivan", total: 100, status: "completed" },
-  { id: 4, user: "Anna", total: 50, status: "completed" },
-  { id: 5, user: "Oleh", total: 300, status: "completed" },
+const products = [
+  { name: "Phone", price: 1200 },
+  { name: "Laptop", price: 3500 },
+  { name: "Mouse", price: 150 },
+  { name: "Monitor", price: 2500 },
 ];
 
-function summarizeOrders(orders) {
-  return orders.reduce(
-    (acc, order) => {
-      if (!acc.byUser[order.user]) {
-        acc.byUser[order.user] = 0;
-      }
+let query = "";
+let sortMode = "asc"; // asc | desc
 
-      acc.byUser[order.user] += order.total;
-
-      if (order.status === "completed") {
-        acc.completedTotal += order.total;
-      }
-
-      acc.count += 1;
-      return acc;
-    },
-    {
-      byUser: {},
-      completedTotal: 0,
-      count: 0,
-    },
+function getVisibleProducts() {
+  let result = products.filter((p) =>
+    p.name.toLowerCase().includes(query.toLowerCase()),
   );
+
+  result.sort((a, b) =>
+    sortMode === "asc" ? a.price - b.price : b.price - a.price,
+  );
+
+  return result;
 }
 
-console.log(summarizeOrders(orders));
+function renderProducts() {
+  console.clear();
+  getVisibleProducts().forEach((p) => {
+    console.log(`${p.name}: ${p.price}`);
+  });
+}
+
+function setSearch(value) {
+  query = value;
+  renderProducts();
+}
+
+function toggleSort() {
+  sortMode = sortMode === "asc" ? "desc" : "asc";
+  renderProducts();
+}
+
+renderProducts();
+
+// const orders = [
+//   { id: 1, user: "Ivan", total: 200, status: "completed" },
+//   { id: 2, user: "Anna", total: 150, status: "pending" },
+//   { id: 3, user: "Ivan", total: 100, status: "completed" },
+//   { id: 4, user: "Anna", total: 50, status: "completed" },
+//   { id: 5, user: "Oleh", total: 300, status: "completed" },
+// ];
+
+// function summarizeOrders(orders) {
+//   return orders.reduce(
+//     (acc, order) => {
+//       if (!acc.byUser[order.user]) {
+//         acc.byUser[order.user] = 0;
+//       }
+
+//       acc.byUser[order.user] += order.total;
+
+//       if (order.status === "completed") {
+//         acc.completedTotal += order.total;
+//       }
+
+//       acc.count += 1;
+//       return acc;
+//     },
+//     {
+//       byUser: {},
+//       completedTotal: 0,
+//       count: 0,
+//     },
+//   );
+// }
+
+// console.log(summarizeOrders(orders));
 
 // const listEl = document.querySelector("#list");
 // const filterEl = document.querySelector("#filter");
