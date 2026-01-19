@@ -1,43 +1,89 @@
-const products = [
-  { name: "Phone", price: 1200 },
-  { name: "Laptop", price: 3500 },
-  { name: "Mouse", price: 150 },
-  { name: "Monitor", price: 2500 },
-];
+const inputEl = document.querySelector("#input");
+const addBtn = document.querySelector("#add");
+const listEl = document.querySelector("#list");
 
-let query = "";
-let sortMode = "asc"; // asc | desc
+let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-function getVisibleProducts() {
-  let result = products.filter((p) =>
-    p.name.toLowerCase().includes(query.toLowerCase()),
-  );
-
-  result.sort((a, b) =>
-    sortMode === "asc" ? a.price - b.price : b.price - a.price,
-  );
-
-  return result;
+function save() {
+  localStorage.setItem("notes", JSON.stringify(notes));
 }
 
-function renderProducts() {
-  console.clear();
-  getVisibleProducts().forEach((p) => {
-    console.log(`${p.name}: ${p.price}`);
+function render() {
+  listEl.textContent = "";
+
+  if (notes.length === 0) {
+    const p = document.createElement("p");
+    p.textContent = "No notes yet";
+    listEl.appendChild(p);
+    return;
+  }
+
+  notes.forEach((note, index) => {
+    const li = document.createElement("li");
+    li.textContent = note;
+
+    li.addEventListener("click", () => {
+      notes.splice(index, 1);
+      save();
+      render();
+    });
+
+    listEl.appendChild(li);
   });
 }
 
-function setSearch(value) {
-  query = value;
-  renderProducts();
-}
+addBtn.addEventListener("click", () => {
+  const value = inputEl.value.trim();
+  if (!value) return;
 
-function toggleSort() {
-  sortMode = sortMode === "asc" ? "desc" : "asc";
-  renderProducts();
-}
+  notes.push(value);
+  inputEl.value = "";
+  save();
+  render();
+});
 
-renderProducts();
+render();
+
+// const products = [
+//   { name: "Phone", price: 1200 },
+//   { name: "Laptop", price: 3500 },
+//   { name: "Mouse", price: 150 },
+//   { name: "Monitor", price: 2500 },
+// ];
+
+// let query = "";
+// let sortMode = "asc"; // asc | desc
+
+// function getVisibleProducts() {
+//   let result = products.filter((p) =>
+//     p.name.toLowerCase().includes(query.toLowerCase()),
+//   );
+
+//   result.sort((a, b) =>
+//     sortMode === "asc" ? a.price - b.price : b.price - a.price,
+//   );
+
+//   return result;
+// }
+
+// function renderProducts() {
+//   console.clear();
+//   getVisibleProducts().forEach((p) => {
+//     console.log(`${p.name}: ${p.price}`);
+//   });
+// }
+
+// function setSearch(value) {
+//   query = value;
+//   renderProducts();
+// }
+
+// function toggleSort() {
+//   sortMode = sortMode === "asc" ? "desc" : "asc";
+//   renderProducts();
+// }
+
+// renderProducts();
 
 // const orders = [
 //   { id: 1, user: "Ivan", total: 200, status: "completed" },
