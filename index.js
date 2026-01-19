@@ -1,31 +1,78 @@
 const listEl = document.querySelector("#list");
+const filterEl = document.querySelector("#filter");
+const statsEl = document.querySelector("#stats");
 
-let items = [
-  { text: "JS", active: true },
-  { text: "Gym", active: false },
+let tasks = [
+  { text: "Learn JS", done: false },
+  { text: "Gym", done: true },
+  { text: "Read book", done: false },
 ];
 
-let showActive = true;
+let filter = "all"; // all | active | done
+
+function getVisibleTasks() {
+  if (filter === "active") return tasks.filter((t) => !t.done);
+  if (filter === "done") return tasks.filter((t) => t.done);
+  return tasks;
+}
 
 function render() {
   listEl.textContent = "";
 
-  const visible = items.filter((i) => i.active === showActive);
+  const visibleTasks = getVisibleTasks();
 
-  visible.forEach((item, index) => {
+  visibleTasks.forEach((task, index) => {
     const li = document.createElement("li");
-    li.textContent = item.text;
+    li.textContent = task.text;
+    li.style.textDecoration = task.done ? "line-through" : "none";
 
     li.addEventListener("click", () => {
-      items[index].active = !items[index].active;
+      tasks[index].done = !tasks[index].done;
       render();
     });
 
     listEl.appendChild(li);
   });
+
+  const doneCount = tasks.filter((t) => t.done).length;
+  statsEl.textContent = `Done: ${doneCount} / ${tasks.length}`;
 }
 
+filterEl.addEventListener("change", (e) => {
+  filter = e.target.value;
+  render();
+});
+
 render();
+
+// const listEl = document.querySelector("#list");
+
+// let items = [
+//   { text: "JS", active: true },
+//   { text: "Gym", active: false },
+// ];
+
+// let showActive = true;
+
+// function render() {
+//   listEl.textContent = "";
+
+//   const visible = items.filter((i) => i.active === showActive);
+
+//   visible.forEach((item, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = item.text;
+
+//     li.addEventListener("click", () => {
+//       items[index].active = !items[index].active;
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// render();
 
 // const listEl = document.querySelector("#list");
 // const undoBtn = document.querySelector("#undo");
