@@ -1,49 +1,83 @@
-const listEl = document.querySelector("#list");
-const filterEl = document.querySelector("#filter");
-const statsEl = document.querySelector("#stats");
-
-let tasks = [
-  { text: "Learn JS", done: false },
-  { text: "Gym", done: true },
-  { text: "Read book", done: false },
+const orders = [
+  { id: 1, user: "Ivan", total: 200, status: "completed" },
+  { id: 2, user: "Anna", total: 150, status: "pending" },
+  { id: 3, user: "Ivan", total: 100, status: "completed" },
+  { id: 4, user: "Anna", total: 50, status: "completed" },
+  { id: 5, user: "Oleh", total: 300, status: "completed" },
 ];
 
-let filter = "all"; // all | active | done
+function summarizeOrders(orders) {
+  return orders.reduce(
+    (acc, order) => {
+      if (!acc.byUser[order.user]) {
+        acc.byUser[order.user] = 0;
+      }
 
-function getVisibleTasks() {
-  if (filter === "active") return tasks.filter((t) => !t.done);
-  if (filter === "done") return tasks.filter((t) => t.done);
-  return tasks;
+      acc.byUser[order.user] += order.total;
+
+      if (order.status === "completed") {
+        acc.completedTotal += order.total;
+      }
+
+      acc.count += 1;
+      return acc;
+    },
+    {
+      byUser: {},
+      completedTotal: 0,
+      count: 0,
+    },
+  );
 }
 
-function render() {
-  listEl.textContent = "";
+console.log(summarizeOrders(orders));
 
-  const visibleTasks = getVisibleTasks();
+// const listEl = document.querySelector("#list");
+// const filterEl = document.querySelector("#filter");
+// const statsEl = document.querySelector("#stats");
 
-  visibleTasks.forEach((task, index) => {
-    const li = document.createElement("li");
-    li.textContent = task.text;
-    li.style.textDecoration = task.done ? "line-through" : "none";
+// let tasks = [
+//   { text: "Learn JS", done: false },
+//   { text: "Gym", done: true },
+//   { text: "Read book", done: false },
+// ];
 
-    li.addEventListener("click", () => {
-      tasks[index].done = !tasks[index].done;
-      render();
-    });
+// let filter = "all"; // all | active | done
 
-    listEl.appendChild(li);
-  });
+// function getVisibleTasks() {
+//   if (filter === "active") return tasks.filter((t) => !t.done);
+//   if (filter === "done") return tasks.filter((t) => t.done);
+//   return tasks;
+// }
 
-  const doneCount = tasks.filter((t) => t.done).length;
-  statsEl.textContent = `Done: ${doneCount} / ${tasks.length}`;
-}
+// function render() {
+//   listEl.textContent = "";
 
-filterEl.addEventListener("change", (e) => {
-  filter = e.target.value;
-  render();
-});
+//   const visibleTasks = getVisibleTasks();
 
-render();
+//   visibleTasks.forEach((task, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = task.text;
+//     li.style.textDecoration = task.done ? "line-through" : "none";
+
+//     li.addEventListener("click", () => {
+//       tasks[index].done = !tasks[index].done;
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+
+//   const doneCount = tasks.filter((t) => t.done).length;
+//   statsEl.textContent = `Done: ${doneCount} / ${tasks.length}`;
+// }
+
+// filterEl.addEventListener("change", (e) => {
+//   filter = e.target.value;
+//   render();
+// });
+
+// render();
 
 // const listEl = document.querySelector("#list");
 
