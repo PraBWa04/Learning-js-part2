@@ -1,17 +1,35 @@
-const orders = [
-  { id: 1, status: "completed", total: 200 },
-  { id: 2, status: "pending", total: 150 },
-  { id: 3, status: "completed", total: 100 },
-  { id: 4, status: "completed", total: 50 },
+const users = [
+  { name: "ivan", score: 50 },
+  { name: "ANNA", score: 80 },
+  { name: "oLeh", score: 65 },
 ];
 
-function getCompletedOrdersTotal(orders) {
-  return orders
-    .filter((order) => order.status === "completed")
-    .reduce((sum, order) => sum + order.total, 0);
+function prepareLeaderboard(users) {
+  return users
+    .map((user) => ({
+      ...user,
+      name:
+        user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase(),
+    }))
+    .sort((a, b) => b.score - a.score);
 }
 
-console.log(getCompletedOrdersTotal(orders));
+console.log(prepareLeaderboard(users));
+
+// const orders = [
+//   { id: 1, status: "completed", total: 200 },
+//   { id: 2, status: "pending", total: 150 },
+//   { id: 3, status: "completed", total: 100 },
+//   { id: 4, status: "completed", total: 50 },
+// ];
+
+// function getCompletedOrdersTotal(orders) {
+//   return orders
+//     .filter((order) => order.status === "completed")
+//     .reduce((sum, order) => sum + order.total, 0);
+// }
+
+// console.log(getCompletedOrdersTotal(orders));
 
 // const orders = [
 //   { id: 1, user: "Ivan", total: 200, status: "completed" },
