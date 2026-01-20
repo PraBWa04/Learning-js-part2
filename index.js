@@ -1,38 +1,53 @@
 const orders = [
-  { id: 1, user: "Ivan", total: 200, status: "completed" },
-  { id: 2, user: "Anna", total: 150, status: "pending" },
-  { id: 3, user: "Ivan", total: 100, status: "completed" },
-  { id: 4, user: "Anna", total: 50, status: "completed" },
-  { id: 5, user: "Oleh", total: 300, status: "completed" },
+  { id: 1, status: "completed", total: 200 },
+  { id: 2, status: "pending", total: 150 },
+  { id: 3, status: "completed", total: 100 },
+  { id: 4, status: "completed", total: 50 },
 ];
 
-function analyzeOrders(orders) {
-  return orders.reduce(
-    (acc, order) => {
-      acc.ordersCount += 1;
-
-      if (order.status === "completed") {
-        acc.completedCount += 1;
-        acc.totalRevenue += order.total;
-
-        if (!acc.revenueByUser[order.user]) {
-          acc.revenueByUser[order.user] = 0;
-        }
-        acc.revenueByUser[order.user] += order.total;
-      }
-
-      return acc;
-    },
-    {
-      totalRevenue: 0,
-      ordersCount: 0,
-      completedCount: 0,
-      revenueByUser: {},
-    },
-  );
+function getCompletedOrdersTotal(orders) {
+  return orders
+    .filter((order) => order.status === "completed")
+    .reduce((sum, order) => sum + order.total, 0);
 }
 
-console.log(analyzeOrders(orders));
+console.log(getCompletedOrdersTotal(orders));
+
+// const orders = [
+//   { id: 1, user: "Ivan", total: 200, status: "completed" },
+//   { id: 2, user: "Anna", total: 150, status: "pending" },
+//   { id: 3, user: "Ivan", total: 100, status: "completed" },
+//   { id: 4, user: "Anna", total: 50, status: "completed" },
+//   { id: 5, user: "Oleh", total: 300, status: "completed" },
+// ];
+
+// function analyzeOrders(orders) {
+//   return orders.reduce(
+//     (acc, order) => {
+//       acc.ordersCount += 1;
+
+//       if (order.status === "completed") {
+//         acc.completedCount += 1;
+//         acc.totalRevenue += order.total;
+
+//         if (!acc.revenueByUser[order.user]) {
+//           acc.revenueByUser[order.user] = 0;
+//         }
+//         acc.revenueByUser[order.user] += order.total;
+//       }
+
+//       return acc;
+//     },
+//     {
+//       totalRevenue: 0,
+//       ordersCount: 0,
+//       completedCount: 0,
+//       revenueByUser: {},
+//     },
+//   );
+// }
+
+// console.log(analyzeOrders(orders));
 
 // const inputEl = document.querySelector("#input");
 // const addBtn = document.querySelector("#add");
