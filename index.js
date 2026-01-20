@@ -1,48 +1,84 @@
-const inputEl = document.querySelector("#input");
-const addBtn = document.querySelector("#add");
-const listEl = document.querySelector("#list");
+const orders = [
+  { id: 1, user: "Ivan", total: 200, status: "completed" },
+  { id: 2, user: "Anna", total: 150, status: "pending" },
+  { id: 3, user: "Ivan", total: 100, status: "completed" },
+  { id: 4, user: "Anna", total: 50, status: "completed" },
+  { id: 5, user: "Oleh", total: 300, status: "completed" },
+];
 
-let notes = JSON.parse(localStorage.getItem("notes")) || [];
+function analyzeOrders(orders) {
+  return orders.reduce(
+    (acc, order) => {
+      acc.ordersCount += 1;
 
-function save() {
-  localStorage.setItem("notes", JSON.stringify(notes));
+      if (order.status === "completed") {
+        acc.completedCount += 1;
+        acc.totalRevenue += order.total;
+
+        if (!acc.revenueByUser[order.user]) {
+          acc.revenueByUser[order.user] = 0;
+        }
+        acc.revenueByUser[order.user] += order.total;
+      }
+
+      return acc;
+    },
+    {
+      totalRevenue: 0,
+      ordersCount: 0,
+      completedCount: 0,
+      revenueByUser: {},
+    },
+  );
 }
 
-function render() {
-  listEl.textContent = "";
+console.log(analyzeOrders(orders));
 
-  if (notes.length === 0) {
-    const p = document.createElement("p");
-    p.textContent = "No notes yet";
-    listEl.appendChild(p);
-    return;
-  }
+// const inputEl = document.querySelector("#input");
+// const addBtn = document.querySelector("#add");
+// const listEl = document.querySelector("#list");
 
-  notes.forEach((note, index) => {
-    const li = document.createElement("li");
-    li.textContent = note;
+// let notes = JSON.parse(localStorage.getItem("notes")) || [];
 
-    li.addEventListener("click", () => {
-      notes.splice(index, 1);
-      save();
-      render();
-    });
+// function save() {
+//   localStorage.setItem("notes", JSON.stringify(notes));
+// }
 
-    listEl.appendChild(li);
-  });
-}
+// function render() {
+//   listEl.textContent = "";
 
-addBtn.addEventListener("click", () => {
-  const value = inputEl.value.trim();
-  if (!value) return;
+//   if (notes.length === 0) {
+//     const p = document.createElement("p");
+//     p.textContent = "No notes yet";
+//     listEl.appendChild(p);
+//     return;
+//   }
 
-  notes.push(value);
-  inputEl.value = "";
-  save();
-  render();
-});
+//   notes.forEach((note, index) => {
+//     const li = document.createElement("li");
+//     li.textContent = note;
 
-render();
+//     li.addEventListener("click", () => {
+//       notes.splice(index, 1);
+//       save();
+//       render();
+//     });
+
+//     listEl.appendChild(li);
+//   });
+// }
+
+// addBtn.addEventListener("click", () => {
+//   const value = inputEl.value.trim();
+//   if (!value) return;
+
+//   notes.push(value);
+//   inputEl.value = "";
+//   save();
+//   render();
+// });
+
+// render();
 
 // const products = [
 //   { name: "Phone", price: 1200 },
