@@ -1,16 +1,33 @@
-const products = [
-  { id: 1, name: "Lamp", price: 120, inStock: true },
-  { id: 2, name: "Cable", price: 40, inStock: false },
-  { id: 3, name: "Battery", price: 300, inStock: true },
-];
+const buyBtn = document.querySelector("#buy");
+const countEl = document.querySelector("#count");
 
-function highPrice(products) {
-  return products
-    .filter((product) => product.inStock === true && product.price > 100)
-    .map((product) => product.name);
-}
+let count = 0;
 
-console.log(highPrice(products));
+buyBtn.addEventListener("click", () => {
+  count++;
+
+  if (count === 5) {
+    buyBtn.disabled = true;
+    countEl.textContent = "Limit reached";
+    return;
+  }
+
+  countEl.textContent = count;
+});
+
+// const products = [
+//   { id: 1, name: "Lamp", price: 120, inStock: true },
+//   { id: 2, name: "Cable", price: 40, inStock: false },
+//   { id: 3, name: "Battery", price: 300, inStock: true },
+// ];
+
+// function highPrice(products) {
+//   return products
+//     .filter((product) => product.inStock === true && product.price > 100)
+//     .map((product) => product.name);
+// }
+
+// console.log(highPrice(products));
 
 // const orders = [
 //   { id: 1, status: "completed", total: 200 },
