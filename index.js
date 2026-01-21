@@ -1,20 +1,16 @@
-const users = [
-  { name: "ivan", score: 50 },
-  { name: "ANNA", score: 80 },
-  { name: "oLeh", score: 65 },
+const products = [
+  { id: 1, name: "Lamp", price: 120, inStock: true },
+  { id: 2, name: "Cable", price: 40, inStock: false },
+  { id: 3, name: "Battery", price: 300, inStock: true },
 ];
 
-function prepareLeaderboard(users) {
-  return users
-    .map((user) => ({
-      ...user,
-      name:
-        user.name.charAt(0).toUpperCase() + user.name.slice(1).toLowerCase(),
-    }))
-    .sort((a, b) => b.score - a.score);
+function highPrice(products) {
+  return products
+    .filter((product) => product.inStock === true && product.price > 100)
+    .map((product) => product.name);
 }
 
-console.log(prepareLeaderboard(users));
+console.log(highPrice(products));
 
 // const orders = [
 //   { id: 1, status: "completed", total: 200 },
