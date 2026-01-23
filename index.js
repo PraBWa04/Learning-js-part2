@@ -1,16 +1,23 @@
-function addToCart(productId) {
-  const cart = getCart();
+const addBtn = document.querySelector("#add");
+const PRODUCT_ID = 1;
 
-  const item = cart.find((p) => p.id === productId);
+addBtn.addEventListener("click", () => {
+  addToCart(PRODUCT_ID);
+});
 
-  if (item) {
-    item.qty += 1;
-  } else {
-    cart.push({ id: productId, qty: 1 });
-  }
+// function addToCart(productId) {
+//   const cart = getCart();
 
-  saveCart(cart);
-}
+//   const item = cart.find((p) => p.id === productId);
+
+//   if (item) {
+//     item.qty += 1;
+//   } else {
+//     cart.push({ id: productId, qty: 1 });
+//   }
+
+//   saveCart(cart);
+// }
 
 // const CART_KEY = "cart";
 
