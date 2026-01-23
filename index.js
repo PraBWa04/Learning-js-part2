@@ -1,19 +1,29 @@
-const buyBtn = document.querySelector("#buy");
-const countEl = document.querySelector("#count");
+const CART_KEY = "cart";
 
-let count = 0;
+function getCart() {
+  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+}
 
-buyBtn.addEventListener("click", () => {
-  count++;
+function saveCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
 
-  if (count === 5) {
-    buyBtn.disabled = true;
-    countEl.textContent = "Limit reached";
-    return;
-  }
+// const buyBtn = document.querySelector("#buy");
+// const countEl = document.querySelector("#count");
 
-  countEl.textContent = count;
-});
+// let count = 0;
+
+// buyBtn.addEventListener("click", () => {
+//   count++;
+
+//   if (count === 5) {
+//     buyBtn.disabled = true;
+//     countEl.textContent = "Limit reached";
+//     return;
+//   }
+
+//   countEl.textContent = count;
+// });
 
 // const products = [
 //   { id: 1, name: "Lamp", price: 120, inStock: true },
