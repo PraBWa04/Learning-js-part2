@@ -1,15 +1,20 @@
-function addToCart(productId) {
+function getCartTotalQty() {
   const cart = getCart();
-  const item = cart.find((p) => p.id === productId);
-
-  if (item) {
-    item.qty += 1;
-  } else {
-    cart.push({ id: productId, qty: 1 });
-  }
-
-  saveCart(cart);
+  return cart.reduce((total, item) => total + item.qty, 0);
 }
+
+// function addToCart(productId) {
+//   const cart = getCart();
+//   const item = cart.find((p) => p.id === productId);
+
+//   if (item) {
+//     item.qty += 1;
+//   } else {
+//     cart.push({ id: productId, qty: 1 });
+//   }
+
+//   saveCart(cart);
+// }
 
 // const CART_KEY = "cart";
 
