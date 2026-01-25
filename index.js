@@ -1,18 +1,28 @@
-async function fetchData(url) {
-  try {
-    const response = await fetch(url);
+const CART_KEY = "cart";
 
-    if (!response.ok) {
-      throw new Error(`HTTP error: ${response.status}`);
-    }
-
-    const data = await response.json();
-    return data;
-  } catch (error) {
-    console.error("Fetch failed:", error);
-    return null;
-  }
+function getCart() {
+  return JSON.parse(localStorage.getItem(CART_KEY)) || [];
 }
+
+function saveCart(cart) {
+  localStorage.setItem(CART_KEY, JSON.stringify(cart));
+}
+
+// async function fetchData(url) {
+//   try {
+//     const response = await fetch(url);
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP error: ${response.status}`);
+//     }
+
+//     const data = await response.json();
+//     return data;
+//   } catch (error) {
+//     console.error("Fetch failed:", error);
+//     return null;
+//   }
+// }
 
 // const addBtn = document.querySelector("#add");
 // const PRODUCT_ID = 1;
