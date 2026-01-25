@@ -1,7 +1,22 @@
-function getCartTotalQty() {
-  const cart = getCart();
-  return cart.reduce((total, item) => total + item.qty, 0);
+const addBtn = document.querySelector("#add");
+const cartCountEl = document.querySelector("#cart-count");
+const PRODUCT_ID = 1;
+
+function updateCartCounter() {
+  cartCountEl.textContent = getCartTotalQty();
 }
+
+addBtn.addEventListener("click", () => {
+  addToCart(PRODUCT_ID);
+  updateCartCounter();
+});
+
+updateCartCounter();
+
+// function getCartTotalQty() {
+//   const cart = getCart();
+//   return cart.reduce((total, item) => total + item.qty, 0);
+// }
 
 // function addToCart(productId) {
 //   const cart = getCart();
