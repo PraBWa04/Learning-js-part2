@@ -1,18 +1,34 @@
-const CART_KEY = "cart";
+function addToCart(productId) {
+  const cart = cartStorage.get();
+  const index = cart.findIndex((item) => item.id === productId);
 
-const cartStorage = {
-  get() {
-    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
-  },
+  if (index !== -1) {
+    cart[index] = {
+      ...cart[index],
+      qty: cart[index].qty + 1,
+    };
+  } else {
+    cart.push({ id: productId, qty: 1 });
+  }
 
-  set(cart) {
-    localStorage.setItem(CART_KEY, JSON.stringify(cart));
-  },
+  cartStorage.set(cart);
+}
 
-  clear() {
-    localStorage.removeItem(CART_KEY);
-  },
-};
+// const CART_KEY = "cart";
+
+// const cartStorage = {
+//   get() {
+//     return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+//   },
+
+//   set(cart) {
+//     localStorage.setItem(CART_KEY, JSON.stringify(cart));
+//   },
+
+//   clear() {
+//     localStorage.removeItem(CART_KEY);
+//   },
+// };
 
 // async function fetchData(url, options = {}) {
 //   try {
