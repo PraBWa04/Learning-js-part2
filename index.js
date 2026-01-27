@@ -1,17 +1,33 @@
-async function fetchData(url, options = {}) {
-  try {
-    const response = await fetch(url, options);
+const CART_KEY = "cart";
 
-    if (!response.ok) {
-      throw new Error(`HTTP ${response.status}`);
-    }
+const cartStorage = {
+  get() {
+    return JSON.parse(localStorage.getItem(CART_KEY)) || [];
+  },
 
-    return await response.json();
-  } catch (error) {
-    console.error("Fetch error:", error);
-    throw error;
-  }
-}
+  set(cart) {
+    localStorage.setItem(CART_KEY, JSON.stringify(cart));
+  },
+
+  clear() {
+    localStorage.removeItem(CART_KEY);
+  },
+};
+
+// async function fetchData(url, options = {}) {
+//   try {
+//     const response = await fetch(url, options);
+
+//     if (!response.ok) {
+//       throw new Error(`HTTP ${response.status}`);
+//     }
+
+//     return await response.json();
+//   } catch (error) {
+//     console.error("Fetch error:", error);
+//     throw error;
+//   }
+// }
 
 // const addBtn = document.querySelector("#add");
 // const cartCountEl = document.querySelector("#cart-count");
