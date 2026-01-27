@@ -1,16 +1,26 @@
-const addBtn = document.querySelector("#add");
-const PRODUCT_ID = 1;
-
-addBtn.addEventListener("click", () => {
-  addBtn.disabled = true;
-
-  addToCart(PRODUCT_ID);
+function resetCart() {
+  cartStorage.clear();
   updateCartBadge();
+}
 
-  setTimeout(() => {
-    addBtn.disabled = false;
-  }, 300);
-});
+window.cartDebug = {
+  get: cartStorage.get,
+  reset: resetCart,
+};
+
+// const addBtn = document.querySelector("#add");
+// const PRODUCT_ID = 1;
+
+// addBtn.addEventListener("click", () => {
+//   addBtn.disabled = true;
+
+//   addToCart(PRODUCT_ID);
+//   updateCartBadge();
+
+//   setTimeout(() => {
+//     addBtn.disabled = false;
+//   }, 300);
+// });
 
 // function getCartTotalQty() {
 //   return cartStorage.get().reduce((sum, item) => sum + item.qty, 0);
