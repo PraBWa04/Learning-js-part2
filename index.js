@@ -1,17 +1,32 @@
-const addBtn = document.querySelector("#add");
-const cartCountEl = document.querySelector("#cart-count");
-const PRODUCT_ID = 1;
+async function fetchData(url, options = {}) {
+  try {
+    const response = await fetch(url, options);
 
-function updateCartCounter() {
-  cartCountEl.textContent = getCartTotalQty();
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}`);
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error("Fetch error:", error);
+    throw error;
+  }
 }
 
-addBtn.addEventListener("click", () => {
-  addToCart(PRODUCT_ID);
-  updateCartCounter();
-});
+// const addBtn = document.querySelector("#add");
+// const cartCountEl = document.querySelector("#cart-count");
+// const PRODUCT_ID = 1;
 
-updateCartCounter();
+// function updateCartCounter() {
+//   cartCountEl.textContent = getCartTotalQty();
+// }
+
+// addBtn.addEventListener("click", () => {
+//   addToCart(PRODUCT_ID);
+//   updateCartCounter();
+// });
+
+// updateCartCounter();
 
 // function getCartTotalQty() {
 //   const cart = getCart();
