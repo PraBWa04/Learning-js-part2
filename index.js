@@ -1,12 +1,17 @@
-const cartSubscribers = [];
+subscribeToCart((cart) => {
+  const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+  cartBadge.textContent = totalQty;
+});
 
-function subscribeToCart(fn) {
-  cartSubscribers.push(fn);
-}
+// const cartSubscribers = [];
 
-function notifyCartSubscribers() {
-  cartSubscribers.forEach((fn) => fn(cartStorage.get()));
-}
+// function subscribeToCart(fn) {
+//   cartSubscribers.push(fn);
+// }
+
+// function notifyCartSubscribers() {
+//   cartSubscribers.forEach((fn) => fn(cartStorage.get()));
+// }
 
 // function decrementFromCart(productId) {
 //   const cart = cartStorage.get();
