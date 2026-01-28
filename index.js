@@ -1,26 +1,35 @@
-function decrementFromCart(productId) {
-  const cart = cartStorage.get();
-  const index = cart.findIndex(item => item.id === productId);
+const cartSubscribers = [];
 
-  if (index === -1) return;
-
-  if (cart[index].qty > 1) {
-    cart[index] = {
-      ...cart[index],
-      qty: cart[index].qty - 1
-    };
-  } else {
-    cart.splice(index, 1);
-  }
-
-  cartStorage.set(cart);
+function subscribeToCart(fn) {
+  cartSubscribers.push(fn);
 }
 
-function removeFromCart(productId) {
-  const cart = cartStorage.get().filter(item => item.id !== productId);
-  cartStorage.set(cart);
+function notifyCartSubscribers() {
+  cartSubscribers.forEach((fn) => fn(cartStorage.get()));
 }
 
+// function decrementFromCart(productId) {
+//   const cart = cartStorage.get();
+//   const index = cart.findIndex(item => item.id === productId);
+
+//   if (index === -1) return;
+
+//   if (cart[index].qty > 1) {
+//     cart[index] = {
+//       ...cart[index],
+//       qty: cart[index].qty - 1
+//     };
+//   } else {
+//     cart.splice(index, 1);
+//   }
+
+//   cartStorage.set(cart);
+// }
+
+// function removeFromCart(productId) {
+//   const cart = cartStorage.get().filter(item => item.id !== productId);
+//   cartStorage.set(cart);
+// }
 
 // function resetCart() {
 //   cartStorage.clear();
