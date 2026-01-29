@@ -1,18 +1,30 @@
-async function hydrateCart() {
-  const cart = getSafeCart();
-
-  const hydrated = await Promise.all(
-    cart.map(async (item) => {
-      const product = await loadProduct(item.id);
-      return {
-        ...product,
-        qty: item.qty,
-      };
-    }),
-  );
-
-  return hydrated;
+function getCartTotalPrice(cart) {
+  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
 }
+
+function getCartSummary(cart) {
+  return {
+    items: cart.length,
+    totalQty: cart.reduce((s, i) => s + i.qty, 0),
+    totalPrice: getCartTotalPrice(cart),
+  };
+}
+
+// async function hydrateCart() {
+//   const cart = getSafeCart();
+
+//   const hydrated = await Promise.all(
+//     cart.map(async (item) => {
+//       const product = await loadProduct(item.id);
+//       return {
+//         ...product,
+//         qty: item.qty,
+//       };
+//     }),
+//   );
+
+//   return hydrated;
+// }
 
 // const productCache = new Map();
 
