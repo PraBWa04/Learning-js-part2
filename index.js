@@ -1,11 +1,23 @@
-function optimisticUpdate(updateFn, rollbackFn) {
-  try {
-    updateFn();
-  } catch (error) {
-    console.error("Optimistic update failed:", error);
-    rollbackFn();
+const productCache = new Map();
+
+async function loadProduct(productId) {
+  if (productCache.has(productId)) {
+    return productCache.get(productId);
   }
+
+  const product = await fetchData(`/api/products/${productId}`);
+  productCache.set(productId, product);
+  return product;
 }
+
+// function optimisticUpdate(updateFn, rollbackFn) {
+//   try {
+//     updateFn();
+//   } catch (error) {
+//     console.error("Optimistic update failed:", error);
+//     rollbackFn();
+//   }
+// }
 
 // function validateCart(cart) {
 //   if (!Array.isArray(cart)) return [];
