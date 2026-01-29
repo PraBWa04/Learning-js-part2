@@ -1,17 +1,43 @@
-const appState = {
-  loading: false,
-  error: null,
-  listeners: [],
-};
+async function renderCart(container) {
+  try {
+    setAppState({ loading: true, error: null });
 
-function setAppState(patch) {
-  Object.assign(appState, patch);
-  appState.listeners.forEach((fn) => fn(appState));
+    const cart = await hydrateCart();
+    const summary = getCartSummary(cart);
+
+    container.innerHTML = cart
+      .map(
+        (item) => `
+        <div class="cart-item">
+          <span>${item.name}</span>
+          <span>${item.qty} × ${item.price}</span>
+        </div>
+      `,
+      )
+      .join("");
+
+    document.querySelector("#total").textContent = summary.totalPrice;
+  } catch (error) {
+    setAppState({ error: "Failed to load cart" });
+  } finally {
+    setAppState({ loading: false });
+  }
 }
 
-function subscribeAppState(fn) {
-  appState.listeners.push(fn);
-}
+// const appState = {
+//   loading: false,
+//   error: null,
+//   listeners: [],
+// };
+
+// function setAppState(patch) {
+//   Object.assign(appState, patch);
+//   appState.listeners.forEach((fn) => fn(appState));
+// }
+
+// function subscribeAppState(fn) {
+//   appState.listeners.push(fn);
+// }
 
 // function getCartTotalPrice(cart) {
 //   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
