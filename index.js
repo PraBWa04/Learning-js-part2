@@ -1,20 +1,29 @@
-function validateCart(cart) {
-  if (!Array.isArray(cart)) return [];
-
-  return cart
-    .filter((item) => item && typeof item.id === "number")
-    .map((item) => ({
-      id: item.id,
-      qty: typeof item.qty === "number" && item.qty > 0 ? item.qty : 1,
-    }));
+function optimisticUpdate(updateFn, rollbackFn) {
+  try {
+    updateFn();
+  } catch (error) {
+    console.error("Optimistic update failed:", error);
+    rollbackFn();
+  }
 }
 
-function getSafeCart() {
-  const raw = JSON.parse(localStorage.getItem(CART_KEY));
-  const safeCart = validateCart(raw);
-  localStorage.setItem(CART_KEY, JSON.stringify(safeCart));
-  return safeCart;
-}
+// function validateCart(cart) {
+//   if (!Array.isArray(cart)) return [];
+
+//   return cart
+//     .filter((item) => item && typeof item.id === "number")
+//     .map((item) => ({
+//       id: item.id,
+//       qty: typeof item.qty === "number" && item.qty > 0 ? item.qty : 1,
+//     }));
+// }
+
+// function getSafeCart() {
+//   const raw = JSON.parse(localStorage.getItem(CART_KEY));
+//   const safeCart = validateCart(raw);
+//   localStorage.setItem(CART_KEY, JSON.stringify(safeCart));
+//   return safeCart;
+// }
 
 // subscribeToCart((cart) => {
 //   const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
