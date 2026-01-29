@@ -1,14 +1,30 @@
-const productCache = new Map();
+async function hydrateCart() {
+  const cart = getSafeCart();
 
-async function loadProduct(productId) {
-  if (productCache.has(productId)) {
-    return productCache.get(productId);
-  }
+  const hydrated = await Promise.all(
+    cart.map(async (item) => {
+      const product = await loadProduct(item.id);
+      return {
+        ...product,
+        qty: item.qty,
+      };
+    }),
+  );
 
-  const product = await fetchData(`/api/products/${productId}`);
-  productCache.set(productId, product);
-  return product;
+  return hydrated;
 }
+
+// const productCache = new Map();
+
+// async function loadProduct(productId) {
+//   if (productCache.has(productId)) {
+//     return productCache.get(productId);
+//   }
+
+//   const product = await fetchData(`/api/products/${productId}`);
+//   productCache.set(productId, product);
+//   return product;
+// }
 
 // function optimisticUpdate(updateFn, rollbackFn) {
 //   try {
