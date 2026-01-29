@@ -1,14 +1,29 @@
-function getCartTotalPrice(cart) {
-  return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+const appState = {
+  loading: false,
+  error: null,
+  listeners: [],
+};
+
+function setAppState(patch) {
+  Object.assign(appState, patch);
+  appState.listeners.forEach((fn) => fn(appState));
 }
 
-function getCartSummary(cart) {
-  return {
-    items: cart.length,
-    totalQty: cart.reduce((s, i) => s + i.qty, 0),
-    totalPrice: getCartTotalPrice(cart),
-  };
+function subscribeAppState(fn) {
+  appState.listeners.push(fn);
 }
+
+// function getCartTotalPrice(cart) {
+//   return cart.reduce((sum, item) => sum + item.price * item.qty, 0);
+// }
+
+// function getCartSummary(cart) {
+//   return {
+//     items: cart.length,
+//     totalQty: cart.reduce((s, i) => s + i.qty, 0),
+//     totalPrice: getCartTotalPrice(cart),
+//   };
+// }
 
 // async function hydrateCart() {
 //   const cart = getSafeCart();
