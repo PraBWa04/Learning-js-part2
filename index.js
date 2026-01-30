@@ -1,28 +1,46 @@
-async function renderCart(container) {
-  try {
-    setAppState({ loading: true, error: null });
+// api.js
+export async function fetchProduct(productId) {
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+      if (!productId) {
+        reject(new Error("Invalid product id"));
+        return;
+      }
 
-    const cart = await hydrateCart();
-    const summary = getCartSummary(cart);
-
-    container.innerHTML = cart
-      .map(
-        (item) => `
-        <div class="cart-item">
-          <span>${item.name}</span>
-          <span>${item.qty} × ${item.price}</span>
-        </div>
-      `,
-      )
-      .join("");
-
-    document.querySelector("#total").textContent = summary.totalPrice;
-  } catch (error) {
-    setAppState({ error: "Failed to load cart" });
-  } finally {
-    setAppState({ loading: false });
-  }
+      resolve({
+        id: productId,
+        name: "Battery 12V",
+        price: 300,
+      });
+    }, 600);
+  });
 }
+
+// async function renderCart(container) {
+//   try {
+//     setAppState({ loading: true, error: null });
+
+//     const cart = await hydrateCart();
+//     const summary = getCartSummary(cart);
+
+//     container.innerHTML = cart
+//       .map(
+//         (item) => `
+//         <div class="cart-item">
+//           <span>${item.name}</span>
+//           <span>${item.qty} × ${item.price}</span>
+//         </div>
+//       `,
+//       )
+//       .join("");
+
+//     document.querySelector("#total").textContent = summary.totalPrice;
+//   } catch (error) {
+//     setAppState({ error: "Failed to load cart" });
+//   } finally {
+//     setAppState({ loading: false });
+//   }
+// }
 
 // const appState = {
 //   loading: false,
