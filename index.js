@@ -1,20 +1,67 @@
-// api.js
-export async function fetchProduct(productId) {
-  return new Promise((resolve, reject) => {
-    setTimeout(() => {
-      if (!productId) {
-        reject(new Error("Invalid product id"));
-        return;
-      }
+// product.js
+import { fetchProduct } from "./api.js";
 
-      resolve({
-        id: productId,
-        name: "Battery 12V",
-        price: 300,
-      });
-    }, 600);
-  });
+const productContainer = document.querySelector("#product");
+
+const productState = {
+  loading: false,
+  error: null,
+  data: null,
+};
+
+function renderProduct() {
+  if (productState.loading) {
+    productContainer.textContent = "Loading...";
+    return;
+  }
+
+  if (productState.error) {
+    productContainer.textContent = productState.error;
+    return;
+  }
+
+  if (productState.data) {
+    productContainer.innerHTML = `
+      <h2>${productState.data.name}</h2>
+      <p>Price: ${productState.data.price}</p>
+      <button id="add">Add to cart</button>
+    `;
+  }
 }
+
+export async function loadProduct(productId) {
+  productState.loading = true;
+  productState.error = null;
+  renderProduct();
+
+  try {
+    const product = await fetchProduct(productId);
+    productState.data = product;
+  } catch (err) {
+    productState.error = "Failed to load product";
+  } finally {
+    productState.loading = false;
+    renderProduct();
+  }
+}
+
+// // api.js
+// export async function fetchProduct(productId) {
+//   return new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//       if (!productId) {
+//         reject(new Error("Invalid product id"));
+//         return;
+//       }
+
+//       resolve({
+//         id: productId,
+//         name: "Battery 12V",
+//         price: 300,
+//       });
+//     }, 600);
+//   });
+// }
 
 // async function renderCart(container) {
 //   try {
