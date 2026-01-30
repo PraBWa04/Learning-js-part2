@@ -1,49 +1,58 @@
-// product.js
-import { fetchProduct } from "./api.js";
+// product.js (доповнення)
+import { addToCart } from "./cart.js";
 
-const productContainer = document.querySelector("#product");
-
-const productState = {
-  loading: false,
-  error: null,
-  data: null,
-};
-
-function renderProduct() {
-  if (productState.loading) {
-    productContainer.textContent = "Loading...";
-    return;
+document.addEventListener("click", (e) => {
+  if (e.target.id === "add") {
+    addToCart(productState.data.id);
   }
+});
 
-  if (productState.error) {
-    productContainer.textContent = productState.error;
-    return;
-  }
+// // product.js
+// import { fetchProduct } from "./api.js";
 
-  if (productState.data) {
-    productContainer.innerHTML = `
-      <h2>${productState.data.name}</h2>
-      <p>Price: ${productState.data.price}</p>
-      <button id="add">Add to cart</button>
-    `;
-  }
-}
+// const productContainer = document.querySelector("#product");
 
-export async function loadProduct(productId) {
-  productState.loading = true;
-  productState.error = null;
-  renderProduct();
+// const productState = {
+//   loading: false,
+//   error: null,
+//   data: null,
+// };
 
-  try {
-    const product = await fetchProduct(productId);
-    productState.data = product;
-  } catch (err) {
-    productState.error = "Failed to load product";
-  } finally {
-    productState.loading = false;
-    renderProduct();
-  }
-}
+// function renderProduct() {
+//   if (productState.loading) {
+//     productContainer.textContent = "Loading...";
+//     return;
+//   }
+
+//   if (productState.error) {
+//     productContainer.textContent = productState.error;
+//     return;
+//   }
+
+//   if (productState.data) {
+//     productContainer.innerHTML = `
+//       <h2>${productState.data.name}</h2>
+//       <p>Price: ${productState.data.price}</p>
+//       <button id="add">Add to cart</button>
+//     `;
+//   }
+// }
+
+// export async function loadProduct(productId) {
+//   productState.loading = true;
+//   productState.error = null;
+//   renderProduct();
+
+//   try {
+//     const product = await fetchProduct(productId);
+//     productState.data = product;
+//   } catch (err) {
+//     productState.error = "Failed to load product";
+//   } finally {
+//     productState.loading = false;
+//     renderProduct();
+//   }
+// }
 
 // // api.js
 // export async function fetchProduct(productId) {
