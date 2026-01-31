@@ -1,27 +1,51 @@
-export function cartReducer(state, action) {
-  switch (action.type) {
-    case "ADD": {
-      const exists = state.find((i) => i.id === action.payload);
+export function createStore(reducer, initialState) {
+  let state = initialState;
+  const listeners = [];
 
-      if (exists) {
-        return state.map((i) =>
-          i.id === action.payload ? { ...i, qty: i.qty + 1 } : i,
-        );
-      }
-
-      return [...state, { id: action.payload, qty: 1 }];
-    }
-
-    case "REMOVE":
-      return state.filter((i) => i.id !== action.payload);
-
-    case "CLEAR":
-      return [];
-
-    default:
-      return state;
+  function getState() {
+    return state;
   }
+
+  function dispatch(action) {
+    state = reducer(state, action);
+    listeners.forEach((fn) => fn(state));
+  }
+
+  function subscribe(fn) {
+    listeners.push(fn);
+    return () => {
+      const index = listeners.indexOf(fn);
+      listeners.splice(index, 1);
+    };
+  }
+
+  return { getState, dispatch, subscribe };
 }
+
+// export function cartReducer(state, action) {
+//   switch (action.type) {
+//     case "ADD": {
+//       const exists = state.find((i) => i.id === action.payload);
+
+//       if (exists) {
+//         return state.map((i) =>
+//           i.id === action.payload ? { ...i, qty: i.qty + 1 } : i,
+//         );
+//       }
+
+//       return [...state, { id: action.payload, qty: 1 }];
+//     }
+
+//     case "REMOVE":
+//       return state.filter((i) => i.id !== action.payload);
+
+//     case "CLEAR":
+//       return [];
+
+//     default:
+//       return state;
+//   }
+// }
 
 // export function addItem(list, item) {
 //   return [...list, item];
