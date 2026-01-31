@@ -1,14 +1,39 @@
-export function addItem(list, item) {
-  return [...list, item];
+export function cartReducer(state, action) {
+  switch (action.type) {
+    case "ADD": {
+      const exists = state.find((i) => i.id === action.payload);
+
+      if (exists) {
+        return state.map((i) =>
+          i.id === action.payload ? { ...i, qty: i.qty + 1 } : i,
+        );
+      }
+
+      return [...state, { id: action.payload, qty: 1 }];
+    }
+
+    case "REMOVE":
+      return state.filter((i) => i.id !== action.payload);
+
+    case "CLEAR":
+      return [];
+
+    default:
+      return state;
+  }
 }
 
-export function updateItem(list, predicate, updater) {
-  return list.map((el) => (predicate(el) ? updater(el) : el));
-}
+// export function addItem(list, item) {
+//   return [...list, item];
+// }
 
-export function removeItem(list, predicate) {
-  return list.filter((el) => !predicate(el));
-}
+// export function updateItem(list, predicate, updater) {
+//   return list.map((el) => (predicate(el) ? updater(el) : el));
+// }
+
+// export function removeItem(list, predicate) {
+//   return list.filter((el) => !predicate(el));
+// }
 
 // // product.js (доповнення)
 // import { addToCart } from "./cart.js";
