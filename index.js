@@ -1,26 +1,41 @@
-export function createStore(reducer, initialState) {
-  let state = initialState;
-  const listeners = [];
+import { cartReducer } from "./cartReducer.js";
+import { createStore } from "./store.js";
 
-  function getState() {
-    return state;
-  }
+const store = createStore(cartReducer, []);
+const counterEl = document.querySelector("#cart-count");
+const addBtn = document.querySelector("#add");
 
-  function dispatch(action) {
-    state = reducer(state, action);
-    listeners.forEach((fn) => fn(state));
-  }
+store.subscribe((cart) => {
+  counterEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+});
 
-  function subscribe(fn) {
-    listeners.push(fn);
-    return () => {
-      const index = listeners.indexOf(fn);
-      listeners.splice(index, 1);
-    };
-  }
+addBtn.addEventListener("click", () => {
+  store.dispatch({ type: "ADD", payload: 1 });
+});
 
-  return { getState, dispatch, subscribe };
-}
+// export function createStore(reducer, initialState) {
+//   let state = initialState;
+//   const listeners = [];
+
+//   function getState() {
+//     return state;
+//   }
+
+//   function dispatch(action) {
+//     state = reducer(state, action);
+//     listeners.forEach((fn) => fn(state));
+//   }
+
+//   function subscribe(fn) {
+//     listeners.push(fn);
+//     return () => {
+//       const index = listeners.indexOf(fn);
+//       listeners.splice(index, 1);
+//     };
+//   }
+
+//   return { getState, dispatch, subscribe };
+// }
 
 // export function cartReducer(state, action) {
 //   switch (action.type) {
