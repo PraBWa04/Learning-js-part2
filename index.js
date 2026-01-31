@@ -1,11 +1,23 @@
-// product.js (доповнення)
-import { addToCart } from "./cart.js";
+export function addItem(list, item) {
+  return [...list, item];
+}
 
-document.addEventListener("click", (e) => {
-  if (e.target.id === "add") {
-    addToCart(productState.data.id);
-  }
-});
+export function updateItem(list, predicate, updater) {
+  return list.map((el) => (predicate(el) ? updater(el) : el));
+}
+
+export function removeItem(list, predicate) {
+  return list.filter((el) => !predicate(el));
+}
+
+// // product.js (доповнення)
+// import { addToCart } from "./cart.js";
+
+// document.addEventListener("click", (e) => {
+//   if (e.target.id === "add") {
+//     addToCart(productState.data.id);
+//   }
+// });
 
 // // product.js
 // import { fetchProduct } from "./api.js";
