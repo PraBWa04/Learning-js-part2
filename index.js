@@ -1,12 +1,11 @@
-function debounce(fn, delay) {
-  let timer;
+function once(fn) {
+  let called = false;
 
   return function (...args) {
-    clearTimeout(timer);
-
-    timer = setTimeout(() => {
-      fn.apply(this, args);
-    }, delay);
+    if (!called) {
+      called = true;
+      return fn.apply(this, args);
+    }
   };
 }
 
