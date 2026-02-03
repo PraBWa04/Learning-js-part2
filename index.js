@@ -1,14 +1,28 @@
-function deepClone(obj) {
-  if (obj === null || typeof obj !== "object") return obj;
-
-  const copy = Array.isArray(obj) ? [] : {};
-
+function flattenObject(obj, parentKey = "", result = {}) {
   for (let key in obj) {
-    copy[key] = deepClone(obj[key]);
+    const newKey = parentKey ? parentKey + "." + key : key;
+
+    if (typeof obj[key] === "object" && obj[key] !== null) {
+      flattenObject(obj[key], newKey, result);
+    } else {
+      result[newKey] = obj[key];
+    }
   }
 
-  return copy;
+  return result;
 }
+
+// function deepClone(obj) {
+//   if (obj === null || typeof obj !== "object") return obj;
+
+//   const copy = Array.isArray(obj) ? [] : {};
+
+//   for (let key in obj) {
+//     copy[key] = deepClone(obj[key]);
+//   }
+
+//   return copy;
+// }
 
 // function hasPairWithSum(arr, sum) {
 //   let left = 0;
