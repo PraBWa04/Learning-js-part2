@@ -1,17 +1,37 @@
-import { cartReducer } from "./cartReducer.js";
-import { createStore } from "./store.js";
+function maxSubarraySum(arr, k) {
+  if (arr.length < k) return null;
 
-const store = createStore(cartReducer, []);
-const counterEl = document.querySelector("#cart-count");
-const addBtn = document.querySelector("#add");
+  let windowSum = 0;
+  let maxSum = 0;
 
-store.subscribe((cart) => {
-  counterEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
-});
+  for (let i = 0; i < k; i++) {
+    windowSum += arr[i];
+  }
 
-addBtn.addEventListener("click", () => {
-  store.dispatch({ type: "ADD", payload: 1 });
-});
+  maxSum = windowSum;
+
+  for (let i = k; i < arr.length; i++) {
+    windowSum = windowSum - arr[i - k] + arr[i];
+    maxSum = Math.max(maxSum, windowSum);
+  }
+
+  return maxSum;
+}
+
+// import { cartReducer } from "./cartReducer.js";
+// import { createStore } from "./store.js";
+
+// const store = createStore(cartReducer, []);
+// const counterEl = document.querySelector("#cart-count");
+// const addBtn = document.querySelector("#add");
+
+// store.subscribe((cart) => {
+//   counterEl.textContent = cart.reduce((sum, item) => sum + item.qty, 0);
+// });
+
+// addBtn.addEventListener("click", () => {
+//   store.dispatch({ type: "ADD", payload: 1 });
+// });
 
 // export function createStore(reducer, initialState) {
 //   let state = initialState;
