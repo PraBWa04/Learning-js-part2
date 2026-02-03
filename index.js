@@ -1,17 +1,29 @@
-function hasPairWithSum(arr, sum) {
-  let left = 0;
-  let right = arr.length - 1;
+function deepClone(obj) {
+  if (obj === null || typeof obj !== "object") return obj;
 
-  while (left < right) {
-    const current = arr[left] + arr[right];
+  const copy = Array.isArray(obj) ? [] : {};
 
-    if (current === sum) return true;
-    if (current < sum) left++;
-    else right--;
+  for (let key in obj) {
+    copy[key] = deepClone(obj[key]);
   }
 
-  return false;
+  return copy;
 }
+
+// function hasPairWithSum(arr, sum) {
+//   let left = 0;
+//   let right = arr.length - 1;
+
+//   while (left < right) {
+//     const current = arr[left] + arr[right];
+
+//     if (current === sum) return true;
+//     if (current < sum) left++;
+//     else right--;
+//   }
+
+//   return false;
+// }
 
 // function maxSubarraySum(arr, k) {
 //   if (arr.length < k) return null;
