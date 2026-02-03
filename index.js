@@ -1,16 +1,28 @@
-function flattenObject(obj, parentKey = "", result = {}) {
-  for (let key in obj) {
-    const newKey = parentKey ? parentKey + "." + key : key;
+function debounce(fn, delay) {
+  let timer;
 
-    if (typeof obj[key] === "object" && obj[key] !== null) {
-      flattenObject(obj[key], newKey, result);
-    } else {
-      result[newKey] = obj[key];
-    }
-  }
+  return function (...args) {
+    clearTimeout(timer);
 
-  return result;
+    timer = setTimeout(() => {
+      fn.apply(this, args);
+    }, delay);
+  };
 }
+
+// function flattenObject(obj, parentKey = "", result = {}) {
+//   for (let key in obj) {
+//     const newKey = parentKey ? parentKey + "." + key : key;
+
+//     if (typeof obj[key] === "object" && obj[key] !== null) {
+//       flattenObject(obj[key], newKey, result);
+//     } else {
+//       result[newKey] = obj[key];
+//     }
+//   }
+
+//   return result;
+// }
 
 // function deepClone(obj) {
 //   if (obj === null || typeof obj !== "object") return obj;
