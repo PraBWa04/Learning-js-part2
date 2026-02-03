@@ -1,21 +1,40 @@
-function isValid(str) {
-  const stack = [];
-  const pairs = {
-    ")": "(",
-    "]": "[",
-    "}": "{",
-  };
+function longestUniqueSubstring(str) {
+  let start = 0;
+  let maxLength = 0;
+  const seen = {};
 
-  for (let char of str) {
-    if (pairs[char]) {
-      if (stack.pop() !== pairs[char]) return false;
-    } else {
-      stack.push(char);
+  for (let end = 0; end < str.length; end++) {
+    const char = str[end];
+
+    if (seen[char] >= start) {
+      start = seen[char] + 1;
     }
+
+    seen[char] = end;
+    maxLength = Math.max(maxLength, end - start + 1);
   }
 
-  return stack.length === 0;
+  return maxLength;
 }
+
+// function isValid(str) {
+//   const stack = [];
+//   const pairs = {
+//     ")": "(",
+//     "]": "[",
+//     "}": "{",
+//   };
+
+//   for (let char of str) {
+//     if (pairs[char]) {
+//       if (stack.pop() !== pairs[char]) return false;
+//     } else {
+//       stack.push(char);
+//     }
+//   }
+
+//   return stack.length === 0;
+// }
 
 // function once(fn) {
 //   let called = false;
