@@ -1,13 +1,32 @@
-function once(fn) {
-  let called = false;
-
-  return function (...args) {
-    if (!called) {
-      called = true;
-      return fn.apply(this, args);
-    }
+function isValid(str) {
+  const stack = [];
+  const pairs = {
+    ")": "(",
+    "]": "[",
+    "}": "{",
   };
+
+  for (let char of str) {
+    if (pairs[char]) {
+      if (stack.pop() !== pairs[char]) return false;
+    } else {
+      stack.push(char);
+    }
+  }
+
+  return stack.length === 0;
 }
+
+// function once(fn) {
+//   let called = false;
+
+//   return function (...args) {
+//     if (!called) {
+//       called = true;
+//       return fn.apply(this, args);
+//     }
+//   };
+// }
 
 // function flattenObject(obj, parentKey = "", result = {}) {
 //   for (let key in obj) {
