@@ -1,21 +1,31 @@
-function longestUniqueSubstring(str) {
-  let start = 0;
-  let maxLength = 0;
-  const seen = {};
+function chunkArray(arr, size) {
+  const result = [];
 
-  for (let end = 0; end < str.length; end++) {
-    const char = str[end];
-
-    if (seen[char] >= start) {
-      start = seen[char] + 1;
-    }
-
-    seen[char] = end;
-    maxLength = Math.max(maxLength, end - start + 1);
+  for (let i = 0; i < arr.length; i += size) {
+    result.push(arr.slice(i, i + size));
   }
 
-  return maxLength;
+  return result;
 }
+
+// function longestUniqueSubstring(str) {
+//   let start = 0;
+//   let maxLength = 0;
+//   const seen = {};
+
+//   for (let end = 0; end < str.length; end++) {
+//     const char = str[end];
+
+//     if (seen[char] >= start) {
+//       start = seen[char] + 1;
+//     }
+
+//     seen[char] = end;
+//     maxLength = Math.max(maxLength, end - start + 1);
+//   }
+
+//   return maxLength;
+// }
 
 // function isValid(str) {
 //   const stack = [];
