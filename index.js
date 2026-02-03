@@ -1,22 +1,37 @@
-function maxSubarraySum(arr, k) {
-  if (arr.length < k) return null;
+function hasPairWithSum(arr, sum) {
+  let left = 0;
+  let right = arr.length - 1;
 
-  let windowSum = 0;
-  let maxSum = 0;
+  while (left < right) {
+    const current = arr[left] + arr[right];
 
-  for (let i = 0; i < k; i++) {
-    windowSum += arr[i];
+    if (current === sum) return true;
+    if (current < sum) left++;
+    else right--;
   }
 
-  maxSum = windowSum;
-
-  for (let i = k; i < arr.length; i++) {
-    windowSum = windowSum - arr[i - k] + arr[i];
-    maxSum = Math.max(maxSum, windowSum);
-  }
-
-  return maxSum;
+  return false;
 }
+
+// function maxSubarraySum(arr, k) {
+//   if (arr.length < k) return null;
+
+//   let windowSum = 0;
+//   let maxSum = 0;
+
+//   for (let i = 0; i < k; i++) {
+//     windowSum += arr[i];
+//   }
+
+//   maxSum = windowSum;
+
+//   for (let i = k; i < arr.length; i++) {
+//     windowSum = windowSum - arr[i - k] + arr[i];
+//     maxSum = Math.max(maxSum, windowSum);
+//   }
+
+//   return maxSum;
+// }
 
 // import { cartReducer } from "./cartReducer.js";
 // import { createStore } from "./store.js";
