@@ -1,11 +1,31 @@
-function findMissingNumber(arr, n) {
-  const expectedSum = (n * (n + 1)) / 2;
-  const actualSum = arr.reduce((sum, num) => sum + num, 0);
+function areAnagrams(str1, str2) {
+  if (str1.length !== str2.length) return false;
 
-  return expectedSum - actualSum;
+  const count = {};
+
+  for (let char of str1) {
+    count[char] = (count[char] || 0) + 1;
+  }
+
+  for (let char of str2) {
+    if (!count[char]) return false;
+    count[char]--;
+  }
+
+  return true;
 }
 
-findMissingNumber([1, 2, 4, 5], 5);
+areAnagrams("listen", "silent");
+areAnagrams("hello", "world");
+
+// function findMissingNumber(arr, n) {
+//   const expectedSum = (n * (n + 1)) / 2;
+//   const actualSum = arr.reduce((sum, num) => sum + num, 0);
+
+//   return expectedSum - actualSum;
+// }
+
+// findMissingNumber([1, 2, 4, 5], 5);
 
 // function longestUniqueSubstring(str) {
 //   let start = 0;
