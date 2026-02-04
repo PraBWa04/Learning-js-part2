@@ -1,30 +1,11 @@
-function mergeIntervals(intervals) {
-  if (intervals.length === 0) return [];
+function findMissingNumber(arr, n) {
+  const expectedSum = (n * (n + 1)) / 2;
+  const actualSum = arr.reduce((sum, num) => sum + num, 0);
 
-  intervals.sort((a, b) => a[0] - b[0]);
-
-  const result = [intervals[0]];
-
-  for (let i = 1; i < intervals.length; i++) {
-    const last = result[result.length - 1];
-    const current = intervals[i];
-
-    if (current[0] <= last[1]) {
-      last[1] = Math.max(last[1], current[1]);
-    } else {
-      result.push(current);
-    }
-  }
-
-  return result;
+  return expectedSum - actualSum;
 }
 
-mergeIntervals([
-  [1, 3],
-  [2, 6],
-  [8, 10],
-  [15, 18],
-]);
+findMissingNumber([1, 2, 4, 5], 5);
 
 // function longestUniqueSubstring(str) {
 //   let start = 0;
