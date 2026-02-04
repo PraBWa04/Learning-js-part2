@@ -1,13 +1,30 @@
-function rotateArray(arr, k) {
-  const n = arr.length;
-  if (n === 0) return arr;
+function mergeIntervals(intervals) {
+  if (intervals.length === 0) return [];
 
-  k = k % n;
+  intervals.sort((a, b) => a[0] - b[0]);
 
-  return arr.slice(-k).concat(arr.slice(0, n - k));
+  const result = [intervals[0]];
+
+  for (let i = 1; i < intervals.length; i++) {
+    const last = result[result.length - 1];
+    const current = intervals[i];
+
+    if (current[0] <= last[1]) {
+      last[1] = Math.max(last[1], current[1]);
+    } else {
+      result.push(current);
+    }
+  }
+
+  return result;
 }
 
-rotateArray([1, 2, 3, 4, 5], 2);
+mergeIntervals([
+  [1, 3],
+  [2, 6],
+  [8, 10],
+  [15, 18],
+]);
 
 // function longestUniqueSubstring(str) {
 //   let start = 0;
