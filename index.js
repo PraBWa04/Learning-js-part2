@@ -1,22 +1,40 @@
-function areAnagrams(str1, str2) {
-  if (str1.length !== str2.length) return false;
+function longestCommonPrefix(arr) {
+  if (arr.length === 0) return "";
 
-  const count = {};
+  let prefix = arr[0];
 
-  for (let char of str1) {
-    count[char] = (count[char] || 0) + 1;
+  for (let i = 1; i < arr.length; i++) {
+    while (!arr[i].startsWith(prefix)) {
+      prefix = prefix.slice(0, -1);
+      if (prefix === "") return "";
+    }
   }
 
-  for (let char of str2) {
-    if (!count[char]) return false;
-    count[char]--;
-  }
-
-  return true;
+  return prefix;
 }
 
-areAnagrams("listen", "silent");
-areAnagrams("hello", "world");
+longestCommonPrefix(["flower", "flow", "flight"]);
+longestCommonPrefix(["dog", "racecar", "car"]);
+
+// function areAnagrams(str1, str2) {
+//   if (str1.length !== str2.length) return false;
+
+//   const count = {};
+
+//   for (let char of str1) {
+//     count[char] = (count[char] || 0) + 1;
+//   }
+
+//   for (let char of str2) {
+//     if (!count[char]) return false;
+//     count[char]--;
+//   }
+
+//   return true;
+// }
+
+// areAnagrams("listen", "silent");
+// areAnagrams("hello", "world");
 
 // function findMissingNumber(arr, n) {
 //   const expectedSum = (n * (n + 1)) / 2;
