@@ -1,12 +1,13 @@
-function chunkArray(arr, size) {
-  const result = [];
+function rotateArray(arr, k) {
+  const n = arr.length;
+  if (n === 0) return arr;
 
-  for (let i = 0; i < arr.length; i += size) {
-    result.push(arr.slice(i, i + size));
-  }
+  k = k % n;
 
-  return result;
+  return arr.slice(-k).concat(arr.slice(0, n - k));
 }
+
+rotateArray([1, 2, 3, 4, 5], 2);
 
 // function longestUniqueSubstring(str) {
 //   let start = 0;
