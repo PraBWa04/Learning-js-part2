@@ -1,20 +1,51 @@
-function longestCommonPrefix(arr) {
-  if (arr.length === 0) return "";
+function createAsyncQueue(limit) {
+  let running = 0;
+  const queue = [];
 
-  let prefix = arr[0];
+  function runNext() {
+    if (running >= limit || queue.length === 0) return;
 
-  for (let i = 1; i < arr.length; i++) {
-    while (!arr[i].startsWith(prefix)) {
-      prefix = prefix.slice(0, -1);
-      if (prefix === "") return "";
-    }
+    running++;
+    const { task, resolve } = queue.shift();
+
+    task().then(() => {
+      running--;
+      resolve();
+      runNext();
+    });
   }
 
-  return prefix;
+  return function enqueue(task) {
+    return new Promise((res) => {
+      queue.push({ task, resolve: res });
+      runNext();
+    });
+  };
 }
 
-longestCommonPrefix(["flower", "flow", "flight"]);
-longestCommonPrefix(["dog", "racecar", "car"]);
+const queue = createAsyncQueue(2);
+
+queue(() => new Promise((r) => setTimeout(r, 1000)));
+queue(() => new Promise((r) => setTimeout(r, 1000)));
+queue(() => new Promise((r) => setTimeout(r, 1000)));
+
+// function longestCommonPrefix(arr) {
+//   if (arr.length === 0) return "";
+
+//   let prefix = arr[0];
+
+//   for (let i = 1; i < arr.length; i++) {
+//     while (!arr[i].startsWith(prefix)) {
+//       prefix = prefix.slice(0, -1);
+//       if (prefix === "") return "";
+//     }
+//   }
+
+//   return prefix;
+// }
+
+// longestCommonPrefix(["flower", "flow", "flight"]);
+// longestCommonPrefix(["dog", "racecar", "car"]);
 
 // function areAnagrams(str1, str2) {
 //   if (str1.length !== str2.length) return false;
