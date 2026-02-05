@@ -1,25 +1,53 @@
-function withTimeout(promise, ms) {
-  return new Promise((resolve, reject) => {
-    const timer = setTimeout(() => {
-      reject(new Error("Timeout"));
-    }, ms);
+function throttle(fn, delay) {
+  let lastCall = 0;
+  let timeout;
 
-    promise.then(
-      (value) => {
-        clearTimeout(timer);
-        resolve(value);
-      },
-      (err) => {
-        clearTimeout(timer);
-        reject(err);
-      },
-    );
-  });
+  return function (...args) {
+    const now = Date.now();
+
+    if (now - lastCall >= delay) {
+      lastCall = now;
+      fn.apply(this, args);
+    } else if (!timeout) {
+      timeout = setTimeout(
+        () => {
+          lastCall = Date.now();
+          timeout = null;
+          fn.apply(this, args);
+        },
+        delay - (now - lastCall),
+      );
+    }
+  };
 }
 
-withTimeout(new Promise((r) => setTimeout(() => r("ok"), 500)), 300).catch(
-  console.log,
-);
+const log = throttle(() => console.log("fire"), 1000);
+log();
+log();
+log();
+
+// function withTimeout(promise, ms) {
+//   return new Promise((resolve, reject) => {
+//     const timer = setTimeout(() => {
+//       reject(new Error("Timeout"));
+//     }, ms);
+
+//     promise.then(
+//       (value) => {
+//         clearTimeout(timer);
+//         resolve(value);
+//       },
+//       (err) => {
+//         clearTimeout(timer);
+//         reject(err);
+//       },
+//     );
+//   });
+// }
+
+// withTimeout(new Promise((r) => setTimeout(() => r("ok"), 500)), 300).catch(
+//   console.log,
+// );
 
 // function createAsyncQueue(limit) {
 //   let running = 0;
