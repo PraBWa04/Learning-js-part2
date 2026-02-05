@@ -1,33 +1,56 @@
-function createAsyncQueue(limit) {
-  let running = 0;
-  const queue = [];
+function withTimeout(promise, ms) {
+  return new Promise((resolve, reject) => {
+    const timer = setTimeout(() => {
+      reject(new Error("Timeout"));
+    }, ms);
 
-  function runNext() {
-    if (running >= limit || queue.length === 0) return;
-
-    running++;
-    const { task, resolve } = queue.shift();
-
-    task().then(() => {
-      running--;
-      resolve();
-      runNext();
-    });
-  }
-
-  return function enqueue(task) {
-    return new Promise((res) => {
-      queue.push({ task, resolve: res });
-      runNext();
-    });
-  };
+    promise.then(
+      (value) => {
+        clearTimeout(timer);
+        resolve(value);
+      },
+      (err) => {
+        clearTimeout(timer);
+        reject(err);
+      },
+    );
+  });
 }
 
-const queue = createAsyncQueue(2);
+withTimeout(new Promise((r) => setTimeout(() => r("ok"), 500)), 300).catch(
+  console.log,
+);
 
-queue(() => new Promise((r) => setTimeout(r, 1000)));
-queue(() => new Promise((r) => setTimeout(r, 1000)));
-queue(() => new Promise((r) => setTimeout(r, 1000)));
+// function createAsyncQueue(limit) {
+//   let running = 0;
+//   const queue = [];
+
+//   function runNext() {
+//     if (running >= limit || queue.length === 0) return;
+
+//     running++;
+//     const { task, resolve } = queue.shift();
+
+//     task().then(() => {
+//       running--;
+//       resolve();
+//       runNext();
+//     });
+//   }
+
+//   return function enqueue(task) {
+//     return new Promise((res) => {
+//       queue.push({ task, resolve: res });
+//       runNext();
+//     });
+//   };
+// }
+
+// const queue = createAsyncQueue(2);
+
+// queue(() => new Promise((r) => setTimeout(r, 1000)));
+// queue(() => new Promise((r) => setTimeout(r, 1000)));
+// queue(() => new Promise((r) => setTimeout(r, 1000)));
 
 // function longestCommonPrefix(arr) {
 //   if (arr.length === 0) return "";
