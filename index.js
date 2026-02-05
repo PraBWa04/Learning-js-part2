@@ -1,30 +1,53 @@
-function throttle(fn, delay) {
-  let lastCall = 0;
-  let timeout;
+function cancellable(promise) {
+  let cancelled = false;
 
-  return function (...args) {
-    const now = Date.now();
+  const wrapped = new Promise((resolve, reject) => {
+    promise.then(
+      (val) => (cancelled ? reject("Cancelled") : resolve(val)),
+      (err) => (cancelled ? reject("Cancelled") : reject(err)),
+    );
+  });
 
-    if (now - lastCall >= delay) {
-      lastCall = now;
-      fn.apply(this, args);
-    } else if (!timeout) {
-      timeout = setTimeout(
-        () => {
-          lastCall = Date.now();
-          timeout = null;
-          fn.apply(this, args);
-        },
-        delay - (now - lastCall),
-      );
-    }
+  return {
+    promise: wrapped,
+    cancel() {
+      cancelled = true;
+    },
   };
 }
 
-const log = throttle(() => console.log("fire"), 1000);
-log();
-log();
-log();
+const task = cancellable(new Promise((r) => setTimeout(() => r("done"), 1000)));
+
+task.cancel();
+task.promise.catch(console.log);
+
+// function throttle(fn, delay) {
+//   let lastCall = 0;
+//   let timeout;
+
+//   return function (...args) {
+//     const now = Date.now();
+
+//     if (now - lastCall >= delay) {
+//       lastCall = now;
+//       fn.apply(this, args);
+//     } else if (!timeout) {
+//       timeout = setTimeout(
+//         () => {
+//           lastCall = Date.now();
+//           timeout = null;
+//           fn.apply(this, args);
+//         },
+//         delay - (now - lastCall),
+//       );
+//     }
+//   };
+// }
+
+// const log = throttle(() => console.log("fire"), 1000);
+// log();
+// log();
+// log();
 
 // function withTimeout(promise, ms) {
 //   return new Promise((resolve, reject) => {
