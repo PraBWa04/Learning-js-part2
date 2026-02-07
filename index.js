@@ -1,25 +1,46 @@
-function cancellable(promise) {
-  let cancelled = false;
+function run() {
+  const out = [];
 
-  const wrapped = new Promise((resolve, reject) => {
-    promise.then(
-      (val) => (cancelled ? reject("Cancelled") : resolve(val)),
-      (err) => (cancelled ? reject("Cancelled") : reject(err)),
-    );
-  });
+  out.push("A");
 
-  return {
-    promise: wrapped,
-    cancel() {
-      cancelled = true;
-    },
-  };
+  setTimeout(() => out.push("B"), 0);
+
+  Promise.resolve()
+    .then(() => out.push("C"))
+    .then(() => {
+      out.push("D");
+      setTimeout(() => out.push("E"), 0);
+    });
+
+  out.push("F");
+
+  setTimeout(() => console.log(out.join("")), 10);
 }
 
-const task = cancellable(new Promise((r) => setTimeout(() => r("done"), 1000)));
+run();
 
-task.cancel();
-task.promise.catch(console.log);
+// function cancellable(promise) {
+//   let cancelled = false;
+
+//   const wrapped = new Promise((resolve, reject) => {
+//     promise.then(
+//       (val) => (cancelled ? reject("Cancelled") : resolve(val)),
+//       (err) => (cancelled ? reject("Cancelled") : reject(err)),
+//     );
+//   });
+
+//   return {
+//     promise: wrapped,
+//     cancel() {
+//       cancelled = true;
+//     },
+//   };
+// }
+
+// const task = cancellable(new Promise((r) => setTimeout(() => r("done"), 1000)));
+
+// task.cancel();
+// task.promise.catch(console.log);
 
 // function throttle(fn, delay) {
 //   let lastCall = 0;
