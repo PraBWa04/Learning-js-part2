@@ -1,23 +1,32 @@
-function run() {
-  const out = [];
-
-  out.push("A");
-
-  setTimeout(() => out.push("B"), 0);
-
-  Promise.resolve()
-    .then(() => out.push("C"))
-    .then(() => {
-      out.push("D");
-      setTimeout(() => out.push("E"), 0);
-    });
-
-  out.push("F");
-
-  setTimeout(() => console.log(out.join("")), 10);
+function retry(fn, retries, delay) {
+  return fn().catch((err) => {
+    if (retries === 0) throw err;
+    return new Promise((r) => setTimeout(r, delay)).then(() =>
+      retry(fn, retries - 1, delay * 2),
+    );
+  });
 }
 
-run();
+// function run() {
+//   const out = [];
+
+//   out.push("A");
+
+//   setTimeout(() => out.push("B"), 0);
+
+//   Promise.resolve()
+//     .then(() => out.push("C"))
+//     .then(() => {
+//       out.push("D");
+//       setTimeout(() => out.push("E"), 0);
+//     });
+
+//   out.push("F");
+
+//   setTimeout(() => console.log(out.join("")), 10);
+// }
+
+// run();
 
 // function cancellable(promise) {
 //   let cancelled = false;
