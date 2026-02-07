@@ -1,11 +1,41 @@
-function retry(fn, retries, delay) {
-  return fn().catch((err) => {
-    if (retries === 0) throw err;
-    return new Promise((r) => setTimeout(r, delay)).then(() =>
-      retry(fn, retries - 1, delay * 2),
-    );
+function pool(tasks, limit) {
+  let index = 0;
+  let active = 0;
+  const results = [];
+
+  return new Promise(resolve => {
+    function next() {
+      if (index === tasks.length && active === 0) {
+        resolve(results);
+        return;
+      }
+
+      while (active < limit && index < tasks.length) {
+        const i = index++;
+        active++;
+
+        tasks[i]()
+          .then(r => (results[i] = r))
+          .finally(() => {
+            active--;
+            next();
+          });
+      }
+    }
+
+    next();
   });
 }
+
+
+// function retry(fn, retries, delay) {
+//   return fn().catch((err) => {
+//     if (retries === 0) throw err;
+//     return new Promise((r) => setTimeout(r, delay)).then(() =>
+//       retry(fn, retries - 1, delay * 2),
+//     );
+//   });
+// }
 
 // function run() {
 //   const out = [];
