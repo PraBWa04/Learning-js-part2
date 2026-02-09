@@ -1,32 +1,38 @@
-function pool(tasks, limit) {
-  let index = 0;
-  let active = 0;
-  const results = [];
-
-  return new Promise(resolve => {
-    function next() {
-      if (index === tasks.length && active === 0) {
-        resolve(results);
-        return;
-      }
-
-      while (active < limit && index < tasks.length) {
-        const i = index++;
-        active++;
-
-        tasks[i]()
-          .then(r => (results[i] = r))
-          .finally(() => {
-            active--;
-            next();
-          });
-      }
-    }
-
-    next();
-  });
+function runSequential(tasks) {
+  return tasks.reduce(
+    (p, task) => p.then((res) => task().then((r) => [...res, r])),
+    Promise.resolve([]),
+  );
 }
 
+// function debounceAsync(fn, delay) {
+//   let timer;
+
+//   return function (...args) {
+//     clearTimeout(timer);
+
+//     return new Promise((resolve) => {
+//       timer = setTimeout(() => resolve(fn.apply(this, args)), delay);
+//     });
+//   };
+// }
+
+// function cancellableTask(fn) {
+//   let cancelled = false;
+
+//   const promise = new Promise((resolve, reject) => {
+//     fn()
+//       .then(res => (cancelled ? reject("cancelled") : resolve(res)))
+//       .catch(err => (cancelled ? reject("cancelled") : reject(err)));
+//   });
+
+//   return {
+//     promise,
+//     cancel() {
+//       cancelled = true;
+//     }
+//   };
+// }
 
 // function retry(fn, retries, delay) {
 //   return fn().catch((err) => {
