@@ -1,14 +1,32 @@
-function memoize(fn) {
-  const cache = {};
+function deepEqual(a, b) {
+  if (a === b) return true;
+  if (
+    typeof a !== "object" ||
+    typeof b !== "object" ||
+    a === null ||
+    b === null
+  )
+    return false;
 
-  return function (...args) {
-    const key = JSON.stringify(args);
-    if (key in cache) return cache[key];
-    const result = fn.apply(this, args);
-    cache[key] = result;
-    return result;
-  };
+  const keysA = Object.keys(a);
+  const keysB = Object.keys(b);
+
+  if (keysA.length !== keysB.length) return false;
+
+  return keysA.every((key) => deepEqual(a[key], b[key]));
 }
+
+// function memoize(fn) {
+//   const cache = {};
+
+//   return function (...args) {
+//     const key = JSON.stringify(args);
+//     if (key in cache) return cache[key];
+//     const result = fn.apply(this, args);
+//     cache[key] = result;
+//     return result;
+//   };
+// }
 
 // function debounceAsync(fn, delay) {
 //   let timer;
