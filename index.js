@@ -1,16 +1,25 @@
-function flattenDeep(arr) {
-  const result = [];
-
-  for (const item of arr) {
-    if (Array.isArray(item)) {
-      result.push(...flattenDeep(item));
-    } else {
-      result.push(item);
-    }
-  }
-
-  return result;
+function groupBy(arr, fn) {
+  return arr.reduce((acc, item) => {
+    const key = fn(item);
+    acc[key] = acc[key] || [];
+    acc[key].push(item);
+    return acc;
+  }, {});
 }
+
+// function flattenDeep(arr) {
+//   const result = [];
+
+//   for (const item of arr) {
+//     if (Array.isArray(item)) {
+//       result.push(...flattenDeep(item));
+//     } else {
+//       result.push(item);
+//     }
+//   }
+
+//   return result;
+// }
 
 // function deepEqual(a, b) {
 //   if (a === b) return true;
