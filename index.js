@@ -1,20 +1,34 @@
-function deepEqual(a, b) {
-  if (a === b) return true;
-  if (
-    typeof a !== "object" ||
-    typeof b !== "object" ||
-    a === null ||
-    b === null
-  )
-    return false;
+function flattenDeep(arr) {
+  const result = [];
 
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
+  for (const item of arr) {
+    if (Array.isArray(item)) {
+      result.push(...flattenDeep(item));
+    } else {
+      result.push(item);
+    }
+  }
 
-  if (keysA.length !== keysB.length) return false;
-
-  return keysA.every((key) => deepEqual(a[key], b[key]));
+  return result;
 }
+
+// function deepEqual(a, b) {
+//   if (a === b) return true;
+//   if (
+//     typeof a !== "object" ||
+//     typeof b !== "object" ||
+//     a === null ||
+//     b === null
+//   )
+//     return false;
+
+//   const keysA = Object.keys(a);
+//   const keysB = Object.keys(b);
+
+//   if (keysA.length !== keysB.length) return false;
+
+//   return keysA.every((key) => deepEqual(a[key], b[key]));
+// }
 
 // function memoize(fn) {
 //   const cache = {};
