@@ -1,7 +1,42 @@
-function isPalindrome(str) {
-  const clean = str.toLowerCase().replace(/[^a-z0-9]/g, "");
-  return clean === clean.split("").reverse().join("");
+function deepMerge(target, source) {
+  const result = { ...target };
+
+  for (let key in source) {
+    if (
+      source[key] &&
+      typeof source[key] === "object" &&
+      !Array.isArray(source[key])
+    ) {
+      result[key] = deepMerge(result[key] || {}, source[key]);
+    } else {
+      result[key] = source[key];
+    }
+  }
+
+  return result;
 }
+
+// function createLRU(limit) {
+//   const cache = new Map();
+
+//   return {
+//     get(key) {
+//       if (!cache.has(key)) return null;
+//       const value = cache.get(key);
+//       cache.delete(key);
+//       cache.set(key, value);
+//       return value;
+//     },
+//     set(key, value) {
+//       if (cache.has(key)) cache.delete(key);
+//       cache.set(key, value);
+//       if (cache.size > limit) {
+//         const firstKey = cache.keys().next().value;
+//         cache.delete(firstKey);
+//       }
+//     }
+//   };
+// }
 
 // function map(arr, fn) {
 //   const result = [];
