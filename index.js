@@ -1,20 +1,38 @@
-function deepMerge(target, source) {
-  const result = { ...target };
+function createEmitter() {
+  const events = {};
 
-  for (let key in source) {
-    if (
-      source[key] &&
-      typeof source[key] === "object" &&
-      !Array.isArray(source[key])
-    ) {
-      result[key] = deepMerge(result[key] || {}, source[key]);
-    } else {
-      result[key] = source[key];
-    }
-  }
-
-  return result;
+  return {
+    on(event, handler) {
+      events[event] = events[event] || [];
+      events[event].push(handler);
+    },
+    emit(event, data) {
+      (events[event] || []).forEach((handler) => handler(data));
+    },
+    off(event, handler) {
+      if (!events[event]) return;
+      events[event] = events[event].filter((h) => h !== handler);
+    },
+  };
 }
+
+// function deepMerge(target, source) {
+//   const result = { ...target };
+
+//   for (let key in source) {
+//     if (
+//       source[key] &&
+//       typeof source[key] === "object" &&
+//       !Array.isArray(source[key])
+//     ) {
+//       result[key] = deepMerge(result[key] || {}, source[key]);
+//     } else {
+//       result[key] = source[key];
+//     }
+//   }
+
+//   return result;
+// }
 
 // function createLRU(limit) {
 //   const cache = new Map();
