@@ -1,12 +1,17 @@
-function map(arr, fn) {
-  const result = [];
-
-  for (let i = 0; i < arr.length; i++) {
-    result.push(fn(arr[i], i, arr));
-  }
-
-  return result;
+function isPalindrome(str) {
+  const clean = str.toLowerCase().replace(/[^a-z0-9]/g, "");
+  return clean === clean.split("").reverse().join("");
 }
+
+// function map(arr, fn) {
+//   const result = [];
+
+//   for (let i = 0; i < arr.length; i++) {
+//     result.push(fn(arr[i], i, arr));
+//   }
+
+//   return result;
+// }
 
 // function groupBy(arr, fn) {
 //   return arr.reduce((acc, item) => {
