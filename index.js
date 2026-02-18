@@ -1,18 +1,61 @@
-function customReduce(arr, reducer, initialValue) {
-  let acc = initialValue;
-  let startIndex = 0;
+function createScheduler() {
+  const queue = [];
+  let running = false;
 
-  if (acc === undefined) {
-    acc = arr[0];
-    startIndex = 1;
+  function runNext() {
+    if (queue.length === 0) {
+      running = false;
+      return;
+    }
+
+    running = true;
+    const task = queue.shift();
+
+    Promise.resolve(task()).finally(() => {
+      runNext();
+    });
   }
 
-  for (let i = startIndex; i < arr.length; i++) {
-    acc = reducer(acc, arr[i], i, arr);
-  }
-
-  return acc;
+  return function schedule(task) {
+    queue.push(task);
+    if (!running) runNext();
+  };
 }
+
+// function createPubSub() {
+//   const subscribers = {};
+
+//   return {
+//     subscribe(event, handler) {
+//       subscribers[event] = subscribers[event] || [];
+//       subscribers[event].push(handler);
+//     },
+//     publish(event, data) {
+//       if (!subscribers[event]) return;
+//       subscribers[event].forEach((handler) => handler(data));
+//     },
+//     unsubscribe(event, handler) {
+//       if (!subscribers[event]) return;
+//       subscribers[event] = subscribers[event].filter((h) => h !== handler);
+//     },
+//   };
+// }
+
+// function customReduce(arr, reducer, initialValue) {
+//   let acc = initialValue;
+//   let startIndex = 0;
+
+//   if (acc === undefined) {
+//     acc = arr[0];
+//     startIndex = 1;
+//   }
+
+//   for (let i = startIndex; i < arr.length; i++) {
+//     acc = reducer(acc, arr[i], i, arr);
+//   }
+
+//   return acc;
+// }
 
 // function customFilter(arr, predicate) {
 //   const result = [];
