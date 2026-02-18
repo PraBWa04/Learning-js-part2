@@ -1,68 +1,96 @@
-class PriorityQueue {
-  constructor() {
-    this.heap = [];
+function customReduce(arr, reducer, initialValue) {
+  let acc = initialValue;
+  let startIndex = 0;
+
+  if (acc === undefined) {
+    acc = arr[0];
+    startIndex = 1;
   }
 
-  enqueue(value, priority) {
-    this.heap.push({ value, priority });
-    this.bubbleUp();
+  for (let i = startIndex; i < arr.length; i++) {
+    acc = reducer(acc, arr[i], i, arr);
   }
 
-  dequeue() {
-    if (this.heap.length === 1) return this.heap.pop();
-    const top = this.heap[0];
-    this.heap[0] = this.heap.pop();
-    this.bubbleDown();
-    return top;
-  }
-
-  bubbleUp() {
-    let index = this.heap.length - 1;
-    const element = this.heap[index];
-
-    while (index > 0) {
-      let parentIndex = Math.floor((index - 1) / 2);
-      let parent = this.heap[parentIndex];
-      if (element.priority <= parent.priority) break;
-      this.heap[parentIndex] = element;
-      this.heap[index] = parent;
-      index = parentIndex;
-    }
-  }
-
-  bubbleDown() {
-    let index = 0;
-    const length = this.heap.length;
-    const element = this.heap[0];
-
-    while (true) {
-      let left = 2 * index + 1;
-      let right = 2 * index + 2;
-      let swap = null;
-
-      if (left < length) {
-        if (this.heap[left].priority > element.priority) {
-          swap = left;
-        }
-      }
-
-      if (right < length) {
-        if (
-          this.heap[right].priority >
-          (swap === null ? element.priority : this.heap[left].priority)
-        ) {
-          swap = right;
-        }
-      }
-
-      if (swap === null) break;
-
-      this.heap[index] = this.heap[swap];
-      this.heap[swap] = element;
-      index = swap;
-    }
-  }
+  return acc;
 }
+
+// function customFilter(arr, predicate) {
+//   const result = [];
+
+//   for (let i = 0; i < arr.length; i++) {
+//     if (predicate(arr[i], i, arr)) {
+//       result.push(arr[i]);
+//     }
+//   }
+
+//   return result;
+// }
+
+// class PriorityQueue {
+//   constructor() {
+//     this.heap = [];
+//   }
+
+//   enqueue(value, priority) {
+//     this.heap.push({ value, priority });
+//     this.bubbleUp();
+//   }
+
+//   dequeue() {
+//     if (this.heap.length === 1) return this.heap.pop();
+//     const top = this.heap[0];
+//     this.heap[0] = this.heap.pop();
+//     this.bubbleDown();
+//     return top;
+//   }
+
+//   bubbleUp() {
+//     let index = this.heap.length - 1;
+//     const element = this.heap[index];
+
+//     while (index > 0) {
+//       let parentIndex = Math.floor((index - 1) / 2);
+//       let parent = this.heap[parentIndex];
+//       if (element.priority <= parent.priority) break;
+//       this.heap[parentIndex] = element;
+//       this.heap[index] = parent;
+//       index = parentIndex;
+//     }
+//   }
+
+//   bubbleDown() {
+//     let index = 0;
+//     const length = this.heap.length;
+//     const element = this.heap[0];
+
+//     while (true) {
+//       let left = 2 * index + 1;
+//       let right = 2 * index + 2;
+//       let swap = null;
+
+//       if (left < length) {
+//         if (this.heap[left].priority > element.priority) {
+//           swap = left;
+//         }
+//       }
+
+//       if (right < length) {
+//         if (
+//           this.heap[right].priority >
+//           (swap === null ? element.priority : this.heap[left].priority)
+//         ) {
+//           swap = right;
+//         }
+//       }
+
+//       if (swap === null) break;
+
+//       this.heap[index] = this.heap[swap];
+//       this.heap[swap] = element;
+//       index = swap;
+//     }
+//   }
+// }
 
 // function createEmitter() {
 //   const events = {};
