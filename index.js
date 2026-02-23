@@ -1,26 +1,49 @@
-function createScheduler() {
-  const queue = [];
-  let running = false;
-
-  function runNext() {
-    if (queue.length === 0) {
-      running = false;
-      return;
-    }
-
-    running = true;
-    const task = queue.shift();
-
-    Promise.resolve(task()).finally(() => {
-      runNext();
-    });
-  }
-
-  return function schedule(task) {
-    queue.push(task);
-    if (!running) runNext();
-  };
+function isString(value) {
+  return typeof value === "string";
 }
+
+function isNumber(value) {
+  return typeof value === "number" && !Number.isNaN(value);
+}
+
+function isNull(value) {
+  return value === null;
+}
+
+function isUndefined(value) {
+  return value === undefined;
+}
+
+module.exports = {
+  isString,
+  isNumber,
+  isNull,
+  isUndefined,
+};
+
+// function createScheduler() {
+//   const queue = [];
+//   let running = false;
+
+//   function runNext() {
+//     if (queue.length === 0) {
+//       running = false;
+//       return;
+//     }
+
+//     running = true;
+//     const task = queue.shift();
+
+//     Promise.resolve(task()).finally(() => {
+//       runNext();
+//     });
+//   }
+
+//   return function schedule(task) {
+//     queue.push(task);
+//     if (!running) runNext();
+//   };
+// }
 
 // function createPubSub() {
 //   const subscribers = {};
