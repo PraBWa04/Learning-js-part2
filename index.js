@@ -1,18 +1,36 @@
-// utils/shallowClone.js
+function safeGet(obj, path, defaultValue = undefined) {
+  if (!obj || typeof path !== "string") return defaultValue;
 
-function shallowClone(value) {
-  if (Array.isArray(value)) {
-    return [...value];
+  const keys = path.split(".");
+  let current = obj;
+
+  for (let key of keys) {
+    if (current && Object.prototype.hasOwnProperty.call(current, key)) {
+      current = current[key];
+    } else {
+      return defaultValue;
+    }
   }
 
-  if (value !== null && typeof value === "object") {
-    return { ...value };
-  }
-
-  return value;
+  return current;
 }
 
-module.exports = shallowClone;
+module.exports = safeGet;
+// // utils/shallowClone.js
+
+// function shallowClone(value) {
+//   if (Array.isArray(value)) {
+//     return [...value];
+//   }
+
+//   if (value !== null && typeof value === "object") {
+//     return { ...value };
+//   }
+
+//   return value;
+// }
+
+// module.exports = shallowClone;
 
 // function isString(value) {
 //   return typeof value === "string";
