@@ -1,25 +1,41 @@
-function isString(value) {
-  return typeof value === "string";
+// utils/shallowClone.js
+
+function shallowClone(value) {
+  if (Array.isArray(value)) {
+    return [...value];
+  }
+
+  if (value !== null && typeof value === "object") {
+    return { ...value };
+  }
+
+  return value;
 }
 
-function isNumber(value) {
-  return typeof value === "number" && !Number.isNaN(value);
-}
+module.exports = shallowClone;
 
-function isNull(value) {
-  return value === null;
-}
+// function isString(value) {
+//   return typeof value === "string";
+// }
 
-function isUndefined(value) {
-  return value === undefined;
-}
+// function isNumber(value) {
+//   return typeof value === "number" && !Number.isNaN(value);
+// }
 
-module.exports = {
-  isString,
-  isNumber,
-  isNull,
-  isUndefined,
-};
+// function isNull(value) {
+//   return value === null;
+// }
+
+// function isUndefined(value) {
+//   return value === undefined;
+// }
+
+// module.exports = {
+//   isString,
+//   isNumber,
+//   isNull,
+//   isUndefined,
+// };
 
 // function createScheduler() {
 //   const queue = [];
