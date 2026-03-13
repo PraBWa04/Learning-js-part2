@@ -1,15 +1,32 @@
-const cartButtons = document.querySelectorAll(".add-to-cart");
-const cartCounter = document.getElementById("cart-count");
+const filterInput = document.getElementById("filter");
+const products = document.querySelectorAll(".product");
 
-let cartCount = 0;
+filterInput.addEventListener("input", function () {
+  const value = filterInput.value.toLowerCase();
 
-cartButtons.forEach(function (button) {
-  button.addEventListener("click", function () {
-    cartCount++;
+  products.forEach(function (product) {
+    const name = product.textContent.toLowerCase();
 
-    cartCounter.textContent = cartCount;
+    if (name.includes(value)) {
+      product.style.display = "block";
+    } else {
+      product.style.display = "none";
+    }
   });
 });
+
+// const cartButtons = document.querySelectorAll(".add-to-cart");
+// const cartCounter = document.getElementById("cart-count");
+
+// let cartCount = 0;
+
+// cartButtons.forEach(function (button) {
+//   button.addEventListener("click", function () {
+//     cartCount++;
+
+//     cartCounter.textContent = cartCount;
+//   });
+// });
 
 // function debounce(func, delay) {
 //   let timeout;
