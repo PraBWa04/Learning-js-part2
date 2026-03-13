@@ -1,21 +1,44 @@
-function safeGet(obj, path, defaultValue = undefined) {
-  if (!obj || typeof path !== "string") return defaultValue;
+function debounce(func, delay) {
+  let timeout;
 
-  const keys = path.split(".");
-  let current = obj;
+  return function () {
+    const context = this;
+    const args = arguments;
 
-  for (let key of keys) {
-    if (current && Object.prototype.hasOwnProperty.call(current, key)) {
-      current = current[key];
-    } else {
-      return defaultValue;
-    }
-  }
+    clearTimeout(timeout);
 
-  return current;
+    timeout = setTimeout(function () {
+      func.apply(context, args);
+    }, delay);
+  };
 }
 
-module.exports = safeGet;
+const searchInput = document.getElementById("search");
+
+function handleSearch(event) {
+  console.log("Search:", event.target.value);
+}
+
+searchInput.addEventListener("input", debounce(handleSearch, 300));
+
+// function safeGet(obj, path, defaultValue = undefined) {
+//   if (!obj || typeof path !== "string") return defaultValue;
+
+//   const keys = path.split(".");
+//   let current = obj;
+
+//   for (let key of keys) {
+//     if (current && Object.prototype.hasOwnProperty.call(current, key)) {
+//       current = current[key];
+//     } else {
+//       return defaultValue;
+//     }
+//   }
+
+//   return current;
+// }
+
+// module.exports = safeGet;
 // // utils/shallowClone.js
 
 // function shallowClone(value) {
