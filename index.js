@@ -1,25 +1,38 @@
-function debounce(func, delay) {
-  let timeout;
+const cartButtons = document.querySelectorAll(".add-to-cart");
+const cartCounter = document.getElementById("cart-count");
 
-  return function () {
-    const context = this;
-    const args = arguments;
+let cartCount = 0;
 
-    clearTimeout(timeout);
+cartButtons.forEach(function (button) {
+  button.addEventListener("click", function () {
+    cartCount++;
 
-    timeout = setTimeout(function () {
-      func.apply(context, args);
-    }, delay);
-  };
-}
+    cartCounter.textContent = cartCount;
+  });
+});
 
-const searchInput = document.getElementById("search");
+// function debounce(func, delay) {
+//   let timeout;
 
-function handleSearch(event) {
-  console.log("Search:", event.target.value);
-}
+//   return function () {
+//     const context = this;
+//     const args = arguments;
 
-searchInput.addEventListener("input", debounce(handleSearch, 300));
+//     clearTimeout(timeout);
+
+//     timeout = setTimeout(function () {
+//       func.apply(context, args);
+//     }, delay);
+//   };
+// }
+
+// const searchInput = document.getElementById("search");
+
+// function handleSearch(event) {
+//   console.log("Search:", event.target.value);
+// }
+
+// searchInput.addEventListener("input", debounce(handleSearch, 300));
 
 // function safeGet(obj, path, defaultValue = undefined) {
 //   if (!obj || typeof path !== "string") return defaultValue;
