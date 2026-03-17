@@ -1,19 +1,34 @@
-const filterInput = document.getElementById("filter");
-const products = document.querySelectorAll(".product");
+function sum(a, b) {
+  return a + b;
+}
 
-filterInput.addEventListener("input", function () {
-  const value = filterInput.value.toLowerCase();
+function multiply(a, b) {
+  return a * b;
+}
 
-  products.forEach(function (product) {
-    const name = product.textContent.toLowerCase();
+function greet(name) {
+  return "Hello " + name;
+}
 
-    if (name.includes(value)) {
-      product.style.display = "block";
-    } else {
-      product.style.display = "none";
-    }
-  });
-});
+console.log(sum(2, 3));
+console.log(multiply(4, 5));
+console.log(greet("Ivan"));
+// const filterInput = document.getElementById("filter");
+// const products = document.querySelectorAll(".product");
+
+// filterInput.addEventListener("input", function () {
+//   const value = filterInput.value.toLowerCase();
+
+//   products.forEach(function (product) {
+//     const name = product.textContent.toLowerCase();
+
+//     if (name.includes(value)) {
+//       product.style.display = "block";
+//     } else {
+//       product.style.display = "none";
+//     }
+//   });
+// });
 
 // const cartButtons = document.querySelectorAll(".add-to-cart");
 // const cartCounter = document.getElementById("cart-count");
