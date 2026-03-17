@@ -1,18 +1,30 @@
-function sum(a, b) {
-  return a + b;
+function greet(name = "Guest") {
+  return "Hi " + name;
 }
 
-function multiply(a, b) {
-  return a * b;
+function createUser(name = "Anonymous", age = 18) {
+  return { name, age };
 }
 
-function greet(name) {
-  return "Hello " + name;
-}
+console.log(greet());
+console.log(createUser());
+console.log(createUser("Ivan", 22));
 
-console.log(sum(2, 3));
-console.log(multiply(4, 5));
-console.log(greet("Ivan"));
+// function sum(a, b) {
+//   return a + b;
+// }
+
+// function multiply(a, b) {
+//   return a * b;
+// }
+
+// function greet(name) {
+//   return "Hello " + name;
+// }
+
+// console.log(sum(2, 3));
+// console.log(multiply(4, 5));
+// console.log(greet("Ivan"));
 // const filterInput = document.getElementById("filter");
 // const products = document.querySelectorAll(".product");
 
