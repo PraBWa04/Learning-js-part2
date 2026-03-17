@@ -1,14 +1,29 @@
-function greet(name = "Guest") {
-  return "Hi " + name;
-}
+const sum = (a, b) => a + b;
 
-function createUser(name = "Anonymous", age = 18) {
-  return { name, age };
-}
+const getUser = () => ({
+  name: "Ivan",
+  age: 20,
+});
 
-console.log(greet());
-console.log(createUser());
-console.log(createUser("Ivan", 22));
+const noReturn = () => {
+  5 + 5;
+};
+
+console.log(sum(3, 7));
+console.log(getUser());
+console.log(noReturn());
+
+// function greet(name = "Guest") {
+//   return "Hi " + name;
+// }
+
+// function createUser(name = "Anonymous", age = 18) {
+//   return { name, age };
+// }
+
+// console.log(greet());
+// console.log(createUser());
+// console.log(createUser("Ivan", 22));
 
 // function sum(a, b) {
 //   return a + b;
