@@ -1,17 +1,37 @@
-function createCounter() {
-  let count = 0;
+// utils/once.js
 
-  return function () {
-    count++;
-    return count;
+function once(fn) {
+  let called = false;
+  let result;
+
+  return function (...args) {
+    if (!called) {
+      called = true;
+      result = fn.apply(this, args);
+    }
+    return result;
   };
 }
 
-const counter = createCounter();
+const init = once(() => "initialized");
 
-console.log(counter());
-console.log(counter());
-console.log(counter());
+console.log(init());
+console.log(init());
+console.log(init());
+// function createCounter() {
+//   let count = 0;
+
+//   return function () {
+//     count++;
+//     return count;
+//   };
+// }
+
+// const counter = createCounter();
+
+// console.log(counter());
+// console.log(counter());
+// console.log(counter());
 
 // function compose(f, g) {
 //   return function (x) {
