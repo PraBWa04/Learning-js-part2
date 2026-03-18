@@ -1,15 +1,30 @@
-function compose(f, g) {
-  return function (x) {
-    return f(g(x));
+function createCounter() {
+  let count = 0;
+
+  return function () {
+    count++;
+    return count;
   };
 }
 
-const double = (x) => x * 2;
-const addOne = (x) => x + 1;
+const counter = createCounter();
 
-const result = compose(double, addOne);
+console.log(counter());
+console.log(counter());
+console.log(counter());
 
-console.log(result(3)); // (3 + 1) * 2 = 8
+// function compose(f, g) {
+//   return function (x) {
+//     return f(g(x));
+//   };
+// }
+
+// const double = (x) => x * 2;
+// const addOne = (x) => x + 1;
+
+// const result = compose(double, addOne);
+
+// console.log(result(3)); // (3 + 1) * 2 = 8
 
 // function applyOperation(a, b, operation) {
 //   return operation(a, b);
