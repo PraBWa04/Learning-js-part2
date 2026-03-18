@@ -1,21 +1,34 @@
-function applyOperation(a, b, operation) {
-  return operation(a, b);
+function compose(f, g) {
+  return function (x) {
+    return f(g(x));
+  };
 }
 
-function mapArray(arr, fn) {
-  const result = [];
+const double = (x) => x * 2;
+const addOne = (x) => x + 1;
 
-  for (let i = 0; i < arr.length; i++) {
-    result.push(fn(arr[i], i));
-  }
+const result = compose(double, addOne);
 
-  return result;
-}
+console.log(result(3)); // (3 + 1) * 2 = 8
 
-const sum = (x, y) => x + y;
+// function applyOperation(a, b, operation) {
+//   return operation(a, b);
+// }
 
-console.log(applyOperation(2, 3, sum));
-console.log(mapArray([1, 2, 3], (x) => x * 2));
+// function mapArray(arr, fn) {
+//   const result = [];
+
+//   for (let i = 0; i < arr.length; i++) {
+//     result.push(fn(arr[i], i));
+//   }
+
+//   return result;
+// }
+
+// const sum = (x, y) => x + y;
+
+// console.log(applyOperation(2, 3, sum));
+// console.log(mapArray([1, 2, 3], (x) => x * 2));
 
 // const sum = (a, b) => a + b;
 
