@@ -1,17 +1,36 @@
-const sum = (a, b) => a + b;
+function applyOperation(a, b, operation) {
+  return operation(a, b);
+}
 
-const getUser = () => ({
-  name: "Ivan",
-  age: 20,
-});
+function mapArray(arr, fn) {
+  const result = [];
 
-const noReturn = () => {
-  5 + 5;
-};
+  for (let i = 0; i < arr.length; i++) {
+    result.push(fn(arr[i], i));
+  }
 
-console.log(sum(3, 7));
-console.log(getUser());
-console.log(noReturn());
+  return result;
+}
+
+const sum = (x, y) => x + y;
+
+console.log(applyOperation(2, 3, sum));
+console.log(mapArray([1, 2, 3], (x) => x * 2));
+
+// const sum = (a, b) => a + b;
+
+// const getUser = () => ({
+//   name: "Ivan",
+//   age: 20,
+// });
+
+// const noReturn = () => {
+//   5 + 5;
+// };
+
+// console.log(sum(3, 7));
+// console.log(getUser());
+// console.log(noReturn());
 
 // function greet(name = "Guest") {
 //   return "Hi " + name;
